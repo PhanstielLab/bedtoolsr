@@ -1,0 +1,73 @@
+#' Annotates a BAM file based on overlaps with multiple BED/GFF/VCF files
+#' on the intervals in -i.
+#' 
+#' @param i <BAM>
+#' @param files FILE1 .. FILEn
+#' @param labels LAB1 .. LABn
+#' @param s Require overlaps on the same strand.  That is, only tag alignments that have the same
+#' strand as a feature in the annotation file(s).
+#' 
+#' @param S Require overlaps on the opposite strand.  That is, only tag alignments that have the opposite
+#' strand as a feature in the annotation file(s).
+#' 
+#' @param f Minimum overlap required as a fraction of the alignment.
+#' - Default is 1E-9 (i.e., 1bp).
+#' - FLOAT (e.g. 0.50)
+#' 
+#' @param tag Dictate what the tag should be. Default is YB.
+#' - STRING (two characters, e.g., YK)
+#' 
+#' @param names Use the name field from the annotation files to populate tags.
+#' By default, the -labels values are used.
+#' 
+#' @param scores Use the score field from the annotation files to populate tags.
+#' By default, the -labels values are used.
+#' 
+#' @param intervals Use the full interval (including name, score, and strand) to populate tags.
+#'  Requires the -labels option to identify from which file the interval came.
+#' 
+tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL)
+{ 
+	options = "" 
+	if (is.null(s) == FALSE) 
+ 	{ 
+	 options = paste(options," -s", sep="")
+	}
+	if (is.null(S) == FALSE) 
+ 	{ 
+	 options = paste(options," -S", sep="")
+	}
+	if (is.null(f) == FALSE) 
+ 	{ 
+	 options = paste(options," -f", sep="")
+	}
+	if (is.null(tag) == FALSE) 
+ 	{ 
+	 options = paste(options," -tag", sep="")
+	}
+	if (is.null(names) == FALSE) 
+ 	{ 
+	 options = paste(options," -names", sep="")
+	}
+	if (is.null(scores) == FALSE) 
+ 	{ 
+	 options = paste(options," -scores", sep="")
+	}
+	if (is.null(intervals) == FALSE) 
+ 	{ 
+	 options = paste(options," -intervals", sep="")
+	}
+
+	# establish output file 
+	tempfile = "~/Desktop/tempfile.txt" 
+	cmd = paste("bedtools tag ", options, " -a " ,a, " -b ", b, " > ", tempfile) 
+	system(cmd) 
+	results = read.table(tempfile,header=FALSE,sep="\t") 
+
+	if (file.exists(tempfile)) 
+	 { 
+	 file.remove(tempfile) 
+	 } 
+	return (results) 
+}
+ 
