@@ -1,0 +1,6 @@
+install.packages('roxygenate')
+install.packages('devtools')
+library('devtools')
+library('roxygenate')
+setwd("/Users/mayurapatwardhan/Documents/Bedtools/BedtoolsRWrapper")
+devtools::document()
