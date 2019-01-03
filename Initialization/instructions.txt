@@ -1,6 +1,3 @@
-Github commands:
-
-
 Example command: intersect("/Users/mayurapatwardhan/Documents/Bedtools/A.bed", "/Users/mayurapatwardhan/Documents/Bedtools/B.bed")
 
 
@@ -35,11 +32,7 @@ Command line: "R CMD build BedtoolsRWrapper"
 
 
 If downloading tar.gz file:
-1. Create new project
-2. Right hand side go to Packages
-3. Hit install
-4. Install from package archive file
-5. Find your package file and install
+install.packages(path_to_file, repos = NULL, type="source")
 
 
 
