@@ -1,0 +1,9 @@
+{
+    "path" : "~/Documents/Bedtools/BedtoolsRWrapper",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

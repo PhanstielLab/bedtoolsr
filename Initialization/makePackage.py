@@ -11,8 +11,12 @@ optionDict = {}
 infoDict = {}
 
 
-#usageDict has the required parameters of the function as the word and the format as the definition. Ex: usageWord = a, usageDefinition =<bed/gff/vcf/bam>
+#usageDict has the required parameters of the function as the word and the format as the definition.
+#Ex: usageWord = a, usageDefinition =<bed/gff/vcf/bam>
+
 #usageDict required parameters are recognized by a "-" in front of name in the "Usage" section of bedtools help menu
+
+
 usageDict = {}
 version = ""
 createR = 1
@@ -132,7 +136,8 @@ def options():
 				word = word.split(" ")[0]
 				optionDict[word] = definition
 		
-		#if the line is not blank but does not have a word on the second element it is a continuation of the previous definition
+#if the line is not blank but does not have a word on the second element it is a continuation
+#of the previous definition
 		elif(len(read)>1):
 			partialdef = (" ").join(read[2:])			
 			definition = definition + partialdef			
@@ -286,11 +291,7 @@ for line in text_file3:
 		bedtoolsFunction(snippedLine)
 	text_file.close()
 	os.system("rm %s/BedtoolsRWrapper/bedtools%s.txt" % (fileinput,snippedLine))
-	
 
-
-#os.system("rm %s/BedtoolsRWrapper/bedtoolsCommands.txt" % fileinput)
-#os.system("rm %s/BedtoolsRWrapper/bedtools.txt" % fileinput)
 text_file3.close()
 text_file4.close()
 f=open("%s/BedtoolsRWrapper/DESCRIPTION" %fileinput, "w")
@@ -306,9 +307,4 @@ f.write("Author: Mayura Patwardhan, Doug Phanstiel\n")
 f.write("Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.\n")
 f.write("License: What license is it under?")
 f.close()
-
-#os.system("R CMD build BedtoolsRWrapper")
-#os.system("R CMD INSTALL BedtoolsWrapper_%s.tar.gz" % version[1:])
-#r command install
-
 

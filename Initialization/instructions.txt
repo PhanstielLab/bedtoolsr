@@ -1,0 +1,50 @@
+Github commands:
+
+
+Example command: intersect("/Users/mayurapatwardhan/Documents/Bedtools/A.bed", "/Users/mayurapatwardhan/Documents/Bedtools/B.bed")
+
+
+If an option has a numeric or string value, assign it one using the equals operator. For example: "f = 1". If an option has no value, assign it the value "TRUE" in all caps. For example: "c =TRUE"
+
+If a option with a numberic value has multiple numbers, attach as a string. Example: bedtools map a.bed b.bed c = "3,4,5,6"
+
+
+1. Download bedtools and python and studio
+2. Download makePackage.py
+3. Run makePackage.py
+4. When it asks: Where would you like to make your R package? Type in the destination of where you want your package to be stored (Ex: /Users/mayurapatwardhan/Documents/Bedtools)
+5. When it asks: What is the bedtools path? Type in the path that your bedtools bin folder is saved in (Ex: /Users/mayurapatwardhan/Downloads/bedtools2/bin). If bedtools is already in your path, just type "bedtools"
+6. Make changes below
+7. Create documentation using the following commands in terminal
+
+install.packages('roxygenate')
+install.packages('devtools')
+library('devtools')
+library('roxygenate')
+setwd(***put the directory path of your package here****)
+devtools::document()
+
+
+8. File --> New Project --> Existing Directory
+On the right hand side there is a tab labeled "build"
+Hit "Install and Restart"
+
+
+To make a tar.gz file:
+Command line: "R CMD build BedtoolsRWrapper"
+
+
+If downloading tar.gz file:
+1. Create new project
+2. Right hand side go to Packages
+3. Hit install
+4. Install from package archive file
+5. Find your package file and install
+
+
+
+window : does not support -abam in replacement of -a as an input file
+genomecov: change all the numbers to letters in options (5 and 3)
+getfasta: change name+ to nameplus
+split: not supported
+makewindows: not supported
