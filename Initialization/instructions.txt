@@ -10,8 +10,8 @@ If a option with a numberic value has multiple numbers, attach as a string. Exam
 2. Download makePackage.py
 3. Run makePackage.py
 4. When it asks: Where would you like to make your R package? Type in the destination of where you want your package to be stored (Ex: /Users/mayurapatwardhan/Documents/Bedtools)
-5. When it asks: What is the bedtools path? Type in the path that your bedtools bin folder is saved in (Ex: /Users/mayurapatwardhan/Downloads/bedtools2/bin). If bedtools is already in your path, just type "bedtools"
-6. Make changes below
+5. When it asks: What is the bedtools path? Type in the path that your bedtools bin folder is saved in (Ex: /Users/mayurapatwardhan/Downloads/bedtools2/bin). If bedtools is already in your path, just press enter
+6. Make changes below, remove necessary files from NAMESPACE export (look at log file too)
 7. Create documentation using the following commands in terminal
 
 install.packages('roxygenate')
