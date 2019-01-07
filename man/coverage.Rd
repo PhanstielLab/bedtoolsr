@@ -5,39 +5,27 @@
 \title{Returns the depth and breadth of coverage of features from B
 on the intervals in A.}
 \usage{
-coverage(a, b, hist = NULL, d = NULL, counts = NULL, mean = NULL,
-  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
-  split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
-  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
+coverage(a, b, e = NULL, d = NULL, g = NULL, f = NULL, F = NULL,
+  S = NULL, bed = NULL, hist = NULL, header = NULL, s = NULL,
+  r = NULL, nobuf = NULL, split = NULL, nonamecheck = NULL,
+  sorted = NULL, counts = NULL, iobuf = NULL, mean = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
 
 \item{b}{<bed/gff/vcf>}
 
-\item{hist}{Report a histogram of coverage for each feature in A
-as well as a summary histogram for _all_ features in A.
-Output (tab delimited) after each feature in A:
-  1) depth
-  2) # bases at depth
-  3) size of A
-  4)  percent of A at depth}
+\item{e}{Require that the minimum fraction be satisfied for A OR B.
+- In other words, if -e is used with -f 0.90 and -F 0.10 this requires
+  that either 90 percent of A is covered OR 10 percent of  B is covered.
+  Without -e, both fractions would have to be satisfied.}
 
 \item{d}{Report the depth at each position in each A feature.
 Positions reported are one based.  Each position
 and depth follow the complete A feature.}
 
-\item{counts}{Only report the count of overlaps, don't compute fraction, etc.}
-
-\item{mean}{Report the mean depth of all positions in each A feature.}
-
-\item{s}{Require same strandedness.  That is, only report hits in B
-that overlap A on the _same_ strand.
-- By default, overlaps are reported without respect to strand.}
-
-\item{S}{Require different strandedness.  That is, only report hits in B
-that overlap A on the _opposite_ strand.
-- By default, overlaps are reported without respect to strand.}
+\item{g}{Provide a genome file to enforce consistent chromosome sort order
+across input files. Only applies when used with -sorted option.}
 
 \item{f}{Minimum overlap required as a fraction of A.
 - Default is 1E-9 (i.e., 1bp).
@@ -47,28 +35,29 @@ that overlap A on the _opposite_ strand.
 - Default is 1E-9 (i.e., 1bp).
 - FLOAT (e.g. 0.50)}
 
-\item{r}{Require that the fraction overlap be reciprocal for A AND B.
-- In other words, if -f is 0.90 and -r is used, this requires
-  that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
-
-\item{e}{Require that the minimum fraction be satisfied for A OR B.
-- In other words, if -e is used with -f 0.90 and -F 0.10 this requires
-  that either 90 percent of A is covered OR 10 percent of  B is covered.
-  Without -e, both fractions would have to be satisfied.}
-
-\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
-
-\item{g}{Provide a genome file to enforce consistent chromosome sort order
-across input files. Only applies when used with -sorted option.}
-
-\item{nonamecheck}{For sorted data, don't throw an error if the file has different naming conventions
-for the same chromosome. ex. "chr1" vs "chr01".}
-
-\item{sorted}{Use the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input.}
+\item{S}{Require different strandedness.  That is, only report hits in B
+that overlap A on the _opposite_ strand.
+- By default, overlaps are reported without respect to strand.}
 
 \item{bed}{If using BAM input, write output as BED.}
 
+\item{hist}{Report a histogram of coverage for each feature in A
+as well as a summary histogram for _all_ features in A.
+Output (tab delimited) after each feature in A:
+  1) depth
+  2) # bases at depth
+  3) size of A
+  4)  percent of A at depth}
+
 \item{header}{Print the header from the A file prior to results.}
+
+\item{s}{Require same strandedness.  That is, only report hits in B
+that overlap A on the _same_ strand.
+- By default, overlaps are reported without respect to strand.}
+
+\item{r}{Require that the fraction overlap be reciprocal for A AND B.
+- In other words, if -f is 0.90 and -r is used, this requires
+  that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
 
 \item{nobuf}{Disable buffered output. Using this option will cause each line
 of output to be printed as it is generated, rather than saved
@@ -77,9 +66,20 @@ noticeably slower, but can be useful in conjunction with
 other software tools and scripts that need to process one
 line of bedtools output at a time.}
 
+\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
+
+\item{nonamecheck}{For sorted data, don't throw an error if the file has different naming conventions
+for the same chromosome. ex. "chr1" vs "chr01".}
+
+\item{sorted}{Use the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input.}
+
+\item{counts}{Only report the count of overlaps, don't compute fraction, etc.}
+
 \item{iobuf}{Specify amount of memory to use for input buffer.
 Takes an integer argument. Optional suffixes K/M/G supported.
 Note: currently has no effect with compressed files.}
+
+\item{mean}{Report the mean depth of all positions in each A feature.}
 }
 \description{
 Returns the depth and breadth of coverage of features from B

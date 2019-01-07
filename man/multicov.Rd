@@ -4,40 +4,40 @@
 \alias{multicov}
 \title{Counts sequence coverage for multiple bams at specific loci.}
 \usage{
-multicov(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL,
-  r = NULL, q = NULL, D = NULL, F = NULL, p = NULL)
+multicov(bed, bams, D = NULL, f = NULL, F = NULL, s = NULL,
+  q = NULL, p = NULL, S = NULL, r = NULL, split = NULL)
 }
 \arguments{
-\item{bams}{aln.1.bam aln.2.bam ... aln.n.bam}
-
 \item{bed}{<bed/gff/vcf>}
 
-\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
+\item{bams}{aln.1.bam aln.2.bam ... aln.n.bam}
 
-\item{s}{Require same strandedness.  That is, only report hits in B
-that overlap A on the _same_ strand.
-- By default, overlaps are reported without respect to strand.}
-
-\item{S}{Require different strandedness.  That is, only report hits in B
-that overlap A on the _opposite_ strand.
-- By default, overlaps are reported without respect to strand.}
+\item{D}{Include duplicate reads.  Default counts non-duplicates only}
 
 \item{f}{Minimum overlap required as a fraction of each A.
 - Default is 1E-9 (i.e., 1bp).
 - FLOAT (e.g. 0.50)}
 
+\item{F}{Include failed-QC reads.  Default counts pass-QC reads only}
+
+\item{s}{Require same strandedness.  That is, only report hits in B
+that overlap A on the _same_ strand.
+- By default, overlaps are reported without respect to strand.}
+
+\item{q}{Minimum mapping quality allowed. Default is 0.}
+
+\item{p}{Only count proper pairs.  Default counts all alignments with
+MAPQ > -q argument, regardless of the BAM FLAG field.}
+
+\item{S}{Require different strandedness.  That is, only report hits in B
+that overlap A on the _opposite_ strand.
+- By default, overlaps are reported without respect to strand.}
+
 \item{r}{Require that the fraction overlap be reciprocal for each A and B.
 - In other words, if -f is 0.90 and -r is used, this requires
   that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
 
-\item{q}{Minimum mapping quality allowed. Default is 0.}
-
-\item{D}{Include duplicate reads.  Default counts non-duplicates only}
-
-\item{F}{Include failed-QC reads.  Default counts pass-QC reads only}
-
-\item{p}{Only count proper pairs.  Default counts all alignments with
-MAPQ > -q argument, regardless of the BAM FLAG field.}
+\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
 }
 \description{
 Counts sequence coverage for multiple bams at specific loci.

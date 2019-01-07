@@ -4,30 +4,30 @@
 \alias{sort}
 \title{Sorts a feature file in various and useful ways.}
 \usage{
-sort(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL,
-  chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL,
-  g = NULL, faidx = NULL, header = NULL)
+sort(i, faidx = NULL, chrThenScoreD = NULL, g = NULL,
+  chrThenScoreA = NULL, header = NULL, sizeD = NULL,
+  chrThenSizeD = NULL, chrThenSizeA = NULL, sizeA = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
-\item{sizeA}{Sort by feature size in ascending order.}
-
-\item{sizeD}{Sort by feature size in descending order.}
-
-\item{chrThenSizeA}{Sort by chrom (asc), then feature size (asc).}
-
-\item{chrThenSizeD}{Sort by chrom (asc), then feature size (desc).}
-
-\item{chrThenScoreA}{Sort by chrom (asc), then score (asc).}
+\item{faidx}{Sort according to the chromosomes declared in "names.txt"}
 
 \item{chrThenScoreD}{Sort by chrom (asc), then score (desc).}
 
 \item{g}{Sort according to the chromosomes declared in "genome.txt"}
 
-\item{faidx}{Sort according to the chromosomes declared in "names.txt"}
+\item{chrThenScoreA}{Sort by chrom (asc), then score (asc).}
 
 \item{header}{Print the header from the A file prior to results.}
+
+\item{sizeD}{Sort by feature size in descending order.}
+
+\item{chrThenSizeD}{Sort by chrom (asc), then feature size (desc).}
+
+\item{chrThenSizeA}{Sort by chrom (asc), then feature size (asc).}
+
+\item{sizeA}{Sort by feature size in ascending order.}
 }
 \description{
 Sorts a feature file in various and useful ways.

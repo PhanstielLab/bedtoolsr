@@ -2,10 +2,10 @@
 #' 
 #' @param i <bed/gff/vcf>
 #' @param g <genome>
-#' @param s Shift the BED/GFF/VCF entry -s base pairs.
+#' @param p Shift features on the + strand by -p base pairs.
 #' - (Integer) or (Float, e.g. 0.1) if used with -pct.
 #' 
-#' @param p Shift features on the + strand by -p base pairs.
+#' @param s Shift the BED/GFF/VCF entry -s base pairs.
 #' - (Integer) or (Float, e.g. 0.1) if used with -pct.
 #' 
 #' @param m Shift features on the - strand by -m base pairs.
@@ -17,7 +17,7 @@
 #' 
 #' @param header Print the header from the input file prior to results.
 #' 
-shift <- function(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NULL)
+shift <- function(i, g, p = NULL, s = NULL, m = NULL, pct = NULL, header = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -32,17 +32,17 @@ shift <- function(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NULL)
 			
 		options = "" 
  
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
 			if (!is.null(p)) {
 			options = paste(options," -p")
 			if(is.character(p) || is.numeric(p)) {
 			options = paste(options, " ", p)
+			}	
+			}
+			 
+			if (!is.null(s)) {
+			options = paste(options," -s")
+			if(is.character(s) || is.numeric(s)) {
+			options = paste(options, " ", s)
 			}	
 			}
 			 

@@ -2,15 +2,15 @@
 #' 
 #' @param i <bed/gff/vcf>
 #' @param g <genome>
+#' @param ubam Write uncompressed BAM output. Default writes compressed BAM.
+#' 
 #' @param mapq Set the mappinq quality for the BAM records.
 #' (INT) Default: 255
 #' 
 #' @param bed12 The BED file is in BED12 format.  The BAM CIGAR
 #' string will reflect BED "blocks".
 #' 
-#' @param ubam Write uncompressed BAM output. Default writes compressed BAM.
-#' 
-bedtobam <- function(i, g, mapq = NULL, bed12 = NULL, ubam = NULL)
+bedtobam <- function(i, g, ubam = NULL, mapq = NULL, bed12 = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -25,6 +25,13 @@ bedtobam <- function(i, g, mapq = NULL, bed12 = NULL, ubam = NULL)
 			
 		options = "" 
  
+			if (!is.null(ubam)) {
+			options = paste(options," -ubam")
+			if(is.character(ubam) || is.numeric(ubam)) {
+			options = paste(options, " ", ubam)
+			}	
+			}
+			 
 			if (!is.null(mapq)) {
 			options = paste(options," -mapq")
 			if(is.character(mapq) || is.numeric(mapq)) {
@@ -36,13 +43,6 @@ bedtobam <- function(i, g, mapq = NULL, bed12 = NULL, ubam = NULL)
 			options = paste(options," -bed12")
 			if(is.character(bed12) || is.numeric(bed12)) {
 			options = paste(options, " ", bed12)
-			}	
-			}
-			 
-			if (!is.null(ubam)) {
-			options = paste(options," -ubam")
-			if(is.character(ubam) || is.numeric(ubam)) {
-			options = paste(options, " ", ubam)
 			}	
 			}
 			

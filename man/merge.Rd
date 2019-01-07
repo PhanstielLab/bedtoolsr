@@ -4,21 +4,16 @@
 \alias{merge}
 \title{Merges overlapping BED/GFF/VCF entries into a single interval.}
 \usage{
-merge(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL,
-  delim = NULL, prec = NULL, bed = NULL, header = NULL,
-  nobuf = NULL, iobuf = NULL)
+merge(i, c = NULL, d = NULL, bed = NULL, delim = NULL, S = NULL,
+  o = NULL, header = NULL, s = NULL, prec = NULL, iobuf = NULL,
+  nobuf = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
-\item{s}{Force strandedness.  That is, only merge features
-that are on the same strand.
-- By default, merging is done without respect to strand.}
-
-\item{S}{Force merge for one specific strand only.
-Follow with + or - to force merge from only
-the forward or reverse strand, respectively.
-- By default, merging is done without respect to strand.}
+\item{c}{Specify columns from the B file to map onto intervals in A.
+Default: 5.
+Multiple columns can be specified in a comma-delimited list.}
 
 \item{d}{Maximum distance between features allowed for features
 to be merged.
@@ -26,9 +21,16 @@ to be merged.
 - (INTEGER)
 - Note: negative values enforce the number of b.p. required for overlap.}
 
-\item{c}{Specify columns from the B file to map onto intervals in A.
-Default: 5.
-Multiple columns can be specified in a comma-delimited list.}
+\item{bed}{If using BAM input, write output as BED.}
+
+\item{delim}{Specify a custom delimiter for the collapse operations.
+- Example: -delim "|"
+- Default: ",".}
+
+\item{S}{Force merge for one specific strand only.
+Follow with + or - to force merge from only
+the forward or reverse strand, respectively.
+- By default, merging is done without respect to strand.}
 
 \item{o}{Specify the operation that should be applied to -c.
 Valid operations:
@@ -55,15 +57,17 @@ E.g., "-c 5,4,6 -o sum,mean,count" will give the sum of column 5,
 the mean of column 4, and the count of column 6.
 The order of output columns will match the ordering given in the command.}
 
-\item{delim}{Specify a custom delimiter for the collapse operations.
-- Example: -delim "|"
-- Default: ",".}
+\item{header}{Print the header from the A file prior to results.}
+
+\item{s}{Force strandedness.  That is, only merge features
+that are on the same strand.
+- By default, merging is done without respect to strand.}
 
 \item{prec}{Sets the decimal precision for output (Default: 5)}
 
-\item{bed}{If using BAM input, write output as BED.}
-
-\item{header}{Print the header from the A file prior to results.}
+\item{iobuf}{Specify amount of memory to use for input buffer.
+Takes an integer argument. Optional suffixes K/M/G supported.
+Note: currently has no effect with compressed files.}
 
 \item{nobuf}{Disable buffered output. Using this option will cause each line
 of output to be printed as it is generated, rather than saved
@@ -71,10 +75,6 @@ in a buffer. This will make printing large output files
 noticeably slower, but can be useful in conjunction with
 other software tools and scripts that need to process one
 line of bedtools output at a time.}
-
-\item{iobuf}{Specify amount of memory to use for input buffer.
-Takes an integer argument. Optional suffixes K/M/G supported.
-Note: currently has no effect with compressed files.}
 }
 \description{
 Merges overlapping BED/GFF/VCF entries into a single interval.

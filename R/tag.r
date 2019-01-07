@@ -4,15 +4,18 @@
 #' @param i <BAM>
 #' @param files FILE1 .. FILEn
 #' @param labels LAB1 .. LABn
-#' @param s Require overlaps on the same strand.  That is, only tag alignments that have the same
-#' strand as a feature in the annotation file(s).
+#' @param f Minimum overlap required as a fraction of the alignment.
+#' - Default is 1E-9 (i.e., 1bp).
+#' - FLOAT (e.g. 0.50)
 #' 
 #' @param S Require overlaps on the opposite strand.  That is, only tag alignments that have the opposite
 #' strand as a feature in the annotation file(s).
 #' 
-#' @param f Minimum overlap required as a fraction of the alignment.
-#' - Default is 1E-9 (i.e., 1bp).
-#' - FLOAT (e.g. 0.50)
+#' @param intervals Use the full interval (including name, score, and strand) to populate tags.
+#'  Requires the -labels option to identify from which file the interval came.
+#' 
+#' @param s Require overlaps on the same strand.  That is, only tag alignments that have the same
+#' strand as a feature in the annotation file(s).
 #' 
 #' @param tag Dictate what the tag should be. Default is YB.
 #' - STRING (two characters, e.g., YK)
@@ -23,10 +26,7 @@
 #' @param scores Use the score field from the annotation files to populate tags.
 #' By default, the -labels values are used.
 #' 
-#' @param intervals Use the full interval (including name, score, and strand) to populate tags.
-#'  Requires the -labels option to identify from which file the interval came.
-#' 
-tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL)
+tag <- function(i, files, labels, f = NULL, S = NULL, intervals = NULL, s = NULL, tag = NULL, names = NULL, scores = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -46,10 +46,10 @@ tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, name
 			
 		options = "" 
  
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
+			if (!is.null(f)) {
+			options = paste(options," -f")
+			if(is.character(f) || is.numeric(f)) {
+			options = paste(options, " ", f)
 			}	
 			}
 			 
@@ -60,10 +60,17 @@ tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, name
 			}	
 			}
 			 
-			if (!is.null(f)) {
-			options = paste(options," -f")
-			if(is.character(f) || is.numeric(f)) {
-			options = paste(options, " ", f)
+			if (!is.null(intervals)) {
+			options = paste(options," -intervals")
+			if(is.character(intervals) || is.numeric(intervals)) {
+			options = paste(options, " ", intervals)
+			}	
+			}
+			 
+			if (!is.null(s)) {
+			options = paste(options," -s")
+			if(is.character(s) || is.numeric(s)) {
+			options = paste(options, " ", s)
 			}	
 			}
 			 
@@ -85,13 +92,6 @@ tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, name
 			options = paste(options," -scores")
 			if(is.character(scores) || is.numeric(scores)) {
 			options = paste(options, " ", scores)
-			}	
-			}
-			 
-			if (!is.null(intervals)) {
-			options = paste(options," -intervals")
-			if(is.character(intervals) || is.numeric(intervals)) {
-			options = paste(options, " ", intervals)
 			}	
 			}
 			

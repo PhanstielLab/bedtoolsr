@@ -4,28 +4,15 @@
 \alias{genomecov}
 \title{Compute the coverage of a feature file among a genome.}
 \usage{
-genomecov(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL,
-  bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL,
-  du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL,
-  trackline = NULL, trackopts = NULL)
+genomecov(i, g, bga = NULL, bg = NULL, d = NULL, max = NULL,
+  trackopts = NULL, trackline = NULL, pc = NULL, three = NULL,
+  fs = NULL, dz = NULL, split = NULL, ibam = NULL, five = NULL,
+  du = NULL, strand = NULL, scale = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
 \item{g}{<genome>}
-
-\item{ibam}{The input file is in BAM format.
-Note: BAM _must_ be sorted by position}
-
-\item{d}{Report the depth at each genome position (with one-based coordinates).
-Default behavior is to report a histogram.}
-
-\item{dz}{Report the depth at each genome position (with zero-based coordinates).
-Reports only non-zero positions.
-Default behavior is to report a histogram.}
-
-\item{bg}{Report depth in BedGraph format. For details, see:
-genome.ucsc.edu/goldenPath/help/bedgraph.html}
 
 \item{bga}{Report depth in BedGraph format, as above (-bg).
 However with this option, regions with zero 
@@ -33,40 +20,22 @@ coverage are also reported. This allows one to
 quickly extract all regions of a genome with 0 
 coverage by applying: "grep -w 0$" to the output.}
 
-\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.
-when computing coverage.
-For BAM files, this uses the CIGAR "N" and "D" operations 
-to infer the blocks for computing coverage.
-For BED12 files, this uses the BlockCount, BlockStarts, and BlockEnds
-fields (i.e., columns 10,11,12).}
+\item{bg}{Report depth in BedGraph format. For details, see:
+genome.ucsc.edu/goldenPath/help/bedgraph.html}
 
-\item{strand}{Calculate coverage of intervals from a specific strand.
-With BED files, requires at least 6 columns (strand is column 6). 
-- (STRING): can be + or -}
-
-\item{pc}{Calculate coverage of pair-end fragments.
-Works for BAM files only}
-
-\item{fs}{Force to use provided fragment size instead of read length
-Works for BAM files only}
-
-\item{du}{Change strand af the mate read (so both reads from the same strand) useful for strand specific
-Works for BAM files only}
-
-\item{five}{Calculate coverage of 5" positions (instead of entire interval).}
-
-\item{three}{Calculate coverage of 3" positions (instead of entire interval).}
+\item{d}{Report the depth at each genome position (with one-based coordinates).
+Default behavior is to report a histogram.}
 
 \item{max}{Combine all positions with a depth >= max into
 a single bin in the histogram. Irrelevant
 for -d and -bedGraph
 - (INTEGER)}
 
-\item{scale}{Scale the coverage by a constant factor.
-Each coverage value is multiplied by this factor before being reported.
-Useful for normalizing coverage by, e.g., reads per million (RPM).
-- Default is 1.0; i.e., unscaled.
-- (FLOAT)}
+\item{trackopts}{Writes additional track line definition parameters in the first line.
+- Example:
+   -trackopts 'name="My Track" visibility=2 color=255,30,30'
+   Note the use of single-quotes if you have spaces in your parameters.
+- (TEXT)}
 
 \item{trackline}{Adds a UCSC/Genome-Browser track line definition in the first line of the output.
 - See here for more details about track line definition:
@@ -75,11 +44,42 @@ Useful for normalizing coverage by, e.g., reads per million (RPM).
       uploaded to the Genome Browser as a custom track,
       BUT CAN NOT be converted into a BigWig file (w/o removing the first line).}
 
-\item{trackopts}{Writes additional track line definition parameters in the first line.
-- Example:
-   -trackopts 'name="My Track" visibility=2 color=255,30,30'
-   Note the use of single-quotes if you have spaces in your parameters.
-- (TEXT)}
+\item{pc}{Calculate coverage of pair-end fragments.
+Works for BAM files only}
+
+\item{three}{Calculate coverage of 3" positions (instead of entire interval).}
+
+\item{fs}{Force to use provided fragment size instead of read length
+Works for BAM files only}
+
+\item{dz}{Report the depth at each genome position (with zero-based coordinates).
+Reports only non-zero positions.
+Default behavior is to report a histogram.}
+
+\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.
+when computing coverage.
+For BAM files, this uses the CIGAR "N" and "D" operations 
+to infer the blocks for computing coverage.
+For BED12 files, this uses the BlockCount, BlockStarts, and BlockEnds
+fields (i.e., columns 10,11,12).}
+
+\item{ibam}{The input file is in BAM format.
+Note: BAM _must_ be sorted by position}
+
+\item{five}{Calculate coverage of 5" positions (instead of entire interval).}
+
+\item{du}{Change strand af the mate read (so both reads from the same strand) useful for strand specific
+Works for BAM files only}
+
+\item{strand}{Calculate coverage of intervals from a specific strand.
+With BED files, requires at least 6 columns (strand is column 6). 
+- (STRING): can be + or -}
+
+\item{scale}{Scale the coverage by a constant factor.
+Each coverage value is multiplied by this factor before being reported.
+Useful for normalizing coverage by, e.g., reads per million (RPM).
+- Default is 1.0; i.e., unscaled.
+- (FLOAT)}
 }
 \description{
 Compute the coverage of a feature file among a genome.

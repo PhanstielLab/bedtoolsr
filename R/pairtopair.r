@@ -2,20 +2,13 @@
 #' 
 #' @param a <BEDPE>
 #' @param b <BEDPE>
-#' @param f Minimum overlap required as fraction of A (e.g. 0.05).
-#' Default is 1E-9 (effectively 1bp).
-#' 
-#' @param type Approach to reporting overlaps between A and B.
-#' neither Report overlaps if neither end of A overlaps B.
-#' either Report overlaps if either ends of A overlap B.
-#' both Report overlaps if both ends of A overlap B.
-#' notboth Report overlaps if one or neither of A's overlap B.
-#' - Default = both.
-#' 
 #' @param slop The amount of slop (in b.p.). to be added to each footprint of A.
 #' *Note*: Slop is subtracted from start1 and start2
 #'  and added to end1 and end2.
 #' - Default = 0.
+#' 
+#' @param f Minimum overlap required as fraction of A (e.g. 0.05).
+#' Default is 1E-9 (effectively 1bp).
 #' 
 #' @param ss Add slop based to each BEDPE footprint based on strand.
 #' - If strand is "+", slop is only added to the end coordinates.
@@ -28,7 +21,14 @@
 #' @param rdn Require the hits to have different names (i.e. avoid self-hits).
 #' - By default, same names are allowed.
 #' 
-pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, is = NULL, rdn = NULL)
+#' @param type Approach to reporting overlaps between A and B.
+#' neither Report overlaps if neither end of A overlaps B.
+#' either Report overlaps if either ends of A overlap B.
+#' both Report overlaps if both ends of A overlap B.
+#' notboth Report overlaps if one or neither of A's overlap B.
+#' - Default = both.
+#' 
+pairtopair <- function(a, b, slop = NULL, f = NULL, ss = NULL, is = NULL, rdn = NULL, type = NULL)
 { 
 
 			if (!is.character(a) && !is.numeric(a)) {
@@ -43,24 +43,17 @@ pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, is =
 			
 		options = "" 
  
-			if (!is.null(f)) {
-			options = paste(options," -f")
-			if(is.character(f) || is.numeric(f)) {
-			options = paste(options, " ", f)
-			}	
-			}
-			 
-			if (!is.null(type)) {
-			options = paste(options," -type")
-			if(is.character(type) || is.numeric(type)) {
-			options = paste(options, " ", type)
-			}	
-			}
-			 
 			if (!is.null(slop)) {
 			options = paste(options," -slop")
 			if(is.character(slop) || is.numeric(slop)) {
 			options = paste(options, " ", slop)
+			}	
+			}
+			 
+			if (!is.null(f)) {
+			options = paste(options," -f")
+			if(is.character(f) || is.numeric(f)) {
+			options = paste(options, " ", f)
 			}	
 			}
 			 
@@ -82,6 +75,13 @@ pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, is =
 			options = paste(options," -rdn")
 			if(is.character(rdn) || is.numeric(rdn)) {
 			options = paste(options, " ", rdn)
+			}	
+			}
+			 
+			if (!is.null(type)) {
+			options = paste(options," -type")
+			if(is.character(type) || is.numeric(type)) {
+			options = paste(options, " ", type)
 			}	
 			}
 			

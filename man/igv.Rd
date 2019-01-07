@@ -5,35 +5,35 @@
 \title{Creates a batch script to create IGV images 
 at each interval defined in a BED/GFF/VCF file.}
 \usage{
-igv(i, path = NULL, sess = NULL, sort = NULL, clps = NULL,
-  name = NULL, slop = NULL, img = NULL)
+igv(i, sort = NULL, sess = NULL, slop = NULL, name = NULL,
+  img = NULL, clps = NULL, path = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
-
-\item{path}{The full path to which the IGV snapshots should be written.
-(STRING) Default: ./}
-
-\item{sess}{The full path to an existing IGV session file to be 
-loaded prior to taking snapshots.
-(STRING) Default is for no session to be loaded.}
 
 \item{sort}{The type of BAM sorting you would like to apply to each image. 
 Options: base, position, strand, quality, sample, and readGroup
 Default is to apply no sorting at all.}
 
-\item{clps}{Collapse the aligned reads prior to taking a snapshot. 
-Default is to no collapse.}
-
-\item{name}{Use the "name" field (column 4) for each image's filename. 
-Default is to use the "chr:start-pos.ext".}
+\item{sess}{The full path to an existing IGV session file to be 
+loaded prior to taking snapshots.
+(STRING) Default is for no session to be loaded.}
 
 \item{slop}{Number of flanking base pairs on the left & right of the image.
 - (INT) Default = 0.}
 
+\item{name}{Use the "name" field (column 4) for each image's filename. 
+Default is to use the "chr:start-pos.ext".}
+
 \item{img}{The type of image to be created. 
 Options: png, eps, svg
 Default is png.}
+
+\item{clps}{Collapse the aligned reads prior to taking a snapshot. 
+Default is to no collapse.}
+
+\item{path}{The full path to which the IGV snapshots should be written.
+(STRING) Default: ./}
 }
 \description{
 Creates a batch script to create IGV images 

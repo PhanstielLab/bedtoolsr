@@ -4,17 +4,14 @@
 \alias{maskfasta}
 \title{Mask a fasta file based on feature coordinates.}
 \usage{
-maskfasta(fi, fo, bed, soft = NULL, mc = NULL, fullHeader = NULL)
+maskfasta(fi, bed, fo, mc = NULL, fullHeader = NULL, soft = NULL)
 }
 \arguments{
 \item{fi}{<fasta>}
 
-\item{fo}{<fasta>}
-
 \item{bed}{<bed/gff/vcf>}
 
-\item{soft}{Enforce "soft" masking.
-Mask with lower-case bases, instead of masking with Ns.}
+\item{fo}{<fasta>}
 
 \item{mc}{Replace masking character.
 Use another character, instead of masking with Ns.}
@@ -22,6 +19,9 @@ Use another character, instead of masking with Ns.}
 \item{fullHeader}{Use full fasta header.
 By default, only the word before the first space or tab
 is used.}
+
+\item{soft}{Enforce "soft" masking.
+Mask with lower-case bases, instead of masking with Ns.}
 }
 \description{
 Mask a fasta file based on feature coordinates.

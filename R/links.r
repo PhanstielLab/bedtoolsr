@@ -1,13 +1,13 @@
 #' Creates HTML links to an UCSC Genome Browser from a feature file.
 #' 
 #' @param i <bed/gff/vcf> > out.html
-#' @param base The browser basename.  Default: http://genome.ucsc.edu 
-#' 
 #' @param org The organism. Default: human
+#' 
+#' @param base The browser basename.  Default: http://genome.ucsc.edu 
 #' 
 #' @param db The build.  Default: hg18
 #' 
-links <- function(i, base = NULL, org = NULL, db = NULL)
+links <- function(i, org = NULL, base = NULL, db = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -17,17 +17,17 @@ links <- function(i, base = NULL, org = NULL, db = NULL)
 			
 		options = "" 
  
-			if (!is.null(base)) {
-			options = paste(options," -base")
-			if(is.character(base) || is.numeric(base)) {
-			options = paste(options, " ", base)
-			}	
-			}
-			 
 			if (!is.null(org)) {
 			options = paste(options," -org")
 			if(is.character(org) || is.numeric(org)) {
 			options = paste(options, " ", org)
+			}	
+			}
+			 
+			if (!is.null(base)) {
+			options = paste(options," -base")
+			if(is.character(base) || is.numeric(base)) {
+			options = paste(options, " ", base)
 			}	
 			}
 			 

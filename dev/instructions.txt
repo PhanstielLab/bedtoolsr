@@ -1,16 +1,16 @@
-Example command: intersect("/Users/mayurapatwardhan/Documents/Bedtools/A.bed", "/Users/mayurapatwardhan/Documents/Bedtools/B.bed")
+Example command: intersect("A.bed", "B.bed")
 
 
-If an option has a numeric or string value, assign it one using the equals operator. For example: "f = 1". If an option has no value, assign it the value "TRUE" in all caps. For example: "c =TRUE"
+If an option has a numeric or string value, assign it one using the equals operator. For example: "f = 1". If an option has no value, assign it the value "TRUE" in all caps. For example: "c = TRUE".
 
-If a option with a numberic value has multiple numbers, attach as a string. Example: bedtools map a.bed b.bed c = "3,4,5,6"
+If an option with a numeric value has multiple numbers, attach as a string. Example: bedtools map a.bed b.bed c = "3,4,5,6".
 
 
 1. Download bedtools and python and studio
 2. Download makePackage.py
 3. Run makePackage.py
-4. When it asks: Where would you like to make your R package? Type in the destination of where you want your package to be stored (Ex: /Users/mayurapatwardhan/Documents/Bedtools)
-5. When it asks: What is the bedtools path? Type in the path that your bedtools bin folder is saved in (Ex: /Users/mayurapatwardhan/Downloads/bedtools2/bin). If bedtools is already in your path, just press enter
+4. When it asks: Where would you like to make your R package? Type in the destination of where you want your package to be stored.
+5. When it asks: What is the bedtools path? Type in the path that your bedtools bin folder is saved in. If bedtools is already in your path, just press enter.
 6. Make changes below, remove necessary files from NAMESPACE export (look at log file too)
 7. Create documentation using the following commands in terminal
 
@@ -28,7 +28,7 @@ Hit "Install and Restart"
 
 
 To make a tar.gz file:
-Command line: "R CMD build BedtoolsRWrapper"
+Command line: "R CMD build bedtoolsr"
 
 
 If downloading tar.gz file:

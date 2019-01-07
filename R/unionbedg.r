@@ -3,25 +3,25 @@
 #' 
 #' @param i FILE1 FILE2 .. FILEn
 #' Assumes that each BedGraph file is sorted by chrom/start
+#' @param g  Use genome file to calculate empty regions.
+#'  - STRING.
+#' 
+#' @param filler Use TEXT when representing intervals having no value.
+#'  - Default is '0', but you can use 'N/A' or any text.
+#' 
 #' @param header  Print a header line.
 #'  (chrom/start/end + names of each file).
 #' 
 #' @param names  A list of names (one/file) to describe each file in -i.
 #'  These names will be printed in the header line.
 #' 
-#' @param g  Use genome file to calculate empty regions.
-#'  - STRING.
-#' 
 #' @param empty  Report empty regions (i.e., start/end intervals w/o
 #'  values in all files).
 #'  - Requires the '-g FILE' parameter.
 #' 
-#' @param filler Use TEXT when representing intervals having no value.
-#'  - Default is '0', but you can use 'N/A' or any text.
-#' 
 #' @param examples Show detailed usage examples.
 #' 
-unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL)
+unionbedg <- function(i, g = NULL, filler = NULL, header = NULL, names = NULL, empty = NULL, examples = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -31,6 +31,20 @@ unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, fi
 			
 		options = "" 
  
+			if (!is.null(g)) {
+			options = paste(options," -g")
+			if(is.character(g) || is.numeric(g)) {
+			options = paste(options, " ", g)
+			}	
+			}
+			 
+			if (!is.null(filler)) {
+			options = paste(options," -filler")
+			if(is.character(filler) || is.numeric(filler)) {
+			options = paste(options, " ", filler)
+			}	
+			}
+			 
 			if (!is.null(header)) {
 			options = paste(options," -header")
 			if(is.character(header) || is.numeric(header)) {
@@ -45,24 +59,10 @@ unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, fi
 			}	
 			}
 			 
-			if (!is.null(g)) {
-			options = paste(options," -g")
-			if(is.character(g) || is.numeric(g)) {
-			options = paste(options, " ", g)
-			}	
-			}
-			 
 			if (!is.null(empty)) {
 			options = paste(options," -empty")
 			if(is.character(empty) || is.numeric(empty)) {
 			options = paste(options, " ", empty)
-			}	
-			}
-			 
-			if (!is.null(filler)) {
-			options = paste(options," -filler")
-			if(is.character(filler) || is.numeric(filler)) {
-			options = paste(options, " ", filler)
 			}	
 			}
 			 

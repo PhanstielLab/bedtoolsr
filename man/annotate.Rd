@@ -5,30 +5,30 @@
 \title{Annotates the depth & breadth of coverage of features from mult. files
 on the intervals in -i.}
 \usage{
-annotate(i, files, names = NULL, counts = NULL, both = NULL,
-  s = NULL, S = NULL)
+annotate(i, files, S = NULL, both = NULL, counts = NULL, s = NULL,
+  names = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
 \item{files}{FILE1 FILE2..FILEn}
 
-\item{names}{A list of names (one / file) to describe each file in -i.
-These names will be printed as a header line.}
-
-\item{counts}{Report the count of features in each file that overlap -i.
-- Default is to report the fraction of -i covered by each file.}
+\item{S}{Require different strandedness.  That is, only count overlaps
+on the _opposite_ strand.
+- By default, overlaps are counted without respect to strand.}
 
 \item{both}{Report the counts followed by the  percent coverage.
+- Default is to report the fraction of -i covered by each file.}
+
+\item{counts}{Report the count of features in each file that overlap -i.
 - Default is to report the fraction of -i covered by each file.}
 
 \item{s}{Require same strandedness.  That is, only counts overlaps
 on the _same_ strand.
 - By default, overlaps are counted without respect to strand.}
 
-\item{S}{Require different strandedness.  That is, only count overlaps
-on the _opposite_ strand.
-- By default, overlaps are counted without respect to strand.}
+\item{names}{A list of names (one / file) to describe each file in -i.
+These names will be printed as a header line.}
 }
 \description{
 Annotates the depth & breadth of coverage of features from mult. files

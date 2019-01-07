@@ -70,7 +70,7 @@ def capture(header, header1):
 	#print none if the header does not exist
 	if(firstWord != header and firstWord != header1):	
 		createR = 0
-		text_file4.write(currentoption.rstrip() + " could not be created because "+ header[:-1] +" did not exist\n")
+		text_file4.write(currentoption.rstrip() + " could not be created because " + header[:-1] + " did not exist\n")
 		return
 	
 
@@ -168,33 +168,51 @@ def bedtoolsFunction(command):
 
 	comment = "#' "
 	
-	file = open(fileinput+"/BedtoolsR%s/R/%s.r" % (version,command),"w")
+	file = open(fileinput + "/R/%s.r" % command, "w")
 
 	summarySplit = infoDict["Summary"].split("\n")
 
 	for line in summarySplit:
-		file.write(comment+line)
+		file.write(comment + line)
 		file.write("\n")
 
 	for key in usageDict:
 		usageLines =  "@param " + key + " " + usageDict[key].replace("%", " percent")
 		usageSplit = usageLines.split("\n")
 		for line in usageSplit:
-			file.write(comment+line)
+			file.write(comment + line)
 			file.write("\n")
 		
 	for option in optionDict:
-		optionLines = "@param " + option + " " + optionDict[option].replace("%", " percent")
+		special = False
+		if(option == "3"):
+			special = True
+			option2 = "three"
+		elif(option == "5"):
+			special = True
+			option2 = "five"
+		elif(option == "name+"):
+			special = True
+			option2 = "nameplus"
+		optionLines = "@param " + (option2 if special else option) + " " + optionDict[option].replace("%", " percent")
 		optionSplit = optionLines.split("\n")
 		for line in optionSplit:
-			file.write(comment+line)
+			file.write(comment + line)
 			file.write("\n")
-
-
 
 	setOptions= ""
 	for option in optionDict:
-		setOptions = setOptions + option + " = " + "NULL" + ", "
+		special = False
+		if(option == "3"):
+			special = True
+			option2 = "three"
+		elif(option == "5"):
+			special = True
+			option2 = "five"
+		elif(option == "name+"):
+			special = True
+			option2 = "nameplus"
+		setOptions = setOptions + (option2 if special else option) + " = " + "NULL" + ", "
 
 	setOptions = setOptions[:-2]
 
@@ -219,6 +237,16 @@ def bedtoolsFunction(command):
 	file.write('\t\toptions = "" \n' )
 
 	for option in optionDict:
+		special = False
+		if(option == "3"):
+			special = True
+			option2 = "three"
+		elif(option == "5"):
+			special = True
+			option2 = "five"
+		elif(option == "name+"):
+			special = True
+			option2 = "nameplus"
 		file.write(""" 
 			if (!is.null(%s)) {
 			options = paste(options," -%s")
@@ -226,7 +254,7 @@ def bedtoolsFunction(command):
 			options = paste(options, " ", %s)
 			}	
 			}
-			""" % (option, option, option, option, option))
+			""" % (option2 if special else option, option, option2 if special else option, option2 if special else option, option2 if special else option))
 
 	file.write('\n\t# establish output file \n\ttempfile = "~/Desktop/tempfile.txt" \n' )
 	cmdstring = ""
@@ -251,7 +279,8 @@ def bedtoolsFunction(command):
 
 
 while True: 
-	fileinput = input("Where would you like to make your R package? Type the full path name below:").rstrip()
+	fileinput = raw_input("Where would you like to make your R package? ").rstrip()
+	fileinput = os.path.expanduser(fileinput)
 	if not fileinput:
 		continue
 	if(os.path.isdir(fileinput) == False):
@@ -260,24 +289,24 @@ while True:
 	else:
 		break
 
-bedtoolsinput = input("What is the bedtools path?")
+bedtoolsinput = raw_input("What is the bedtools path? ")
 if(bedtoolsinput == ""):
     bedtoolsinputmain = "bedtools"
 else:
-    bedtoolsinputmain = bedtoolsinput+"/bedtools"
+    bedtoolsinput = os.path.expanduser(bedtoolsinput)
+    bedtoolsinputmain = bedtoolsinput + "/bedtools"
 
-os.system("%s &> %s/bedtools.txt" %(bedtoolsinputmain,fileinput))
-text_file2 = open(fileinput+"/bedtools.txt", "r")
-text_file3 = open(fileinput+"/bedtoolsCommands.txt", "w")
+os.system("%s &> %s/bedtools.txt" % (bedtoolsinputmain, fileinput))
+text_file2 = open(fileinput + "/bedtools.txt", "r")
+text_file3 = open(fileinput + "/bedtoolsCommands.txt", "w")
 captureCommands()
 text_file2.close()
 
 
-os.system("mkdir " + fileinput + "/BedtoolsR%s" % version)
-os.system("mkdir "+ fileinput +"/BedtoolsR%s/man" %version)
-os.system("mkdir "+fileinput+ "/BedtoolsR%s/R" %version)
-text_file4 = open(fileinput+"/BedtoolsR%s/logFile.txt" %version, "w")
-text_file3 = open(fileinput+"/bedtoolsCommands.txt", "r")
+os.system("mkdir " + fileinput + "/man")
+os.system("mkdir " + fileinput + "/R")
+text_file4 = open(fileinput + "/dev/log.txt", "w")
+text_file3 = open(fileinput + "/bedtoolsCommands.txt", "r")
 
 for line in text_file3:
 	createR = 1
@@ -285,8 +314,8 @@ for line in text_file3:
 	infoDict.clear()
 	usageDict.clear()
 	snippedLine = line[:-1]
-	os.system("%s %s -h &> %s/BedtoolsR%s/bedtools%s.txt" % (bedtoolsinputmain, snippedLine, fileinput, version, snippedLine))
-	text_file = open("%s/BedtoolsR%s/bedtools%s.txt" % (fileinput,version, snippedLine), "r+")
+	os.system("%s %s -h &> %s/bedtools%s.txt" % (bedtoolsinputmain, snippedLine, fileinput, snippedLine))
+	text_file = open("%s/bedtools%s.txt" % (fileinput, snippedLine), "r+")
 	currentoption = line
 	basic()
 	options()
@@ -294,31 +323,47 @@ for line in text_file3:
 		bedtoolsFunction(snippedLine)
 		functionList.append(line.rstrip())
 	text_file.close()
-	os.system("rm %s/BedtoolsR%s/bedtools%s.txt" % (fileinput, version, snippedLine))
+	os.system("rm %s/bedtools%s.txt" % (fileinput, snippedLine))
 
 text_file3.close()
 text_file4.close()
 os.system("rm %s/bedtools.txt" % fileinput)
 os.system("rm %s/bedtoolsCommands.txt" % fileinput)
-f=open("%s/BedtoolsR%s/DESCRIPTION" % (fileinput, version), "w")
-f.write("Package: BedtoolsR\n")
+f=open("%s/DESCRIPTION" % fileinput, "w")
+f.write("Package: bedtoolsr\n")
 f.write("Encoding: UTF-8\n")
 f.write("Type: Package\n")
 f.write("Title: Bedtools Wrapper\n")
-f.write("Version: "+ version[1:]+"\n")
+f.write("Version: "+ version[1:] + "-1\n")
 today = datetime.date.today()
 f.write("Date: "+ str(today) + "\n")
 f.write("Author: Mayura Patwardhan, Doug Phanstiel\n")
 f.write("Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.\n")
-f.write("License: What license is it under?\n")
+f.write("License: MIT\n")
 f.close()
-f = open("%s/BedtoolsR%s/NAMESPACE" % (fileinput, version), "w")
+f = open("%s/NAMESPACE" % fileinput, "w")
 exportfunctions = ""
 for function in functionList:
 	exportfunctions = exportfunctions + function + ", "
 exportfunctions = exportfunctions[:-2]
-f.write("export("+exportfunctions+")")
-
-
-
-
+f.write("export(" + exportfunctions + ")")
+f = open("%s/R/zzz.r" % fileinput, "w")
+f.write("""
+.onLoad <- function(libname, pkgname) {
+  response<-system("bedtools --version", intern=T)
+  if(!exists("response")) {
+    stop("bedtools does not appear to be installed. ")
+  }
+  installed_bedtools_version<-substr(response, 11, nchar(response))
+  if(length(which(installed.packages()[, 1]=="bedtoolsr"))>0) {
+    bedtoolsr_version<-installed.packages()[which(installed.packages()[, 1]=="bedtoolsr"), 3]
+    hyphens<-gregexpr("-", bedtoolsr_version)
+    package_bedtools_version<-substr(bedtoolsr_version, 1, hyphens[[length(hyphens)]][1]-1)
+    if(installed_bedtools_version != package_bedtools_version) {
+      warning(paste("bedtoolsr was built with bedtools version", package_bedtools_version, "but you have version", installed_bedtools_version, "installed. Function syntax may have changed and wrapper will not function correctly. To fix this, please install bedtools version", package_bedtools_version, "and either add it to your PATH or run:
+  ", "options(bedtools.path = \\\"[bedtools path]\\\")"))
+    }
+  }
+}
+""")
+f.close()

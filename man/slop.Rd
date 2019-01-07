@@ -4,8 +4,8 @@
 \alias{slop}
 \title{Add requested base pairs of "slop" to each feature.}
 \usage{
-slop(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL,
-  header = NULL)
+slop(i, g, b = NULL, l = NULL, pct = NULL, header = NULL,
+  s = NULL, r = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -18,18 +18,18 @@ slop(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL,
 \item{l}{The number of base pairs to subtract from the start coordinate.
 - (Integer) or (Float, e.g. 0.1) if used with -pct.}
 
-\item{r}{The number of base pairs to add to the end coordinate.
-- (Integer) or (Float, e.g. 0.1) if used with -pct.}
-
-\item{s}{Define -l and -r based on strand.
-E.g. if used, -l 500 for a negative-stranded feature, 
-it will add 500 bp downstream.  Default = false.}
-
 \item{pct}{Define -l and -r as a fraction of the feature's length.
 E.g. if used on a 1000bp feature, -l 0.50, 
 will add 500 bp "upstream".  Default = false.}
 
 \item{header}{Print the header from the input file prior to results.}
+
+\item{s}{Define -l and -r based on strand.
+E.g. if used, -l 500 for a negative-stranded feature, 
+it will add 500 bp downstream.  Default = false.}
+
+\item{r}{The number of base pairs to add to the end coordinate.
+- (Integer) or (Float, e.g. 0.1) if used with -pct.}
 }
 \description{
 Add requested base pairs of "slop" to each feature.

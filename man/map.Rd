@@ -4,10 +4,10 @@
 \alias{map}
 \title{Apply a function to a column from B intervals that overlap A.}
 \usage{
-map(a, b, c = NULL, o = NULL, delim = NULL, prec = NULL,
-  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
-  split = NULL, g = NULL, nonamecheck = NULL, bed = NULL,
-  header = NULL, nobuf = NULL, iobuf = NULL)
+map(a, b, c = NULL, e = NULL, bed = NULL, g = NULL, f = NULL,
+  F = NULL, delim = NULL, s = NULL, prec = NULL, header = NULL,
+  S = NULL, r = NULL, nobuf = NULL, o = NULL, nonamecheck = NULL,
+  iobuf = NULL, split = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
@@ -17,6 +17,51 @@ map(a, b, c = NULL, o = NULL, delim = NULL, prec = NULL,
 \item{c}{Specify columns from the B file to map onto intervals in A.
 Default: 5.
 Multiple columns can be specified in a comma-delimited list.}
+
+\item{e}{Require that the minimum fraction be satisfied for A OR B.
+- In other words, if -e is used with -f 0.90 and -F 0.10 this requires
+  that either 90 percent of A is covered OR 10 percent of  B is covered.
+  Without -e, both fractions would have to be satisfied.}
+
+\item{bed}{If using BAM input, write output as BED.}
+
+\item{g}{Provide a genome file to enforce consistent chromosome sort order
+across input files. Only applies when used with -sorted option.}
+
+\item{f}{Minimum overlap required as a fraction of A.
+- Default is 1E-9 (i.e., 1bp).
+- FLOAT (e.g. 0.50)}
+
+\item{F}{Minimum overlap required as a fraction of B.
+- Default is 1E-9 (i.e., 1bp).
+- FLOAT (e.g. 0.50)}
+
+\item{delim}{Specify a custom delimiter for the collapse operations.
+- Example: -delim "|"
+- Default: ",".}
+
+\item{s}{Require same strandedness.  That is, only report hits in B
+that overlap A on the _same_ strand.
+- By default, overlaps are reported without respect to strand.}
+
+\item{prec}{Sets the decimal precision for output (Default: 5)}
+
+\item{header}{Print the header from the A file prior to results.}
+
+\item{S}{Require different strandedness.  That is, only report hits in B
+that overlap A on the _opposite_ strand.
+- By default, overlaps are reported without respect to strand.}
+
+\item{r}{Require that the fraction overlap be reciprocal for A AND B.
+- In other words, if -f is 0.90 and -r is used, this requires
+  that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
+
+\item{nobuf}{Disable buffered output. Using this option will cause each line
+of output to be printed as it is generated, rather than saved
+in a buffer. This will make printing large output files 
+noticeably slower, but can be useful in conjunction with
+other software tools and scripts that need to process one
+line of bedtools output at a time.}
 
 \item{o}{Specify the operation that should be applied to -c.
 Valid operations:
@@ -43,59 +88,14 @@ E.g., "-c 5,4,6 -o sum,mean,count" will give the sum of column 5,
 the mean of column 4, and the count of column 6.
 The order of output columns will match the ordering given in the command.}
 
-\item{delim}{Specify a custom delimiter for the collapse operations.
-- Example: -delim "|"
-- Default: ",".}
-
-\item{prec}{Sets the decimal precision for output (Default: 5)}
-
-\item{s}{Require same strandedness.  That is, only report hits in B
-that overlap A on the _same_ strand.
-- By default, overlaps are reported without respect to strand.}
-
-\item{S}{Require different strandedness.  That is, only report hits in B
-that overlap A on the _opposite_ strand.
-- By default, overlaps are reported without respect to strand.}
-
-\item{f}{Minimum overlap required as a fraction of A.
-- Default is 1E-9 (i.e., 1bp).
-- FLOAT (e.g. 0.50)}
-
-\item{F}{Minimum overlap required as a fraction of B.
-- Default is 1E-9 (i.e., 1bp).
-- FLOAT (e.g. 0.50)}
-
-\item{r}{Require that the fraction overlap be reciprocal for A AND B.
-- In other words, if -f is 0.90 and -r is used, this requires
-  that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
-
-\item{e}{Require that the minimum fraction be satisfied for A OR B.
-- In other words, if -e is used with -f 0.90 and -F 0.10 this requires
-  that either 90 percent of A is covered OR 10 percent of  B is covered.
-  Without -e, both fractions would have to be satisfied.}
-
-\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
-
-\item{g}{Provide a genome file to enforce consistent chromosome sort order
-across input files. Only applies when used with -sorted option.}
-
 \item{nonamecheck}{For sorted data, don't throw an error if the file has different naming conventions
 for the same chromosome. ex. "chr1" vs "chr01".}
-
-\item{bed}{If using BAM input, write output as BED.}
-
-\item{header}{Print the header from the A file prior to results.}
-
-\item{nobuf}{Disable buffered output. Using this option will cause each line
-of output to be printed as it is generated, rather than saved
-in a buffer. This will make printing large output files 
-noticeably slower, but can be useful in conjunction with
-other software tools and scripts that need to process one
-line of bedtools output at a time.}
 
 \item{iobuf}{Specify amount of memory to use for input buffer.
 Takes an integer argument. Optional suffixes K/M/G supported.
 Note: currently has no effect with compressed files.}
+
+\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
 }
 \description{
 Apply a function to a column from B intervals that overlap A.

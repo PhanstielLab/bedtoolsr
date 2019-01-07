@@ -5,10 +5,10 @@
 \title{Removes the portion(s) of an interval that is overlapped
 by another feature(s).}
 \usage{
-subtract(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL,
-  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
-  split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
-  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
+subtract(a, b, A = NULL, e = NULL, wb = NULL, g = NULL, f = NULL,
+  wo = NULL, F = NULL, S = NULL, bed = NULL, N = NULL,
+  header = NULL, s = NULL, r = NULL, split = NULL,
+  nonamecheck = NULL, sorted = NULL, iobuf = NULL, nobuf = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
@@ -19,55 +19,59 @@ subtract(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL,
 only subtract the portion of A that overlaps B. Here, if
 any overlap is found (or -f amount), the entire feature is removed.}
 
-\item{N}{Same as -A except when used with -f, the amount is the sum
-of all features (not any single feature).}
+\item{e}{Require that the minimum fraction be satisfied for A OR B.
+- In other words, if -e is used with -f 0.90 and -F 0.10 this requires
+  that either 90 percent of A is covered OR 10 percent of  B is covered.
+  Without -e, both fractions would have to be satisfied.}
 
 \item{wb}{Write the original entry in B for each overlap.
 - Useful for knowing _what_ A overlaps. Restricted by -f and -r.}
+
+\item{g}{Provide a genome file to enforce consistent chromosome sort order
+across input files. Only applies when used with -sorted option.}
+
+\item{f}{Minimum overlap required as a fraction of A.
+- Default is 1E-9 (i.e., 1bp).
+- FLOAT (e.g. 0.50)}
 
 \item{wo}{Write the original A and B entries plus the number of base
 pairs of overlap between the two features.
 - Overlaps restricted by -f and -r.
   Only A features with overlap are reported.}
 
-\item{s}{Require same strandedness.  That is, only report hits in B
-that overlap A on the _same_ strand.
-- By default, overlaps are reported without respect to strand.}
+\item{F}{Minimum overlap required as a fraction of B.
+- Default is 1E-9 (i.e., 1bp).
+- FLOAT (e.g. 0.50)}
 
 \item{S}{Require different strandedness.  That is, only report hits in B
 that overlap A on the _opposite_ strand.
 - By default, overlaps are reported without respect to strand.}
 
-\item{f}{Minimum overlap required as a fraction of A.
-- Default is 1E-9 (i.e., 1bp).
-- FLOAT (e.g. 0.50)}
+\item{bed}{If using BAM input, write output as BED.}
 
-\item{F}{Minimum overlap required as a fraction of B.
-- Default is 1E-9 (i.e., 1bp).
-- FLOAT (e.g. 0.50)}
+\item{N}{Same as -A except when used with -f, the amount is the sum
+of all features (not any single feature).}
+
+\item{header}{Print the header from the A file prior to results.}
+
+\item{s}{Require same strandedness.  That is, only report hits in B
+that overlap A on the _same_ strand.
+- By default, overlaps are reported without respect to strand.}
 
 \item{r}{Require that the fraction overlap be reciprocal for A AND B.
 - In other words, if -f is 0.90 and -r is used, this requires
   that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
 
-\item{e}{Require that the minimum fraction be satisfied for A OR B.
-- In other words, if -e is used with -f 0.90 and -F 0.10 this requires
-  that either 90 percent of A is covered OR 10 percent of  B is covered.
-  Without -e, both fractions would have to be satisfied.}
-
 \item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
-
-\item{g}{Provide a genome file to enforce consistent chromosome sort order
-across input files. Only applies when used with -sorted option.}
 
 \item{nonamecheck}{For sorted data, don't throw an error if the file has different naming conventions
 for the same chromosome. ex. "chr1" vs "chr01".}
 
 \item{sorted}{Use the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input.}
 
-\item{bed}{If using BAM input, write output as BED.}
-
-\item{header}{Print the header from the A file prior to results.}
+\item{iobuf}{Specify amount of memory to use for input buffer.
+Takes an integer argument. Optional suffixes K/M/G supported.
+Note: currently has no effect with compressed files.}
 
 \item{nobuf}{Disable buffered output. Using this option will cause each line
 of output to be printed as it is generated, rather than saved
@@ -75,10 +79,6 @@ in a buffer. This will make printing large output files
 noticeably slower, but can be useful in conjunction with
 other software tools and scripts that need to process one
 line of bedtools output at a time.}
-
-\item{iobuf}{Specify amount of memory to use for input buffer.
-Takes an integer argument. Optional suffixes K/M/G supported.
-Note: currently has no effect with compressed files.}
 }
 \description{
 Removes the portion(s) of an interval that is overlapped

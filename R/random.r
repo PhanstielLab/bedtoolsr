@@ -1,6 +1,10 @@
 #' Generate random intervals among a genome.
 #' 
 #' @param g <genome>
+#' @param seed Supply an integer seed for the shuffling.
+#' - By default, the seed is chosen automatically.
+#' - (INTEGER)
+#' 
 #' @param l The length of the intervals to generate.
 #' - Default = 100.
 #' - (INTEGER)
@@ -9,11 +13,7 @@
 #' - Default = 1,000,000.
 #' - (INTEGER)
 #' 
-#' @param seed Supply an integer seed for the shuffling.
-#' - By default, the seed is chosen automatically.
-#' - (INTEGER)
-#' 
-random <- function(g, l = NULL, n = NULL, seed = NULL)
+random <- function(g, seed = NULL, l = NULL, n = NULL)
 { 
 
 			if (!is.character(g) && !is.numeric(g)) {
@@ -23,6 +23,13 @@ random <- function(g, l = NULL, n = NULL, seed = NULL)
 			
 		options = "" 
  
+			if (!is.null(seed)) {
+			options = paste(options," -seed")
+			if(is.character(seed) || is.numeric(seed)) {
+			options = paste(options, " ", seed)
+			}	
+			}
+			 
 			if (!is.null(l)) {
 			options = paste(options," -l")
 			if(is.character(l) || is.numeric(l)) {
@@ -34,13 +41,6 @@ random <- function(g, l = NULL, n = NULL, seed = NULL)
 			options = paste(options," -n")
 			if(is.character(n) || is.numeric(n)) {
 			options = paste(options, " ", n)
-			}	
-			}
-			 
-			if (!is.null(seed)) {
-			options = paste(options," -seed")
-			if(is.character(seed) || is.numeric(seed)) {
-			options = paste(options, " ", seed)
 			}	
 			}
 			

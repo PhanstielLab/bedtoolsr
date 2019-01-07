@@ -4,30 +4,30 @@
 \alias{sample}
 \title{Take sample of input file(s) using reservoir sampling algorithm.}
 \usage{
-sample(i, n = NULL, seed = NULL, ubam = NULL, s = NULL,
-  header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL)
+sample(i, ubam = NULL, bed = NULL, n = NULL, header = NULL,
+  s = NULL, seed = NULL, nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
+
+\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
+
+\item{bed}{If using BAM input, write output as BED.}
 
 \item{n}{The number of records to generate.
 - Default = 1,000,000.
 - (INTEGER)}
 
-\item{seed}{Supply an integer seed for the shuffling.
-- By default, the seed is chosen automatically.
-- (INTEGER)}
-
-\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
+\item{header}{Print the header from the A file prior to results.}
 
 \item{s}{Require same strandedness.  That is, only give records
 that have the same strand. Use '-s forward' or '-s reverse'
 for forward or reverse strand records, respectively.
 - By default, records are reported without respect to strand.}
 
-\item{header}{Print the header from the A file prior to results.}
-
-\item{bed}{If using BAM input, write output as BED.}
+\item{seed}{Supply an integer seed for the shuffling.
+- By default, the seed is chosen automatically.
+- (INTEGER)}
 
 \item{nobuf}{Disable buffered output. Using this option will cause each line
 of output to be printed as it is generated, rather than saved

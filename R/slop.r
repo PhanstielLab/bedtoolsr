@@ -8,20 +8,20 @@
 #' @param l The number of base pairs to subtract from the start coordinate.
 #' - (Integer) or (Float, e.g. 0.1) if used with -pct.
 #' 
-#' @param r The number of base pairs to add to the end coordinate.
-#' - (Integer) or (Float, e.g. 0.1) if used with -pct.
-#' 
-#' @param s Define -l and -r based on strand.
-#' E.g. if used, -l 500 for a negative-stranded feature, 
-#' it will add 500 bp downstream.  Default = false.
-#' 
 #' @param pct Define -l and -r as a fraction of the feature's length.
 #' E.g. if used on a 1000bp feature, -l 0.50, 
 #' will add 500 bp "upstream".  Default = false.
 #' 
 #' @param header Print the header from the input file prior to results.
 #' 
-slop <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, header = NULL)
+#' @param s Define -l and -r based on strand.
+#' E.g. if used, -l 500 for a negative-stranded feature, 
+#' it will add 500 bp downstream.  Default = false.
+#' 
+#' @param r The number of base pairs to add to the end coordinate.
+#' - (Integer) or (Float, e.g. 0.1) if used with -pct.
+#' 
+slop <- function(i, g, b = NULL, l = NULL, pct = NULL, header = NULL, s = NULL, r = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -50,20 +50,6 @@ slop <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, heade
 			}	
 			}
 			 
-			if (!is.null(r)) {
-			options = paste(options," -r")
-			if(is.character(r) || is.numeric(r)) {
-			options = paste(options, " ", r)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
 			if (!is.null(pct)) {
 			options = paste(options," -pct")
 			if(is.character(pct) || is.numeric(pct)) {
@@ -75,6 +61,20 @@ slop <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, heade
 			options = paste(options," -header")
 			if(is.character(header) || is.numeric(header)) {
 			options = paste(options, " ", header)
+			}	
+			}
+			 
+			if (!is.null(s)) {
+			options = paste(options," -s")
+			if(is.character(s) || is.numeric(s)) {
+			options = paste(options, " ", s)
+			}	
+			}
+			 
+			if (!is.null(r)) {
+			options = paste(options," -r")
+			if(is.character(r) || is.numeric(r)) {
+			options = paste(options, " ", r)
 			}	
 			}
 			

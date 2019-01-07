@@ -3,27 +3,27 @@
 #' 
 #' @param i FILE1 FILE2 .. FILEn
 #' Requires that each interval file is sorted by chrom/start.
-#' @param cluster Invoke Ryan Layers's clustering algorithm.
+#' @param g  Use genome file to calculate empty regions.
+#'  - STRING.
 #' 
 #' @param header  Print a header line.
 #'  (chrom/start/end + names of each file).
 #' 
+#' @param filler Use TEXT when representing intervals having no value.
+#'  - Default is '0', but you can use 'N/A' or any text.
+#' 
+#' @param cluster Invoke Ryan Layers's clustering algorithm.
+#' 
 #' @param names  A list of names (one/file) to describe each file in -i.
 #'  These names will be printed in the header line.
-#' 
-#' @param g  Use genome file to calculate empty regions.
-#'  - STRING.
 #' 
 #' @param empty  Report empty regions (i.e., start/end intervals w/o
 #'  values in all files).
 #'  - Requires the '-g FILE' parameter.
 #' 
-#' @param filler Use TEXT when representing intervals having no value.
-#'  - Default is '0', but you can use 'N/A' or any text.
-#' 
 #' @param examples Show detailed usage examples.
 #' 
-multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL)
+multiinter <- function(i, g = NULL, header = NULL, filler = NULL, cluster = NULL, names = NULL, empty = NULL, examples = NULL)
 { 
 
 			if (!is.character(i) && !is.numeric(i)) {
@@ -33,10 +33,10 @@ multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL,
 			
 		options = "" 
  
-			if (!is.null(cluster)) {
-			options = paste(options," -cluster")
-			if(is.character(cluster) || is.numeric(cluster)) {
-			options = paste(options, " ", cluster)
+			if (!is.null(g)) {
+			options = paste(options," -g")
+			if(is.character(g) || is.numeric(g)) {
+			options = paste(options, " ", g)
 			}	
 			}
 			 
@@ -47,6 +47,20 @@ multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL,
 			}	
 			}
 			 
+			if (!is.null(filler)) {
+			options = paste(options," -filler")
+			if(is.character(filler) || is.numeric(filler)) {
+			options = paste(options, " ", filler)
+			}	
+			}
+			 
+			if (!is.null(cluster)) {
+			options = paste(options," -cluster")
+			if(is.character(cluster) || is.numeric(cluster)) {
+			options = paste(options, " ", cluster)
+			}	
+			}
+			 
 			if (!is.null(names)) {
 			options = paste(options," -names")
 			if(is.character(names) || is.numeric(names)) {
@@ -54,24 +68,10 @@ multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL,
 			}	
 			}
 			 
-			if (!is.null(g)) {
-			options = paste(options," -g")
-			if(is.character(g) || is.numeric(g)) {
-			options = paste(options, " ", g)
-			}	
-			}
-			 
 			if (!is.null(empty)) {
 			options = paste(options," -empty")
 			if(is.character(empty) || is.numeric(empty)) {
 			options = paste(options, " ", empty)
-			}	
-			}
-			 
-			if (!is.null(filler)) {
-			options = paste(options," -filler")
-			if(is.character(filler) || is.numeric(filler)) {
-			options = paste(options, " ", filler)
 			}	
 			}
 			 
