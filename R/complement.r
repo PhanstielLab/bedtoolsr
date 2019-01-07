@@ -19,7 +19,7 @@ complement <- function(i, g)
 
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools complement ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools complement ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

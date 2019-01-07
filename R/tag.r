@@ -97,7 +97,7 @@ tag <- function(i, files, labels, f = NULL, S = NULL, intervals = NULL, s = NULL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools tag ", options, " -i ", i, " -files ", files, " -labels ", labels, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools tag ", options, " -i ", i, " -files ", files, " -labels ", labels, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

@@ -198,7 +198,7 @@ genomecov <- function(i, g, bga = NULL, bg = NULL, d = NULL, max = NULL, trackop
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools genomecov ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools genomecov ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

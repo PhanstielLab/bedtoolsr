@@ -72,7 +72,7 @@ annotate <- function(i, files, S = NULL, both = NULL, counts = NULL, s = NULL, n
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools annotate ", options, " -i ", i, " -files ", files, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools annotate ", options, " -i ", i, " -files ", files, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

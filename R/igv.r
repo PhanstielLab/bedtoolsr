@@ -87,7 +87,7 @@ igv <- function(i, sort = NULL, sess = NULL, slop = NULL, name = NULL, img = NUL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools igv ", options, " -i ", i, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools igv ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

@@ -38,7 +38,7 @@ bedpetobam <- function(i, g, ubam = NULL, mapq = NULL)
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools bedpetobam ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools bedpetobam ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

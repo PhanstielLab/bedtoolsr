@@ -118,7 +118,7 @@ pairtobed <- function(a, b, bedpe = NULL, f = NULL, ed = NULL, ubam = NULL, S = 
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste("bedtools pairtobed ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), " bedtools pairtobed ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 
