@@ -309,6 +309,8 @@ text_file4 = open(fileinput + "/dev/log.txt", "w")
 text_file3 = open(fileinput + "/bedtoolsCommands.txt", "r")
 
 for line in text_file3:
+	if line.startswith("makewindows") or line.startswith("split"):
+		continue
 	createR = 1
 	optionDict.clear()
 	infoDict.clear()
