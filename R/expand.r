@@ -22,7 +22,7 @@ expand <- function(c, i = NULL)
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools expand ", options, " -c ", c, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools expand ", options, " -c ", c, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

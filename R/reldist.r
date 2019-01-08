@@ -28,7 +28,7 @@ reldist <- function(a, b, detail = NULL)
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools reldist ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools reldist ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

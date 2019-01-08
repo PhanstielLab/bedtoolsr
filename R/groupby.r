@@ -105,7 +105,7 @@ groupby <- function(c, o, g, full = NULL, i = NULL, inheader = NULL, delim = NUL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools groupby ", options, " -c ", c, " -o ", o, " -g ", g, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools groupby ", options, " -c ", c, " -o ", o, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

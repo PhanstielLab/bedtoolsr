@@ -159,7 +159,7 @@ window <- function(a, b, c = NULL, Sm = NULL, sm = NULL, ubam = NULL, sw = NULL,
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools window ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools window ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

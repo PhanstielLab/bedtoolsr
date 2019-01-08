@@ -80,7 +80,7 @@ slop <- function(i, g, b = NULL, l = NULL, pct = NULL, header = NULL, s = NULL, 
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools slop ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools slop ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

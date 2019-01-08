@@ -40,7 +40,7 @@ links <- function(i, org = NULL, base = NULL, db = NULL)
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools links ", options, " -i ", i, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools links ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

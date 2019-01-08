@@ -211,7 +211,7 @@ subtract <- function(a, b, A = NULL, e = NULL, wb = NULL, g = NULL, f = NULL, wo
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools subtract ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools subtract ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

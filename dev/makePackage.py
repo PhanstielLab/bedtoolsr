@@ -261,7 +261,7 @@ def bedtoolsFunction(command):
 	for key in usageDict:
 		cmdstring = cmdstring + ', " -%s ", %s' % (key, key)
 
-	file.write('\tcmd = paste(getOption(\"bedtools.path\"), " %s ' %bedtoolsinputmain + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile) \n\tsystem(cmd) \n')
+	file.write('\tcmd = paste(getOption(\"bedtools.path\"), "%s ' %bedtoolsinputmain + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile) \n\tsystem(cmd) \n')
 	file.write('\tresults = read.table(tempfile,header=FALSE,sep="\\t")')
 	file.write(""" 
 		if (file.exists(tempfile)){ 

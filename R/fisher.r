@@ -164,7 +164,7 @@ fisher <- function(a, b, g, e = NULL, F = NULL, f = NULL, m = NULL, S = NULL, be
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools fisher ", options, " -a ", a, " -b ", b, " -g ", g, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools fisher ", options, " -a ", a, " -b ", b, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

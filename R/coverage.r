@@ -212,7 +212,7 @@ coverage <- function(a, b, e = NULL, d = NULL, g = NULL, f = NULL, F = NULL, S =
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), " bedtools coverage ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste(getOption("bedtools.path"), "bedtools coverage ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 
