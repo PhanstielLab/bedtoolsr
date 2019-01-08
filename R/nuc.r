@@ -66,7 +66,7 @@ nuc <- function(fi, bed, C = NULL, seq = NULL, pattern = NULL, fullHeader = NULL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools nuc ", options, " -fi ", fi, " -bed ", bed, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools nuc ", options, " -fi ", fi, " -bed ", bed, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

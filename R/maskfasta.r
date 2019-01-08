@@ -56,7 +56,7 @@ maskfasta <- function(fi, bed, fo, mc = NULL, fullHeader = NULL, soft = NULL)
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools maskfasta ", options, " -fi ", fi, " -bed ", bed, " -fo ", fo, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools maskfasta ", options, " -fi ", fi, " -bed ", bed, " -fo ", fo, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

@@ -99,7 +99,7 @@ sample <- function(i, ubam = NULL, bed = NULL, n = NULL, header = NULL, s = NULL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools sample ", options, " -i ", i, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools sample ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

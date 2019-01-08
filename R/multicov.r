@@ -109,7 +109,7 @@ multicov <- function(bed, bams, D = NULL, f = NULL, F = NULL, s = NULL, q = NULL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools multicov ", options, " -bed ", bed, " -bams ", bams, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools multicov ", options, " -bed ", bed, " -bams ", bams, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

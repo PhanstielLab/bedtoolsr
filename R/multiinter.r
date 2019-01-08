@@ -84,7 +84,7 @@ multiinter <- function(i, g = NULL, header = NULL, filler = NULL, cluster = NULL
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools multiinter ", options, " -i ", i, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools multiinter ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

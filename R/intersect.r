@@ -293,7 +293,7 @@ intersect <- function(a, b, header = NULL, names = NULL, nonamecheck = NULL, wao
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools intersect ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools intersect ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

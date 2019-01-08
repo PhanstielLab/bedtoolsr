@@ -82,7 +82,7 @@ flank <- function(i, g, b = NULL, l = NULL, pct = NULL, header = NULL, s = NULL,
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools flank ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools flank ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

@@ -160,7 +160,7 @@ jaccard <- function(a, b, e = NULL, g = NULL, F = NULL, f = NULL, S = NULL, bed 
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools jaccard ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools jaccard ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

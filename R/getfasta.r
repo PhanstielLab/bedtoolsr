@@ -88,7 +88,7 @@ getfasta <- function(fi, bed, name = NULL, fullHeader = NULL, nameplus = NULL, s
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste(getOption("bedtools.path"), "bedtools getfasta ", options, " -fi ", fi, " -bed ", bed, " > ", tempfile) 
+	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools getfasta ", options, " -fi ", fi, " -bed ", bed, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 
