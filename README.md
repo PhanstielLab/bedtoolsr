@@ -82,6 +82,7 @@ The following funtions are _not_ supported:
 ## Authors
 
 * [Mayura Patwardhan](https://github.com/mayurapatwardhan)
+* [Craig Wenger](https://github.com/cwenger)
 * [Doug Phanstiel](https://github.com/dphansti)
 
 ## Contact
