@@ -155,7 +155,9 @@ merge <- function(i, c = NULL, d = NULL, bed = NULL, delim = NULL, S = NULL, o =
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools merge ", options, " -i ", i, " > ", tempfile) 
+	bedtools.path <- getOption("bedtools.path")
+	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	cmd = paste0(bedtools.path, "bedtools merge ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

@@ -19,7 +19,9 @@ complement <- function(i, g)
 
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools complement ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	bedtools.path <- getOption("bedtools.path")
+	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	cmd = paste0(bedtools.path, "bedtools complement ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 

@@ -39,7 +39,9 @@ bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL)
 			
 	# establish output file 
 	tempfile = "~/Desktop/tempfile.txt" 
-	cmd = paste0(getOption("bedtools.path", default="."), "/bedtools bamtofastq ", options, " -i ", i, " -fq ", fq, " > ", tempfile) 
+	bedtools.path <- getOption("bedtools.path")
+	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	cmd = paste0(bedtools.path, "bedtools bamtofastq ", options, " -i ", i, " -fq ", fq, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
 		if (file.exists(tempfile)){ 
