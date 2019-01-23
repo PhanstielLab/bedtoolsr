@@ -88,154 +88,154 @@
 map <- function(a, b, c = NULL, e = NULL, bed = NULL, g = NULL, f = NULL, F = NULL, delim = NULL, s = NULL, prec = NULL, header = NULL, S = NULL, r = NULL, nobuf = NULL, o = NULL, nonamecheck = NULL, iobuf = NULL, split = NULL)
 { 
 
-			if (!is.character(a) && !is.numeric(a)) {
-			aTable = "~/Desktop/aTable.txt"
-			write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			a=aTable } 
-			
-			if (!is.character(b) && !is.numeric(b)) {
-			bTable = "~/Desktop/bTable.txt"
-			write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			b=bTable } 
-			
+            if (!is.character(a) && !is.numeric(a)) {
+            aTable = paste0(tempdir(), "/aTable.txt")
+            write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            a=aTable } 
+            
+            if (!is.character(b) && !is.numeric(b)) {
+            bTable = paste0(tempdir(), "/bTable.txt")
+            write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            b=bTable } 
+            
 		options = "" 
  
-			if (!is.null(c)) {
-			options = paste(options," -c")
-			if(is.character(c) || is.numeric(c)) {
-			options = paste(options, " ", c)
-			}	
-			}
-			 
-			if (!is.null(e)) {
-			options = paste(options," -e")
-			if(is.character(e) || is.numeric(e)) {
-			options = paste(options, " ", e)
-			}	
-			}
-			 
-			if (!is.null(bed)) {
-			options = paste(options," -bed")
-			if(is.character(bed) || is.numeric(bed)) {
-			options = paste(options, " ", bed)
-			}	
-			}
-			 
-			if (!is.null(g)) {
-			options = paste(options," -g")
-			if(is.character(g) || is.numeric(g)) {
-			options = paste(options, " ", g)
-			}	
-			}
-			 
-			if (!is.null(f)) {
-			options = paste(options," -f")
-			if(is.character(f) || is.numeric(f)) {
-			options = paste(options, " ", f)
-			}	
-			}
-			 
-			if (!is.null(F)) {
-			options = paste(options," -F")
-			if(is.character(F) || is.numeric(F)) {
-			options = paste(options, " ", F)
-			}	
-			}
-			 
-			if (!is.null(delim)) {
-			options = paste(options," -delim")
-			if(is.character(delim) || is.numeric(delim)) {
-			options = paste(options, " ", delim)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
-			if (!is.null(prec)) {
-			options = paste(options," -prec")
-			if(is.character(prec) || is.numeric(prec)) {
-			options = paste(options, " ", prec)
-			}	
-			}
-			 
-			if (!is.null(header)) {
-			options = paste(options," -header")
-			if(is.character(header) || is.numeric(header)) {
-			options = paste(options, " ", header)
-			}	
-			}
-			 
-			if (!is.null(S)) {
-			options = paste(options," -S")
-			if(is.character(S) || is.numeric(S)) {
-			options = paste(options, " ", S)
-			}	
-			}
-			 
-			if (!is.null(r)) {
-			options = paste(options," -r")
-			if(is.character(r) || is.numeric(r)) {
-			options = paste(options, " ", r)
-			}	
-			}
-			 
-			if (!is.null(nobuf)) {
-			options = paste(options," -nobuf")
-			if(is.character(nobuf) || is.numeric(nobuf)) {
-			options = paste(options, " ", nobuf)
-			}	
-			}
-			 
-			if (!is.null(o)) {
-			options = paste(options," -o")
-			if(is.character(o) || is.numeric(o)) {
-			options = paste(options, " ", o)
-			}	
-			}
-			 
-			if (!is.null(nonamecheck)) {
-			options = paste(options," -nonamecheck")
-			if(is.character(nonamecheck) || is.numeric(nonamecheck)) {
-			options = paste(options, " ", nonamecheck)
-			}	
-			}
-			 
-			if (!is.null(iobuf)) {
-			options = paste(options," -iobuf")
-			if(is.character(iobuf) || is.numeric(iobuf)) {
-			options = paste(options, " ", iobuf)
-			}	
-			}
-			 
-			if (!is.null(split)) {
-			options = paste(options," -split")
-			if(is.character(split) || is.numeric(split)) {
-			options = paste(options, " ", split)
-			}	
-			}
-			
+            if (!is.null(c)) {
+            options = paste(options," -c")
+            if(is.character(c) || is.numeric(c)) {
+            options = paste(options, " ", c)
+            }   
+            }
+             
+            if (!is.null(e)) {
+            options = paste(options," -e")
+            if(is.character(e) || is.numeric(e)) {
+            options = paste(options, " ", e)
+            }   
+            }
+             
+            if (!is.null(bed)) {
+            options = paste(options," -bed")
+            if(is.character(bed) || is.numeric(bed)) {
+            options = paste(options, " ", bed)
+            }   
+            }
+             
+            if (!is.null(g)) {
+            options = paste(options," -g")
+            if(is.character(g) || is.numeric(g)) {
+            options = paste(options, " ", g)
+            }   
+            }
+             
+            if (!is.null(f)) {
+            options = paste(options," -f")
+            if(is.character(f) || is.numeric(f)) {
+            options = paste(options, " ", f)
+            }   
+            }
+             
+            if (!is.null(F)) {
+            options = paste(options," -F")
+            if(is.character(F) || is.numeric(F)) {
+            options = paste(options, " ", F)
+            }   
+            }
+             
+            if (!is.null(delim)) {
+            options = paste(options," -delim")
+            if(is.character(delim) || is.numeric(delim)) {
+            options = paste(options, " ", delim)
+            }   
+            }
+             
+            if (!is.null(s)) {
+            options = paste(options," -s")
+            if(is.character(s) || is.numeric(s)) {
+            options = paste(options, " ", s)
+            }   
+            }
+             
+            if (!is.null(prec)) {
+            options = paste(options," -prec")
+            if(is.character(prec) || is.numeric(prec)) {
+            options = paste(options, " ", prec)
+            }   
+            }
+             
+            if (!is.null(header)) {
+            options = paste(options," -header")
+            if(is.character(header) || is.numeric(header)) {
+            options = paste(options, " ", header)
+            }   
+            }
+             
+            if (!is.null(S)) {
+            options = paste(options," -S")
+            if(is.character(S) || is.numeric(S)) {
+            options = paste(options, " ", S)
+            }   
+            }
+             
+            if (!is.null(r)) {
+            options = paste(options," -r")
+            if(is.character(r) || is.numeric(r)) {
+            options = paste(options, " ", r)
+            }   
+            }
+             
+            if (!is.null(nobuf)) {
+            options = paste(options," -nobuf")
+            if(is.character(nobuf) || is.numeric(nobuf)) {
+            options = paste(options, " ", nobuf)
+            }   
+            }
+             
+            if (!is.null(o)) {
+            options = paste(options," -o")
+            if(is.character(o) || is.numeric(o)) {
+            options = paste(options, " ", o)
+            }   
+            }
+             
+            if (!is.null(nonamecheck)) {
+            options = paste(options," -nonamecheck")
+            if(is.character(nonamecheck) || is.numeric(nonamecheck)) {
+            options = paste(options, " ", nonamecheck)
+            }   
+            }
+             
+            if (!is.null(iobuf)) {
+            options = paste(options," -iobuf")
+            if(is.character(iobuf) || is.numeric(iobuf)) {
+            options = paste(options, " ", iobuf)
+            }   
+            }
+             
+            if (!is.null(split)) {
+            options = paste(options," -split")
+            if(is.character(split) || is.numeric(split)) {
+            options = paste(options, " ", split)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools map ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("aTable")) { 
-		file.remove (aTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("aTable")) { 
+        file.remove (aTable)
+        } 
  
-		if(exists("bTable")) { 
-		file.remove (bTable)
-		} 
+        if(exists("bTable")) { 
+        file.remove (bTable)
+        } 

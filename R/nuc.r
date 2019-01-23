@@ -17,70 +17,70 @@
 nuc <- function(fi, bed, C = NULL, seq = NULL, pattern = NULL, fullHeader = NULL, s = NULL)
 { 
 
-			if (!is.character(fi) && !is.numeric(fi)) {
-			fiTable = "~/Desktop/fiTable.txt"
-			write.table(fi, fiTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			fi=fiTable } 
-			
-			if (!is.character(bed) && !is.numeric(bed)) {
-			bedTable = "~/Desktop/bedTable.txt"
-			write.table(bed, bedTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			bed=bedTable } 
-			
+            if (!is.character(fi) && !is.numeric(fi)) {
+            fiTable = paste0(tempdir(), "/fiTable.txt")
+            write.table(fi, fiTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            fi=fiTable } 
+            
+            if (!is.character(bed) && !is.numeric(bed)) {
+            bedTable = paste0(tempdir(), "/bedTable.txt")
+            write.table(bed, bedTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            bed=bedTable } 
+            
 		options = "" 
  
-			if (!is.null(C)) {
-			options = paste(options," -C")
-			if(is.character(C) || is.numeric(C)) {
-			options = paste(options, " ", C)
-			}	
-			}
-			 
-			if (!is.null(seq)) {
-			options = paste(options," -seq")
-			if(is.character(seq) || is.numeric(seq)) {
-			options = paste(options, " ", seq)
-			}	
-			}
-			 
-			if (!is.null(pattern)) {
-			options = paste(options," -pattern")
-			if(is.character(pattern) || is.numeric(pattern)) {
-			options = paste(options, " ", pattern)
-			}	
-			}
-			 
-			if (!is.null(fullHeader)) {
-			options = paste(options," -fullHeader")
-			if(is.character(fullHeader) || is.numeric(fullHeader)) {
-			options = paste(options, " ", fullHeader)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			
+            if (!is.null(C)) {
+            options = paste(options," -C")
+            if(is.character(C) || is.numeric(C)) {
+            options = paste(options, " ", C)
+            }   
+            }
+             
+            if (!is.null(seq)) {
+            options = paste(options," -seq")
+            if(is.character(seq) || is.numeric(seq)) {
+            options = paste(options, " ", seq)
+            }   
+            }
+             
+            if (!is.null(pattern)) {
+            options = paste(options," -pattern")
+            if(is.character(pattern) || is.numeric(pattern)) {
+            options = paste(options, " ", pattern)
+            }   
+            }
+             
+            if (!is.null(fullHeader)) {
+            options = paste(options," -fullHeader")
+            if(is.character(fullHeader) || is.numeric(fullHeader)) {
+            options = paste(options, " ", fullHeader)
+            }   
+            }
+             
+            if (!is.null(s)) {
+            options = paste(options," -s")
+            if(is.character(s) || is.numeric(s)) {
+            options = paste(options, " ", s)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools nuc ", options, " -fi ", fi, " -bed ", bed, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("fiTable")) { 
-		file.remove (fiTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("fiTable")) { 
+        file.remove (fiTable)
+        } 
  
-		if(exists("bedTable")) { 
-		file.remove (bedTable)
-		} 
+        if(exists("bedTable")) { 
+        file.remove (bedTable)
+        } 

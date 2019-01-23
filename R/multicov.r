@@ -32,98 +32,98 @@
 multicov <- function(bed, bams, D = NULL, f = NULL, F = NULL, s = NULL, q = NULL, p = NULL, S = NULL, r = NULL, split = NULL)
 { 
 
-			if (!is.character(bed) && !is.numeric(bed)) {
-			bedTable = "~/Desktop/bedTable.txt"
-			write.table(bed, bedTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			bed=bedTable } 
-			
-			if (!is.character(bams) && !is.numeric(bams)) {
-			bamsTable = "~/Desktop/bamsTable.txt"
-			write.table(bams, bamsTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			bams=bamsTable } 
-			
+            if (!is.character(bed) && !is.numeric(bed)) {
+            bedTable = paste0(tempdir(), "/bedTable.txt")
+            write.table(bed, bedTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            bed=bedTable } 
+            
+            if (!is.character(bams) && !is.numeric(bams)) {
+            bamsTable = paste0(tempdir(), "/bamsTable.txt")
+            write.table(bams, bamsTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            bams=bamsTable } 
+            
 		options = "" 
  
-			if (!is.null(D)) {
-			options = paste(options," -D")
-			if(is.character(D) || is.numeric(D)) {
-			options = paste(options, " ", D)
-			}	
-			}
-			 
-			if (!is.null(f)) {
-			options = paste(options," -f")
-			if(is.character(f) || is.numeric(f)) {
-			options = paste(options, " ", f)
-			}	
-			}
-			 
-			if (!is.null(F)) {
-			options = paste(options," -F")
-			if(is.character(F) || is.numeric(F)) {
-			options = paste(options, " ", F)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
-			if (!is.null(q)) {
-			options = paste(options," -q")
-			if(is.character(q) || is.numeric(q)) {
-			options = paste(options, " ", q)
-			}	
-			}
-			 
-			if (!is.null(p)) {
-			options = paste(options," -p")
-			if(is.character(p) || is.numeric(p)) {
-			options = paste(options, " ", p)
-			}	
-			}
-			 
-			if (!is.null(S)) {
-			options = paste(options," -S")
-			if(is.character(S) || is.numeric(S)) {
-			options = paste(options, " ", S)
-			}	
-			}
-			 
-			if (!is.null(r)) {
-			options = paste(options," -r")
-			if(is.character(r) || is.numeric(r)) {
-			options = paste(options, " ", r)
-			}	
-			}
-			 
-			if (!is.null(split)) {
-			options = paste(options," -split")
-			if(is.character(split) || is.numeric(split)) {
-			options = paste(options, " ", split)
-			}	
-			}
-			
+            if (!is.null(D)) {
+            options = paste(options," -D")
+            if(is.character(D) || is.numeric(D)) {
+            options = paste(options, " ", D)
+            }   
+            }
+             
+            if (!is.null(f)) {
+            options = paste(options," -f")
+            if(is.character(f) || is.numeric(f)) {
+            options = paste(options, " ", f)
+            }   
+            }
+             
+            if (!is.null(F)) {
+            options = paste(options," -F")
+            if(is.character(F) || is.numeric(F)) {
+            options = paste(options, " ", F)
+            }   
+            }
+             
+            if (!is.null(s)) {
+            options = paste(options," -s")
+            if(is.character(s) || is.numeric(s)) {
+            options = paste(options, " ", s)
+            }   
+            }
+             
+            if (!is.null(q)) {
+            options = paste(options," -q")
+            if(is.character(q) || is.numeric(q)) {
+            options = paste(options, " ", q)
+            }   
+            }
+             
+            if (!is.null(p)) {
+            options = paste(options," -p")
+            if(is.character(p) || is.numeric(p)) {
+            options = paste(options, " ", p)
+            }   
+            }
+             
+            if (!is.null(S)) {
+            options = paste(options," -S")
+            if(is.character(S) || is.numeric(S)) {
+            options = paste(options, " ", S)
+            }   
+            }
+             
+            if (!is.null(r)) {
+            options = paste(options," -r")
+            if(is.character(r) || is.numeric(r)) {
+            options = paste(options, " ", r)
+            }   
+            }
+             
+            if (!is.null(split)) {
+            options = paste(options," -split")
+            if(is.character(split) || is.numeric(split)) {
+            options = paste(options, " ", split)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools multicov ", options, " -bed ", bed, " -bams ", bams, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("bedTable")) { 
-		file.remove (bedTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("bedTable")) { 
+        file.remove (bedTable)
+        } 
  
-		if(exists("bamsTable")) { 
-		file.remove (bamsTable)
-		} 
+        if(exists("bamsTable")) { 
+        file.remove (bamsTable)
+        } 

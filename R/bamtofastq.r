@@ -11,49 +11,49 @@
 bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
-			if (!is.character(fq) && !is.numeric(fq)) {
-			fqTable = "~/Desktop/fqTable.txt"
-			write.table(fq, fqTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			fq=fqTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
+            if (!is.character(fq) && !is.numeric(fq)) {
+            fqTable = paste0(tempdir(), "/fqTable.txt")
+            write.table(fq, fqTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            fq=fqTable } 
+            
 		options = "" 
  
-			if (!is.null(fq2)) {
-			options = paste(options," -fq2")
-			if(is.character(fq2) || is.numeric(fq2)) {
-			options = paste(options, " ", fq2)
-			}	
-			}
-			 
-			if (!is.null(tags)) {
-			options = paste(options," -tags")
-			if(is.character(tags) || is.numeric(tags)) {
-			options = paste(options, " ", tags)
-			}	
-			}
-			
+            if (!is.null(fq2)) {
+            options = paste(options," -fq2")
+            if(is.character(fq2) || is.numeric(fq2)) {
+            options = paste(options, " ", fq2)
+            }   
+            }
+             
+            if (!is.null(tags)) {
+            options = paste(options," -tags")
+            if(is.character(tags) || is.numeric(tags)) {
+            options = paste(options, " ", tags)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools bamtofastq ", options, " -i ", i, " -fq ", fq, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 
  
-		if(exists("fqTable")) { 
-		file.remove (fqTable)
-		} 
+        if(exists("fqTable")) { 
+        file.remove (fqTable)
+        } 

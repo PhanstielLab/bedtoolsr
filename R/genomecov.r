@@ -72,147 +72,147 @@
 genomecov <- function(i, g, bga = NULL, bg = NULL, d = NULL, max = NULL, trackopts = NULL, trackline = NULL, pc = NULL, three = NULL, fs = NULL, dz = NULL, split = NULL, ibam = NULL, five = NULL, du = NULL, strand = NULL, scale = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
-			if (!is.character(g) && !is.numeric(g)) {
-			gTable = "~/Desktop/gTable.txt"
-			write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			g=gTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
+            if (!is.character(g) && !is.numeric(g)) {
+            gTable = paste0(tempdir(), "/gTable.txt")
+            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            g=gTable } 
+            
 		options = "" 
  
-			if (!is.null(bga)) {
-			options = paste(options," -bga")
-			if(is.character(bga) || is.numeric(bga)) {
-			options = paste(options, " ", bga)
-			}	
-			}
-			 
-			if (!is.null(bg)) {
-			options = paste(options," -bg")
-			if(is.character(bg) || is.numeric(bg)) {
-			options = paste(options, " ", bg)
-			}	
-			}
-			 
-			if (!is.null(d)) {
-			options = paste(options," -d")
-			if(is.character(d) || is.numeric(d)) {
-			options = paste(options, " ", d)
-			}	
-			}
-			 
-			if (!is.null(max)) {
-			options = paste(options," -max")
-			if(is.character(max) || is.numeric(max)) {
-			options = paste(options, " ", max)
-			}	
-			}
-			 
-			if (!is.null(trackopts)) {
-			options = paste(options," -trackopts")
-			if(is.character(trackopts) || is.numeric(trackopts)) {
-			options = paste(options, " ", trackopts)
-			}	
-			}
-			 
-			if (!is.null(trackline)) {
-			options = paste(options," -trackline")
-			if(is.character(trackline) || is.numeric(trackline)) {
-			options = paste(options, " ", trackline)
-			}	
-			}
-			 
-			if (!is.null(pc)) {
-			options = paste(options," -pc")
-			if(is.character(pc) || is.numeric(pc)) {
-			options = paste(options, " ", pc)
-			}	
-			}
-			 
-			if (!is.null(three)) {
-			options = paste(options," -3")
-			if(is.character(three) || is.numeric(three)) {
-			options = paste(options, " ", three)
-			}	
-			}
-			 
-			if (!is.null(fs)) {
-			options = paste(options," -fs")
-			if(is.character(fs) || is.numeric(fs)) {
-			options = paste(options, " ", fs)
-			}	
-			}
-			 
-			if (!is.null(dz)) {
-			options = paste(options," -dz")
-			if(is.character(dz) || is.numeric(dz)) {
-			options = paste(options, " ", dz)
-			}	
-			}
-			 
-			if (!is.null(split)) {
-			options = paste(options," -split")
-			if(is.character(split) || is.numeric(split)) {
-			options = paste(options, " ", split)
-			}	
-			}
-			 
-			if (!is.null(ibam)) {
-			options = paste(options," -ibam")
-			if(is.character(ibam) || is.numeric(ibam)) {
-			options = paste(options, " ", ibam)
-			}	
-			}
-			 
-			if (!is.null(five)) {
-			options = paste(options," -5")
-			if(is.character(five) || is.numeric(five)) {
-			options = paste(options, " ", five)
-			}	
-			}
-			 
-			if (!is.null(du)) {
-			options = paste(options," -du")
-			if(is.character(du) || is.numeric(du)) {
-			options = paste(options, " ", du)
-			}	
-			}
-			 
-			if (!is.null(strand)) {
-			options = paste(options," -strand")
-			if(is.character(strand) || is.numeric(strand)) {
-			options = paste(options, " ", strand)
-			}	
-			}
-			 
-			if (!is.null(scale)) {
-			options = paste(options," -scale")
-			if(is.character(scale) || is.numeric(scale)) {
-			options = paste(options, " ", scale)
-			}	
-			}
-			
+            if (!is.null(bga)) {
+            options = paste(options," -bga")
+            if(is.character(bga) || is.numeric(bga)) {
+            options = paste(options, " ", bga)
+            }   
+            }
+             
+            if (!is.null(bg)) {
+            options = paste(options," -bg")
+            if(is.character(bg) || is.numeric(bg)) {
+            options = paste(options, " ", bg)
+            }   
+            }
+             
+            if (!is.null(d)) {
+            options = paste(options," -d")
+            if(is.character(d) || is.numeric(d)) {
+            options = paste(options, " ", d)
+            }   
+            }
+             
+            if (!is.null(max)) {
+            options = paste(options," -max")
+            if(is.character(max) || is.numeric(max)) {
+            options = paste(options, " ", max)
+            }   
+            }
+             
+            if (!is.null(trackopts)) {
+            options = paste(options," -trackopts")
+            if(is.character(trackopts) || is.numeric(trackopts)) {
+            options = paste(options, " ", trackopts)
+            }   
+            }
+             
+            if (!is.null(trackline)) {
+            options = paste(options," -trackline")
+            if(is.character(trackline) || is.numeric(trackline)) {
+            options = paste(options, " ", trackline)
+            }   
+            }
+             
+            if (!is.null(pc)) {
+            options = paste(options," -pc")
+            if(is.character(pc) || is.numeric(pc)) {
+            options = paste(options, " ", pc)
+            }   
+            }
+             
+            if (!is.null(three)) {
+            options = paste(options," -3")
+            if(is.character(three) || is.numeric(three)) {
+            options = paste(options, " ", three)
+            }   
+            }
+             
+            if (!is.null(fs)) {
+            options = paste(options," -fs")
+            if(is.character(fs) || is.numeric(fs)) {
+            options = paste(options, " ", fs)
+            }   
+            }
+             
+            if (!is.null(dz)) {
+            options = paste(options," -dz")
+            if(is.character(dz) || is.numeric(dz)) {
+            options = paste(options, " ", dz)
+            }   
+            }
+             
+            if (!is.null(split)) {
+            options = paste(options," -split")
+            if(is.character(split) || is.numeric(split)) {
+            options = paste(options, " ", split)
+            }   
+            }
+             
+            if (!is.null(ibam)) {
+            options = paste(options," -ibam")
+            if(is.character(ibam) || is.numeric(ibam)) {
+            options = paste(options, " ", ibam)
+            }   
+            }
+             
+            if (!is.null(five)) {
+            options = paste(options," -5")
+            if(is.character(five) || is.numeric(five)) {
+            options = paste(options, " ", five)
+            }   
+            }
+             
+            if (!is.null(du)) {
+            options = paste(options," -du")
+            if(is.character(du) || is.numeric(du)) {
+            options = paste(options, " ", du)
+            }   
+            }
+             
+            if (!is.null(strand)) {
+            options = paste(options," -strand")
+            if(is.character(strand) || is.numeric(strand)) {
+            options = paste(options, " ", strand)
+            }   
+            }
+             
+            if (!is.null(scale)) {
+            options = paste(options," -scale")
+            if(is.character(scale) || is.numeric(scale)) {
+            options = paste(options, " ", scale)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools genomecov ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 
  
-		if(exists("gTable")) { 
-		file.remove (gTable)
-		} 
+        if(exists("gTable")) { 
+        file.remove (gTable)
+        } 

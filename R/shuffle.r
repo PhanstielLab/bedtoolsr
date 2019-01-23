@@ -55,105 +55,105 @@
 shuffle <- function(i, g, bedpe = NULL, f = NULL, incl = NULL, allowBeyondChromEnd = NULL, chromFirst = NULL, seed = NULL, excl = NULL, noOverlapping = NULL, chrom = NULL, maxTries = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
-			if (!is.character(g) && !is.numeric(g)) {
-			gTable = "~/Desktop/gTable.txt"
-			write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			g=gTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
+            if (!is.character(g) && !is.numeric(g)) {
+            gTable = paste0(tempdir(), "/gTable.txt")
+            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            g=gTable } 
+            
 		options = "" 
  
-			if (!is.null(bedpe)) {
-			options = paste(options," -bedpe")
-			if(is.character(bedpe) || is.numeric(bedpe)) {
-			options = paste(options, " ", bedpe)
-			}	
-			}
-			 
-			if (!is.null(f)) {
-			options = paste(options," -f")
-			if(is.character(f) || is.numeric(f)) {
-			options = paste(options, " ", f)
-			}	
-			}
-			 
-			if (!is.null(incl)) {
-			options = paste(options," -incl")
-			if(is.character(incl) || is.numeric(incl)) {
-			options = paste(options, " ", incl)
-			}	
-			}
-			 
-			if (!is.null(allowBeyondChromEnd)) {
-			options = paste(options," -allowBeyondChromEnd")
-			if(is.character(allowBeyondChromEnd) || is.numeric(allowBeyondChromEnd)) {
-			options = paste(options, " ", allowBeyondChromEnd)
-			}	
-			}
-			 
-			if (!is.null(chromFirst)) {
-			options = paste(options," -chromFirst")
-			if(is.character(chromFirst) || is.numeric(chromFirst)) {
-			options = paste(options, " ", chromFirst)
-			}	
-			}
-			 
-			if (!is.null(seed)) {
-			options = paste(options," -seed")
-			if(is.character(seed) || is.numeric(seed)) {
-			options = paste(options, " ", seed)
-			}	
-			}
-			 
-			if (!is.null(excl)) {
-			options = paste(options," -excl")
-			if(is.character(excl) || is.numeric(excl)) {
-			options = paste(options, " ", excl)
-			}	
-			}
-			 
-			if (!is.null(noOverlapping)) {
-			options = paste(options," -noOverlapping")
-			if(is.character(noOverlapping) || is.numeric(noOverlapping)) {
-			options = paste(options, " ", noOverlapping)
-			}	
-			}
-			 
-			if (!is.null(chrom)) {
-			options = paste(options," -chrom")
-			if(is.character(chrom) || is.numeric(chrom)) {
-			options = paste(options, " ", chrom)
-			}	
-			}
-			 
-			if (!is.null(maxTries)) {
-			options = paste(options," -maxTries")
-			if(is.character(maxTries) || is.numeric(maxTries)) {
-			options = paste(options, " ", maxTries)
-			}	
-			}
-			
+            if (!is.null(bedpe)) {
+            options = paste(options," -bedpe")
+            if(is.character(bedpe) || is.numeric(bedpe)) {
+            options = paste(options, " ", bedpe)
+            }   
+            }
+             
+            if (!is.null(f)) {
+            options = paste(options," -f")
+            if(is.character(f) || is.numeric(f)) {
+            options = paste(options, " ", f)
+            }   
+            }
+             
+            if (!is.null(incl)) {
+            options = paste(options," -incl")
+            if(is.character(incl) || is.numeric(incl)) {
+            options = paste(options, " ", incl)
+            }   
+            }
+             
+            if (!is.null(allowBeyondChromEnd)) {
+            options = paste(options," -allowBeyondChromEnd")
+            if(is.character(allowBeyondChromEnd) || is.numeric(allowBeyondChromEnd)) {
+            options = paste(options, " ", allowBeyondChromEnd)
+            }   
+            }
+             
+            if (!is.null(chromFirst)) {
+            options = paste(options," -chromFirst")
+            if(is.character(chromFirst) || is.numeric(chromFirst)) {
+            options = paste(options, " ", chromFirst)
+            }   
+            }
+             
+            if (!is.null(seed)) {
+            options = paste(options," -seed")
+            if(is.character(seed) || is.numeric(seed)) {
+            options = paste(options, " ", seed)
+            }   
+            }
+             
+            if (!is.null(excl)) {
+            options = paste(options," -excl")
+            if(is.character(excl) || is.numeric(excl)) {
+            options = paste(options, " ", excl)
+            }   
+            }
+             
+            if (!is.null(noOverlapping)) {
+            options = paste(options," -noOverlapping")
+            if(is.character(noOverlapping) || is.numeric(noOverlapping)) {
+            options = paste(options, " ", noOverlapping)
+            }   
+            }
+             
+            if (!is.null(chrom)) {
+            options = paste(options," -chrom")
+            if(is.character(chrom) || is.numeric(chrom)) {
+            options = paste(options, " ", chrom)
+            }   
+            }
+             
+            if (!is.null(maxTries)) {
+            options = paste(options," -maxTries")
+            if(is.character(maxTries) || is.numeric(maxTries)) {
+            options = paste(options, " ", maxTries)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools shuffle ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 
  
-		if(exists("gTable")) { 
-		file.remove (gTable)
-		} 
+        if(exists("gTable")) { 
+        file.remove (gTable)
+        } 

@@ -54,126 +54,126 @@
 window <- function(a, b, c = NULL, Sm = NULL, sm = NULL, ubam = NULL, sw = NULL, l = NULL, bed = NULL, abam = NULL, header = NULL, r = NULL, u = NULL, w = NULL, v = NULL)
 { 
 
-			if (!is.character(a) && !is.numeric(a)) {
-			aTable = "~/Desktop/aTable.txt"
-			write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			a=aTable } 
-			
-			if (!is.character(b) && !is.numeric(b)) {
-			bTable = "~/Desktop/bTable.txt"
-			write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			b=bTable } 
-			
+            if (!is.character(a) && !is.numeric(a)) {
+            aTable = paste0(tempdir(), "/aTable.txt")
+            write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            a=aTable } 
+            
+            if (!is.character(b) && !is.numeric(b)) {
+            bTable = paste0(tempdir(), "/bTable.txt")
+            write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            b=bTable } 
+            
 		options = "" 
  
-			if (!is.null(c)) {
-			options = paste(options," -c")
-			if(is.character(c) || is.numeric(c)) {
-			options = paste(options, " ", c)
-			}	
-			}
-			 
-			if (!is.null(Sm)) {
-			options = paste(options," -Sm")
-			if(is.character(Sm) || is.numeric(Sm)) {
-			options = paste(options, " ", Sm)
-			}	
-			}
-			 
-			if (!is.null(sm)) {
-			options = paste(options," -sm")
-			if(is.character(sm) || is.numeric(sm)) {
-			options = paste(options, " ", sm)
-			}	
-			}
-			 
-			if (!is.null(ubam)) {
-			options = paste(options," -ubam")
-			if(is.character(ubam) || is.numeric(ubam)) {
-			options = paste(options, " ", ubam)
-			}	
-			}
-			 
-			if (!is.null(sw)) {
-			options = paste(options," -sw")
-			if(is.character(sw) || is.numeric(sw)) {
-			options = paste(options, " ", sw)
-			}	
-			}
-			 
-			if (!is.null(l)) {
-			options = paste(options," -l")
-			if(is.character(l) || is.numeric(l)) {
-			options = paste(options, " ", l)
-			}	
-			}
-			 
-			if (!is.null(bed)) {
-			options = paste(options," -bed")
-			if(is.character(bed) || is.numeric(bed)) {
-			options = paste(options, " ", bed)
-			}	
-			}
-			 
-			if (!is.null(abam)) {
-			options = paste(options," -abam")
-			if(is.character(abam) || is.numeric(abam)) {
-			options = paste(options, " ", abam)
-			}	
-			}
-			 
-			if (!is.null(header)) {
-			options = paste(options," -header")
-			if(is.character(header) || is.numeric(header)) {
-			options = paste(options, " ", header)
-			}	
-			}
-			 
-			if (!is.null(r)) {
-			options = paste(options," -r")
-			if(is.character(r) || is.numeric(r)) {
-			options = paste(options, " ", r)
-			}	
-			}
-			 
-			if (!is.null(u)) {
-			options = paste(options," -u")
-			if(is.character(u) || is.numeric(u)) {
-			options = paste(options, " ", u)
-			}	
-			}
-			 
-			if (!is.null(w)) {
-			options = paste(options," -w")
-			if(is.character(w) || is.numeric(w)) {
-			options = paste(options, " ", w)
-			}	
-			}
-			 
-			if (!is.null(v)) {
-			options = paste(options," -v")
-			if(is.character(v) || is.numeric(v)) {
-			options = paste(options, " ", v)
-			}	
-			}
-			
+            if (!is.null(c)) {
+            options = paste(options," -c")
+            if(is.character(c) || is.numeric(c)) {
+            options = paste(options, " ", c)
+            }   
+            }
+             
+            if (!is.null(Sm)) {
+            options = paste(options," -Sm")
+            if(is.character(Sm) || is.numeric(Sm)) {
+            options = paste(options, " ", Sm)
+            }   
+            }
+             
+            if (!is.null(sm)) {
+            options = paste(options," -sm")
+            if(is.character(sm) || is.numeric(sm)) {
+            options = paste(options, " ", sm)
+            }   
+            }
+             
+            if (!is.null(ubam)) {
+            options = paste(options," -ubam")
+            if(is.character(ubam) || is.numeric(ubam)) {
+            options = paste(options, " ", ubam)
+            }   
+            }
+             
+            if (!is.null(sw)) {
+            options = paste(options," -sw")
+            if(is.character(sw) || is.numeric(sw)) {
+            options = paste(options, " ", sw)
+            }   
+            }
+             
+            if (!is.null(l)) {
+            options = paste(options," -l")
+            if(is.character(l) || is.numeric(l)) {
+            options = paste(options, " ", l)
+            }   
+            }
+             
+            if (!is.null(bed)) {
+            options = paste(options," -bed")
+            if(is.character(bed) || is.numeric(bed)) {
+            options = paste(options, " ", bed)
+            }   
+            }
+             
+            if (!is.null(abam)) {
+            options = paste(options," -abam")
+            if(is.character(abam) || is.numeric(abam)) {
+            options = paste(options, " ", abam)
+            }   
+            }
+             
+            if (!is.null(header)) {
+            options = paste(options," -header")
+            if(is.character(header) || is.numeric(header)) {
+            options = paste(options, " ", header)
+            }   
+            }
+             
+            if (!is.null(r)) {
+            options = paste(options," -r")
+            if(is.character(r) || is.numeric(r)) {
+            options = paste(options, " ", r)
+            }   
+            }
+             
+            if (!is.null(u)) {
+            options = paste(options," -u")
+            if(is.character(u) || is.numeric(u)) {
+            options = paste(options, " ", u)
+            }   
+            }
+             
+            if (!is.null(w)) {
+            options = paste(options," -w")
+            if(is.character(w) || is.numeric(w)) {
+            options = paste(options, " ", w)
+            }   
+            }
+             
+            if (!is.null(v)) {
+            options = paste(options," -v")
+            if(is.character(v) || is.numeric(v)) {
+            options = paste(options, " ", v)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools window ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("aTable")) { 
-		file.remove (aTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("aTable")) { 
+        file.remove (aTable)
+        } 
  
-		if(exists("bTable")) { 
-		file.remove (bTable)
-		} 
+        if(exists("bTable")) { 
+        file.remove (bTable)
+        } 

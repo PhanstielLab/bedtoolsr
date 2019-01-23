@@ -24,68 +24,68 @@
 unionbedg <- function(i, g = NULL, filler = NULL, header = NULL, names = NULL, empty = NULL, examples = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
 		options = "" 
  
-			if (!is.null(g)) {
-			options = paste(options," -g")
-			if(is.character(g) || is.numeric(g)) {
-			options = paste(options, " ", g)
-			}	
-			}
-			 
-			if (!is.null(filler)) {
-			options = paste(options," -filler")
-			if(is.character(filler) || is.numeric(filler)) {
-			options = paste(options, " ", filler)
-			}	
-			}
-			 
-			if (!is.null(header)) {
-			options = paste(options," -header")
-			if(is.character(header) || is.numeric(header)) {
-			options = paste(options, " ", header)
-			}	
-			}
-			 
-			if (!is.null(names)) {
-			options = paste(options," -names")
-			if(is.character(names) || is.numeric(names)) {
-			options = paste(options, " ", names)
-			}	
-			}
-			 
-			if (!is.null(empty)) {
-			options = paste(options," -empty")
-			if(is.character(empty) || is.numeric(empty)) {
-			options = paste(options, " ", empty)
-			}	
-			}
-			 
-			if (!is.null(examples)) {
-			options = paste(options," -examples")
-			if(is.character(examples) || is.numeric(examples)) {
-			options = paste(options, " ", examples)
-			}	
-			}
-			
+            if (!is.null(g)) {
+            options = paste(options," -g")
+            if(is.character(g) || is.numeric(g)) {
+            options = paste(options, " ", g)
+            }   
+            }
+             
+            if (!is.null(filler)) {
+            options = paste(options," -filler")
+            if(is.character(filler) || is.numeric(filler)) {
+            options = paste(options, " ", filler)
+            }   
+            }
+             
+            if (!is.null(header)) {
+            options = paste(options," -header")
+            if(is.character(header) || is.numeric(header)) {
+            options = paste(options, " ", header)
+            }   
+            }
+             
+            if (!is.null(names)) {
+            options = paste(options," -names")
+            if(is.character(names) || is.numeric(names)) {
+            options = paste(options, " ", names)
+            }   
+            }
+             
+            if (!is.null(empty)) {
+            options = paste(options," -empty")
+            if(is.character(empty) || is.numeric(empty)) {
+            options = paste(options, " ", empty)
+            }   
+            }
+             
+            if (!is.null(examples)) {
+            options = paste(options," -examples")
+            if(is.character(examples) || is.numeric(examples)) {
+            options = paste(options, " ", examples)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools unionbedg ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 

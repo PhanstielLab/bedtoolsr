@@ -34,82 +34,82 @@
 sample <- function(i, ubam = NULL, bed = NULL, n = NULL, header = NULL, s = NULL, seed = NULL, nobuf = NULL, iobuf = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
 		options = "" 
  
-			if (!is.null(ubam)) {
-			options = paste(options," -ubam")
-			if(is.character(ubam) || is.numeric(ubam)) {
-			options = paste(options, " ", ubam)
-			}	
-			}
-			 
-			if (!is.null(bed)) {
-			options = paste(options," -bed")
-			if(is.character(bed) || is.numeric(bed)) {
-			options = paste(options, " ", bed)
-			}	
-			}
-			 
-			if (!is.null(n)) {
-			options = paste(options," -n")
-			if(is.character(n) || is.numeric(n)) {
-			options = paste(options, " ", n)
-			}	
-			}
-			 
-			if (!is.null(header)) {
-			options = paste(options," -header")
-			if(is.character(header) || is.numeric(header)) {
-			options = paste(options, " ", header)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
-			if (!is.null(seed)) {
-			options = paste(options," -seed")
-			if(is.character(seed) || is.numeric(seed)) {
-			options = paste(options, " ", seed)
-			}	
-			}
-			 
-			if (!is.null(nobuf)) {
-			options = paste(options," -nobuf")
-			if(is.character(nobuf) || is.numeric(nobuf)) {
-			options = paste(options, " ", nobuf)
-			}	
-			}
-			 
-			if (!is.null(iobuf)) {
-			options = paste(options," -iobuf")
-			if(is.character(iobuf) || is.numeric(iobuf)) {
-			options = paste(options, " ", iobuf)
-			}	
-			}
-			
+            if (!is.null(ubam)) {
+            options = paste(options," -ubam")
+            if(is.character(ubam) || is.numeric(ubam)) {
+            options = paste(options, " ", ubam)
+            }   
+            }
+             
+            if (!is.null(bed)) {
+            options = paste(options," -bed")
+            if(is.character(bed) || is.numeric(bed)) {
+            options = paste(options, " ", bed)
+            }   
+            }
+             
+            if (!is.null(n)) {
+            options = paste(options," -n")
+            if(is.character(n) || is.numeric(n)) {
+            options = paste(options, " ", n)
+            }   
+            }
+             
+            if (!is.null(header)) {
+            options = paste(options," -header")
+            if(is.character(header) || is.numeric(header)) {
+            options = paste(options, " ", header)
+            }   
+            }
+             
+            if (!is.null(s)) {
+            options = paste(options," -s")
+            if(is.character(s) || is.numeric(s)) {
+            options = paste(options, " ", s)
+            }   
+            }
+             
+            if (!is.null(seed)) {
+            options = paste(options," -seed")
+            if(is.character(seed) || is.numeric(seed)) {
+            options = paste(options, " ", seed)
+            }   
+            }
+             
+            if (!is.null(nobuf)) {
+            options = paste(options," -nobuf")
+            if(is.character(nobuf) || is.numeric(nobuf)) {
+            options = paste(options, " ", nobuf)
+            }   
+            }
+             
+            if (!is.null(iobuf)) {
+            options = paste(options," -iobuf")
+            if(is.character(iobuf) || is.numeric(iobuf)) {
+            options = paste(options, " ", iobuf)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools sample ", options, " -i ", i, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 

@@ -31,77 +31,77 @@
 pairtopair <- function(a, b, slop = NULL, f = NULL, ss = NULL, is = NULL, rdn = NULL, type = NULL)
 { 
 
-			if (!is.character(a) && !is.numeric(a)) {
-			aTable = "~/Desktop/aTable.txt"
-			write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			a=aTable } 
-			
-			if (!is.character(b) && !is.numeric(b)) {
-			bTable = "~/Desktop/bTable.txt"
-			write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			b=bTable } 
-			
+            if (!is.character(a) && !is.numeric(a)) {
+            aTable = paste0(tempdir(), "/aTable.txt")
+            write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            a=aTable } 
+            
+            if (!is.character(b) && !is.numeric(b)) {
+            bTable = paste0(tempdir(), "/bTable.txt")
+            write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            b=bTable } 
+            
 		options = "" 
  
-			if (!is.null(slop)) {
-			options = paste(options," -slop")
-			if(is.character(slop) || is.numeric(slop)) {
-			options = paste(options, " ", slop)
-			}	
-			}
-			 
-			if (!is.null(f)) {
-			options = paste(options," -f")
-			if(is.character(f) || is.numeric(f)) {
-			options = paste(options, " ", f)
-			}	
-			}
-			 
-			if (!is.null(ss)) {
-			options = paste(options," -ss")
-			if(is.character(ss) || is.numeric(ss)) {
-			options = paste(options, " ", ss)
-			}	
-			}
-			 
-			if (!is.null(is)) {
-			options = paste(options," -is")
-			if(is.character(is) || is.numeric(is)) {
-			options = paste(options, " ", is)
-			}	
-			}
-			 
-			if (!is.null(rdn)) {
-			options = paste(options," -rdn")
-			if(is.character(rdn) || is.numeric(rdn)) {
-			options = paste(options, " ", rdn)
-			}	
-			}
-			 
-			if (!is.null(type)) {
-			options = paste(options," -type")
-			if(is.character(type) || is.numeric(type)) {
-			options = paste(options, " ", type)
-			}	
-			}
-			
+            if (!is.null(slop)) {
+            options = paste(options," -slop")
+            if(is.character(slop) || is.numeric(slop)) {
+            options = paste(options, " ", slop)
+            }   
+            }
+             
+            if (!is.null(f)) {
+            options = paste(options," -f")
+            if(is.character(f) || is.numeric(f)) {
+            options = paste(options, " ", f)
+            }   
+            }
+             
+            if (!is.null(ss)) {
+            options = paste(options," -ss")
+            if(is.character(ss) || is.numeric(ss)) {
+            options = paste(options, " ", ss)
+            }   
+            }
+             
+            if (!is.null(is)) {
+            options = paste(options," -is")
+            if(is.character(is) || is.numeric(is)) {
+            options = paste(options, " ", is)
+            }   
+            }
+             
+            if (!is.null(rdn)) {
+            options = paste(options," -rdn")
+            if(is.character(rdn) || is.numeric(rdn)) {
+            options = paste(options, " ", rdn)
+            }   
+            }
+             
+            if (!is.null(type)) {
+            options = paste(options," -type")
+            if(is.character(type) || is.numeric(type)) {
+            options = paste(options, " ", type)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools pairtopair ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("aTable")) { 
-		file.remove (aTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("aTable")) { 
+        file.remove (aTable)
+        } 
  
-		if(exists("bTable")) { 
-		file.remove (bTable)
-		} 
+        if(exists("bTable")) { 
+        file.remove (bTable)
+        } 

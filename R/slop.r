@@ -24,77 +24,77 @@
 slop <- function(i, g, b = NULL, l = NULL, pct = NULL, header = NULL, s = NULL, r = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
-			if (!is.character(g) && !is.numeric(g)) {
-			gTable = "~/Desktop/gTable.txt"
-			write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			g=gTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
+            if (!is.character(g) && !is.numeric(g)) {
+            gTable = paste0(tempdir(), "/gTable.txt")
+            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            g=gTable } 
+            
 		options = "" 
  
-			if (!is.null(b)) {
-			options = paste(options," -b")
-			if(is.character(b) || is.numeric(b)) {
-			options = paste(options, " ", b)
-			}	
-			}
-			 
-			if (!is.null(l)) {
-			options = paste(options," -l")
-			if(is.character(l) || is.numeric(l)) {
-			options = paste(options, " ", l)
-			}	
-			}
-			 
-			if (!is.null(pct)) {
-			options = paste(options," -pct")
-			if(is.character(pct) || is.numeric(pct)) {
-			options = paste(options, " ", pct)
-			}	
-			}
-			 
-			if (!is.null(header)) {
-			options = paste(options," -header")
-			if(is.character(header) || is.numeric(header)) {
-			options = paste(options, " ", header)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
-			if (!is.null(r)) {
-			options = paste(options," -r")
-			if(is.character(r) || is.numeric(r)) {
-			options = paste(options, " ", r)
-			}	
-			}
-			
+            if (!is.null(b)) {
+            options = paste(options," -b")
+            if(is.character(b) || is.numeric(b)) {
+            options = paste(options, " ", b)
+            }   
+            }
+             
+            if (!is.null(l)) {
+            options = paste(options," -l")
+            if(is.character(l) || is.numeric(l)) {
+            options = paste(options, " ", l)
+            }   
+            }
+             
+            if (!is.null(pct)) {
+            options = paste(options," -pct")
+            if(is.character(pct) || is.numeric(pct)) {
+            options = paste(options, " ", pct)
+            }   
+            }
+             
+            if (!is.null(header)) {
+            options = paste(options," -header")
+            if(is.character(header) || is.numeric(header)) {
+            options = paste(options, " ", header)
+            }   
+            }
+             
+            if (!is.null(s)) {
+            options = paste(options," -s")
+            if(is.character(s) || is.numeric(s)) {
+            options = paste(options, " ", s)
+            }   
+            }
+             
+            if (!is.null(r)) {
+            options = paste(options," -r")
+            if(is.character(r) || is.numeric(r)) {
+            options = paste(options, " ", r)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools slop ", options, " -i ", i, " -g ", g, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 
  
-		if(exists("gTable")) { 
-		file.remove (gTable)
-		} 
+        if(exists("gTable")) { 
+        file.remove (gTable)
+        } 

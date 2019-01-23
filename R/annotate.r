@@ -23,70 +23,70 @@
 annotate <- function(i, files, S = NULL, both = NULL, counts = NULL, s = NULL, names = NULL)
 { 
 
-			if (!is.character(i) && !is.numeric(i)) {
-			iTable = "~/Desktop/iTable.txt"
-			write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			i=iTable } 
-			
-			if (!is.character(files) && !is.numeric(files)) {
-			filesTable = "~/Desktop/filesTable.txt"
-			write.table(files, filesTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-			files=filesTable } 
-			
+            if (!is.character(i) && !is.numeric(i)) {
+            iTable = paste0(tempdir(), "/iTable.txt")
+            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            i=iTable } 
+            
+            if (!is.character(files) && !is.numeric(files)) {
+            filesTable = paste0(tempdir(), "/filesTable.txt")
+            write.table(files, filesTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+            files=filesTable } 
+            
 		options = "" 
  
-			if (!is.null(S)) {
-			options = paste(options," -S")
-			if(is.character(S) || is.numeric(S)) {
-			options = paste(options, " ", S)
-			}	
-			}
-			 
-			if (!is.null(both)) {
-			options = paste(options," -both")
-			if(is.character(both) || is.numeric(both)) {
-			options = paste(options, " ", both)
-			}	
-			}
-			 
-			if (!is.null(counts)) {
-			options = paste(options," -counts")
-			if(is.character(counts) || is.numeric(counts)) {
-			options = paste(options, " ", counts)
-			}	
-			}
-			 
-			if (!is.null(s)) {
-			options = paste(options," -s")
-			if(is.character(s) || is.numeric(s)) {
-			options = paste(options, " ", s)
-			}	
-			}
-			 
-			if (!is.null(names)) {
-			options = paste(options," -names")
-			if(is.character(names) || is.numeric(names)) {
-			options = paste(options, " ", names)
-			}	
-			}
-			
+            if (!is.null(S)) {
+            options = paste(options," -S")
+            if(is.character(S) || is.numeric(S)) {
+            options = paste(options, " ", S)
+            }   
+            }
+             
+            if (!is.null(both)) {
+            options = paste(options," -both")
+            if(is.character(both) || is.numeric(both)) {
+            options = paste(options, " ", both)
+            }   
+            }
+             
+            if (!is.null(counts)) {
+            options = paste(options," -counts")
+            if(is.character(counts) || is.numeric(counts)) {
+            options = paste(options, " ", counts)
+            }   
+            }
+             
+            if (!is.null(s)) {
+            options = paste(options," -s")
+            if(is.character(s) || is.numeric(s)) {
+            options = paste(options, " ", s)
+            }   
+            }
+             
+            if (!is.null(names)) {
+            options = paste(options," -names")
+            if(is.character(names) || is.numeric(names)) {
+            options = paste(options, " ", names)
+            }   
+            }
+            
 	# establish output file 
-	tempfile = "~/Desktop/tempfile.txt" 
+	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools annotate ", options, " -i ", i, " -files ", files, " > ", tempfile) 
 	system(cmd) 
 	results = read.table(tempfile,header=FALSE,sep="\t") 
-		if (file.exists(tempfile)){ 
-		file.remove(tempfile) 
-		}
-		return (results)
-		}
-		 
-		if(exists("iTable")) { 
-		file.remove (iTable)
-		} 
+        if (file.exists(tempfile)){ 
+        file.remove(tempfile) 
+        }
+        return (results)
+        }
+         
+        if(exists("iTable")) { 
+        file.remove (iTable)
+        } 
  
-		if(exists("filesTable")) { 
-		file.remove (filesTable)
-		} 
+        if(exists("filesTable")) { 
+        file.remove (filesTable)
+        } 
