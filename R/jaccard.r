@@ -164,7 +164,7 @@ jaccard <- function(a, b, e = NULL, g = NULL, F = NULL, f = NULL, S = NULL, bed 
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools jaccard ", options, " -a ", a, " -b ", b, " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
+	results = read.table(tempfile,header=TRUE,sep="\t") 
         if (file.exists(tempfile)){ 
         file.remove(tempfile) 
         }
