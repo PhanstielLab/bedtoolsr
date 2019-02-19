@@ -5,7 +5,7 @@ Title: Bedtools Wrapper
 Version: 2.27.1-2
 Date: 2019-01-23
 Author: Mayura Patwardhan, Craig Wenger, Doug Phanstiel
-Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.
+Description: bedtoolsr allows seamless use of bedtools from within the R environment. This was accomplished using a python script that reads in the bedtools code and writes the R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.
 License: MIT
 RoxygenNote: 6.1.1
 Suggests: 
