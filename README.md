@@ -103,6 +103,7 @@ As noted above, this package was developed with a Python script that runs all be
 
 * `genomecov`: `5` parameter changed to `five` and `3` parameter changed to `three` for R compatibility
 * `getfasta`: `name+` parameter changed to `nameplus` for R compatibility
+* `jaccard`: changed header from "FALSE" to "TRUE"
 
 
 
