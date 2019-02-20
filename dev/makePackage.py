@@ -182,7 +182,7 @@ def bedtoolsFunction(command):
         for line in usageSplit:
             file.write(comment + line)
             file.write("\n")
-        
+
     for option in optionDict:
       roption = option
       if(option == "3"):
@@ -217,61 +217,60 @@ def bedtoolsFunction(command):
     if (len(setOptions) == 0):
         usageDictOptions = usageDictOptions[:-2]
     file.write(infoDict["ToolName"] + " <- " + "function(" + usageDictOptions  + setOptions + ")\n")
-
-
     file.write ("{ \n")
+    
+    # Establish the file paths and write temp files
+    file.write(# Required Inputs)
     for key in usageDict:
-        file.write("""
-            if (!is.character(%s) && !is.numeric(%s)) {
-            %sTable = paste0(tempdir(), "/%sTable.txt")
-            write.table(%s, %sTable, append = "FALSE", sep = "\t", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            %s=%sTable } 
-            """ % (key, key, key, key, key, key, key, key))
+      file.write("""%s = establishPaths(input=%s,name="%s")""" % (key,key,key))
     file.write ("\n")
     file.write('\t\toptions = "" \n' )
 
+    # Establish the options
+    file.write(# Options)
+    optionsbedtools = list()
+    optionsr = list()
     for option in optionDict:
-        special = False
-        if(option == "3"):
-            special = True
-            option2 = "three"
-        elif(option == "5"):
-            special = True
-            option2 = "five"
-        elif(option == "name+"):
-            special = True
-            option2 = "nameplus"
-        file.write(""" 
-            if (!is.null(%s)) {
-            options = paste(options," -%s")
-            if(is.character(%s) || is.numeric(%s)) {
-            options = paste(options, " ", %s)
-            }   
-            }
-            """ % (option2 if special else option, option, option2 if special else option, option2 if special else option, option2 if special else option))
-
+      roption = option
+      if(option == "3"):
+            roption = "three"
+      elif(option == "5"):
+            roption = "five"
+      elif(option == "name+"):
+            roption = "nameplus"
+      optionsbedtools.append("\"" + option + "\"")
+      optionsr.append(roption)     
+    optionsbedtoolscombined = ",".join(optionsbedtools)
+    optionsrcombined = ",".join(optionsr)
+    file.write("""options = createOptions(names = c(%s),values= c(%s))""" % (optionsbedtools,optionsr))      
+    
+    
+    # Launch the bedtools command
     file.write('\n\t# establish output file \n\ttempfile = tempfile("bedtoolsr", fileext=".txt")\n' )
     cmdstring = ""
     for key in usageDict:
-        cmdstring = cmdstring + ', " -%s ", %s' % (key, key)
+        cmdstring = cmdstring + ', " -%s ", %s[[1]]' % (key, key)
 
     file.write('\tbedtools.path <- getOption(\"bedtools.path\")\n')
     file.write('\tif(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
     file.write('\tcmd = paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile) \n\tsystem(cmd) \n')
     file.write('\tresults = read.table(tempfile,header=FALSE,sep="\\t")')
-    file.write(""" 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-        """)
+    
+    # Delete the temp files
+    file.write('\n\t# Delete temp files \n')
+    tempfiles = list()
+    tempfiles.append("tempfile")
     for key in usageDict:
-        file.write(""" 
-        if(exists("%sTable")) { 
-        file.remove (%sTable)
-        } """ % (key, key))
-        file.write ("\n")
+        tempfiles.append(key + "[[2]]")
+    filestodelete = ",".join(tempfiles)
+    file.write("""deleteTempfiles(c(%s))""" % filestodelete)
+    
+    # Return the results
+    file.write("""
+    return (results)
+    }""")
+    
+   
 
 
 while True: 
