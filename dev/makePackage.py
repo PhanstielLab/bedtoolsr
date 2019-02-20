@@ -184,17 +184,15 @@ def bedtoolsFunction(command):
             file.write("\n")
         
     for option in optionDict:
-        special = False
-        if(option == "3"):
-            special = True
-            option2 = "three"
-        elif(option == "5"):
-            special = True
-            option2 = "five"
-        elif(option == "name+"):
-            special = True
-            option2 = "nameplus"
-        optionLines = "@param " + (option2 if special else option) + " " + optionDict[option].replace("%", " percent")
+      roption = option
+      if(option == "3"):
+            roption = "three"
+      elif(option == "5"):
+            roption = "five"
+      elif(option == "name+"):
+            roption = "nameplus"
+
+        optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
         optionSplit = optionLines.split("\n")
         for line in optionSplit:
             file.write(comment + line)
@@ -202,18 +200,14 @@ def bedtoolsFunction(command):
 
     setOptions= ""
     for option in optionDict:
-        special = False
-        if(option == "3"):
-            special = True
-            option2 = "three"
-        elif(option == "5"):
-            special = True
-            option2 = "five"
-        elif(option == "name+"):
-            special = True
-            option2 = "nameplus"
-        setOptions = setOptions + (option2 if special else option) + " = " + "NULL" + ", "
-
+      roption = option
+      if(option == "3"):
+            roption = "three"
+      elif(option == "5"):
+            roption = "five"
+      elif(option == "name+"):
+            roption = "nameplus"
+      setOptions = setOptions + roption + " = " + "NULL" + ", "
     setOptions = setOptions[:-2]
 
     usageDictOptions = ""
