@@ -4,14 +4,10 @@
 \alias{random}
 \title{Generate random intervals among a genome.}
 \usage{
-random(g, seed = NULL, l = NULL, n = NULL)
+random(g, l = NULL, n = NULL, seed = NULL)
 }
 \arguments{
 \item{g}{<genome>}
-
-\item{seed}{Supply an integer seed for the shuffling.
-- By default, the seed is chosen automatically.
-- (INTEGER)}
 
 \item{l}{The length of the intervals to generate.
 - Default = 100.
@@ -19,6 +15,10 @@ random(g, seed = NULL, l = NULL, n = NULL)
 
 \item{n}{The number of intervals to generate.
 - Default = 1,000,000.
+- (INTEGER)}
+
+\item{seed}{Supply an integer seed for the shuffling.
+- By default, the seed is chosen automatically.
 - (INTEGER)}
 }
 \description{

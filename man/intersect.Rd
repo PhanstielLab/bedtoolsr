@@ -4,25 +4,31 @@
 \alias{intersect}
 \title{Report overlaps between two feature files.}
 \usage{
-intersect(a, b, header = NULL, names = NULL, nonamecheck = NULL,
-  wao = NULL, loj = NULL, split = NULL, sortout = NULL,
-  wb = NULL, wa = NULL, F = NULL, wo = NULL, filenames = NULL,
-  S = NULL, sorted = NULL, c = NULL, e = NULL, g = NULL,
-  f = NULL, ubam = NULL, bed = NULL, s = NULL, r = NULL,
-  u = NULL, v = NULL, iobuf = NULL, nobuf = NULL)
+intersect(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL,
+  wao = NULL, u = NULL, c = NULL, v = NULL, ubam = NULL, s = NULL,
+  S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL,
+  g = NULL, nonamecheck = NULL, sorted = NULL, names = NULL,
+  filenames = NULL, sortout = NULL, bed = NULL, header = NULL,
+  nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf/bam>}
 
 \item{b}{<bed/gff/vcf/bam>}
 
-\item{header}{Print the header from the A file prior to results.}
+\item{wa}{Write the original entry in A for each overlap.}
 
-\item{names}{When using multiple databases, provide an alias for each that
-will appear instead of a fileId when also printing the DB record.}
+\item{wb}{Write the original entry in B for each overlap.
+- Useful for knowing _what_ A overlaps. Restricted by -f and -r.}
 
-\item{nonamecheck}{For sorted data, don't throw an error if the file has different naming conventions
-for the same chromosome. ex. "chr1" vs "chr01".}
+\item{loj}{Perform a "left outer join". That is, for each feature in A
+report each overlap with B.  If no overlaps are found, 
+report a NULL feature for B.}
+
+\item{wo}{Write the original A and B entries plus the number of base
+pairs of overlap between the two features.
+- Overlaps restricted by -f and -r.
+  Only A features with overlap are reported.}
 
 \item{wao}{Write the original A and B entries plus the number of base
 pairs of overlap between the two features.
@@ -30,76 +36,66 @@ pairs of overlap between the two features.
   However, A features w/o overlap are also reported
   with a NULL B feature and overlap = 0.}
 
-\item{loj}{Perform a "left outer join". That is, for each feature in A
-report each overlap with B.  If no overlaps are found, 
-report a NULL feature for B.}
+\item{u}{Write the original A entry _once_ if _any_ overlaps found in B.
+- In other words, just report the fact >=1 hit was found.
+- Overlaps restricted by -f and -r.}
 
-\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
+\item{c}{For each entry in A, report the number of overlaps with B.
+- Reports 0 for A entries that have no overlap with B.
+- Overlaps restricted by -f and -r.}
 
-\item{sortout}{When using multiple databases, sort the output DB hits
-for each record.}
+\item{v}{Only report those entries in A that have _no overlaps_ with B.
+- Similar to "grep -v" (an homage).}
 
-\item{wb}{Write the original entry in B for each overlap.
-- Useful for knowing _what_ A overlaps. Restricted by -f and -r.}
+\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
 
-\item{wa}{Write the original entry in A for each overlap.}
-
-\item{F}{Minimum overlap required as a fraction of B.
-- Default is 1E-9 (i.e., 1bp).
-- FLOAT (e.g. 0.50)}
-
-\item{wo}{Write the original A and B entries plus the number of base
-pairs of overlap between the two features.
-- Overlaps restricted by -f and -r.
-  Only A features with overlap are reported.}
-
-\item{filenames}{When using multiple databases, show each complete filename
-instead of a fileId when also printing the DB record.}
+\item{s}{Require same strandedness.  That is, only report hits in B
+that overlap A on the _same_ strand.
+- By default, overlaps are reported without respect to strand.}
 
 \item{S}{Require different strandedness.  That is, only report hits in B
 that overlap A on the _opposite_ strand.
 - By default, overlaps are reported without respect to strand.}
 
-\item{sorted}{Use the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input.}
+\item{f}{Minimum overlap required as a fraction of A.
+- Default is 1E-9 (i.e., 1bp).
+- FLOAT (e.g. 0.50)}
 
-\item{c}{For each entry in A, report the number of overlaps with B.
-- Reports 0 for A entries that have no overlap with B.
-- Overlaps restricted by -f and -r.}
+\item{F}{Minimum overlap required as a fraction of B.
+- Default is 1E-9 (i.e., 1bp).
+- FLOAT (e.g. 0.50)}
+
+\item{r}{Require that the fraction overlap be reciprocal for A AND B.
+- In other words, if -f is 0.90 and -r is used, this requires
+  that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
 
 \item{e}{Require that the minimum fraction be satisfied for A OR B.
 - In other words, if -e is used with -f 0.90 and -F 0.10 this requires
   that either 90 percent of A is covered OR 10 percent of  B is covered.
   Without -e, both fractions would have to be satisfied.}
 
+\item{split}{Treat "split" BAM or BED12 entries as distinct BED intervals.}
+
 \item{g}{Provide a genome file to enforce consistent chromosome sort order
 across input files. Only applies when used with -sorted option.}
 
-\item{f}{Minimum overlap required as a fraction of A.
-- Default is 1E-9 (i.e., 1bp).
-- FLOAT (e.g. 0.50)}
+\item{nonamecheck}{For sorted data, don't throw an error if the file has different naming conventions
+for the same chromosome. ex. "chr1" vs "chr01".}
 
-\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
+\item{sorted}{Use the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input.}
+
+\item{names}{When using multiple databases, provide an alias for each that
+will appear instead of a fileId when also printing the DB record.}
+
+\item{filenames}{When using multiple databases, show each complete filename
+instead of a fileId when also printing the DB record.}
+
+\item{sortout}{When using multiple databases, sort the output DB hits
+for each record.}
 
 \item{bed}{If using BAM input, write output as BED.}
 
-\item{s}{Require same strandedness.  That is, only report hits in B
-that overlap A on the _same_ strand.
-- By default, overlaps are reported without respect to strand.}
-
-\item{r}{Require that the fraction overlap be reciprocal for A AND B.
-- In other words, if -f is 0.90 and -r is used, this requires
-  that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.}
-
-\item{u}{Write the original A entry _once_ if _any_ overlaps found in B.
-- In other words, just report the fact >=1 hit was found.
-- Overlaps restricted by -f and -r.}
-
-\item{v}{Only report those entries in A that have _no overlaps_ with B.
-- Similar to "grep -v" (an homage).}
-
-\item{iobuf}{Specify amount of memory to use for input buffer.
-Takes an integer argument. Optional suffixes K/M/G supported.
-Note: currently has no effect with compressed files.}
+\item{header}{Print the header from the A file prior to results.}
 
 \item{nobuf}{Disable buffered output. Using this option will cause each line
 of output to be printed as it is generated, rather than saved
@@ -107,6 +103,10 @@ in a buffer. This will make printing large output files
 noticeably slower, but can be useful in conjunction with
 other software tools and scripts that need to process one
 line of bedtools output at a time.}
+
+\item{iobuf}{Specify amount of memory to use for input buffer.
+Takes an integer argument. Optional suffixes K/M/G supported.
+Note: currently has no effect with compressed files.}
 }
 \description{
 Report overlaps between two feature files.

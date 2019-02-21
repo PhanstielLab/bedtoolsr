@@ -2,67 +2,34 @@
 #' 
 #' @param i <bed/gff/vcf>
 #' @param g <genome>
-#' @param ubam Write uncompressed BAM output. Default writes compressed BAM.
-#' 
 #' @param mapq Set the mappinq quality for the BAM records.
 #' (INT) Default: 255
 #' 
 #' @param bed12 The BED file is in BED12 format.  The BAM CIGAR
 #' string will reflect BED "blocks".
 #' 
-bedtobam <- function(i, g, ubam = NULL, mapq = NULL, bed12 = NULL)
+#' @param ubam Write uncompressed BAM output. Default writes compressed BAM.
+#' 
+bedtobam <- function(i, g, mapq = NULL, bed12 = NULL, ubam = NULL)
 { 
+	# Required Inputs
+	i = establishPaths(input=i,name="i")
+	g = establishPaths(input=g,name="g")
 
-            if (!is.character(i) && !is.numeric(i)) {
-            iTable = paste0(tempdir(), "/iTable.txt")
-            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            i=iTable } 
-            
-            if (!is.character(g) && !is.numeric(g)) {
-            gTable = paste0(tempdir(), "/gTable.txt")
-            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            g=gTable } 
-            
-		options = "" 
- 
-            if (!is.null(ubam)) {
-            options = paste(options," -ubam")
-            if(is.character(ubam) || is.numeric(ubam)) {
-            options = paste(options, " ", ubam)
-            }   
-            }
-             
-            if (!is.null(mapq)) {
-            options = paste(options," -mapq")
-            if(is.character(mapq) || is.numeric(mapq)) {
-            options = paste(options, " ", mapq)
-            }   
-            }
-             
-            if (!is.null(bed12)) {
-            options = paste(options," -bed12")
-            if(is.character(bed12) || is.numeric(bed12)) {
-            options = paste(options, " ", bed12)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("mapq","bed12","ubam"),values= list(mapq,bed12,ubam))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools bedtobam ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools bedtobam ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("iTable")) { 
-        file.remove (iTable)
-        } 
- 
-        if(exists("gTable")) { 
-        file.remove (gTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,i[[2]],g[[2]]))
+	return (results)
+}

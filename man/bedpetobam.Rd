@@ -4,17 +4,17 @@
 \alias{bedpetobam}
 \title{Converts feature records to BAM format.}
 \usage{
-bedpetobam(i, g, ubam = NULL, mapq = NULL)
+bedpetobam(i, g, mapq = NULL, ubam = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
 \item{g}{<genome>}
 
-\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
-
 \item{mapq}{Set the mappinq quality for the BAM records.
 (INT) Default: 255}
+
+\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
 }
 \description{
 Converts feature records to BAM format.

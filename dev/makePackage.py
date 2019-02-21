@@ -192,9 +192,9 @@ def bedtoolsFunction(command):
       elif(option == "name+"):
             roption = "nameplus"
 
-        optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
-        optionSplit = optionLines.split("\n")
-        for line in optionSplit:
+      optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
+      optionSplit = optionLines.split("\n")
+      for line in optionSplit:
             file.write(comment + line)
             file.write("\n")
 
@@ -220,14 +220,17 @@ def bedtoolsFunction(command):
     file.write ("{ \n")
     
     # Establish the file paths and write temp files
-    file.write(# Required Inputs)
+    file.write("\t# Required Inputs\n")
     for key in usageDict:
+      file.write ("\t")
       file.write("""%s = establishPaths(input=%s,name="%s")""" % (key,key,key))
+      file.write ("\n")
     file.write ("\n")
-    file.write('\t\toptions = "" \n' )
+    file.write('\toptions = "" \n' )
+    file.write ("\n")
 
     # Establish the options
-    file.write(# Options)
+    file.write("\t# Options\n")
     optionsbedtools = list()
     optionsr = list()
     for option in optionDict:
@@ -242,11 +245,14 @@ def bedtoolsFunction(command):
       optionsr.append(roption)     
     optionsbedtoolscombined = ",".join(optionsbedtools)
     optionsrcombined = ",".join(optionsr)
-    file.write("""options = createOptions(names = c(%s),values= c(%s))""" % (optionsbedtools,optionsr))      
+    file.write ("\t")
+    file.write("""options = createOptions(names = c(%s),values= list(%s))""" % (optionsbedtoolscombined,optionsrcombined))      
+    file.write ("\n")
     
     
     # Launch the bedtools command
-    file.write('\n\t# establish output file \n\ttempfile = tempfile("bedtoolsr", fileext=".txt")\n' )
+    file.write('\n\t# establish output file \n')
+    file.write('\ttempfile = tempfile("bedtoolsr", fileext=".txt")\n' )
     cmdstring = ""
     for key in usageDict:
         cmdstring = cmdstring + ', " -%s ", %s[[1]]' % (key, key)
@@ -257,24 +263,20 @@ def bedtoolsFunction(command):
     file.write('\tresults = read.table(tempfile,header=FALSE,sep="\\t")')
     
     # Delete the temp files
-    file.write('\n\t# Delete temp files \n')
+    file.write('\n\n\t# Delete temp files \n')
     tempfiles = list()
     tempfiles.append("tempfile")
     for key in usageDict:
         tempfiles.append(key + "[[2]]")
     filestodelete = ",".join(tempfiles)
+    file.write ("\t")
     file.write("""deleteTempfiles(c(%s))""" % filestodelete)
     
     # Return the results
-    file.write("""
-    return (results)
-    }""")
+    file.write("\n\treturn (results)\n}")
     
-   
-
-
 while True: 
-    fileinput = raw_input("Where would you like to make your R package? ").rstrip()
+    fileinput = input("Where would you like to make your R package? ").rstrip()
     fileinput = os.path.expanduser(fileinput)
     if not fileinput:
         continue
@@ -284,7 +286,7 @@ while True:
     else:
         break
 
-bedtoolsinput = raw_input("What is the bedtools path? ")
+bedtoolsinput = input("What is the bedtools path? ")
 if(bedtoolsinput == ""):
     bedtoolsinputmain = "bedtools"
 else:
@@ -292,7 +294,7 @@ else:
     bedtoolsinputmain = bedtoolsinput + "/bedtools"
 
 while True:
-    versionsuffixinput = raw_input("What version suffix do you want added? ")
+    versionsuffixinput = input("What version suffix do you want added? ")
     try:
         versionsuffix = int(versionsuffixinput)
     except ValueError:
@@ -308,6 +310,7 @@ text_file2.close()
 
 os.system("mkdir " + fileinput + "/man")
 os.system("mkdir " + fileinput + "/R")
+os.system("mkdir " + fileinput + "/dev")
 text_file4 = open(fileinput + "/dev/log.txt", "w")
 text_file3 = open(fileinput + "/bedtoolsCommands.txt", "r")
 
@@ -381,6 +384,8 @@ f.write("""
 f.close()
 
 #------- Make helper R functions -------#
+
+# Define a function to create options
 f = open("%s/R/createOptions.r" % fileinput, "w")
 f.write("""
 #' Creates options based on user input
@@ -393,15 +398,17 @@ createOptions <- function(names,values)
 {
   
   options = "" 
-  
-  for (i in 1:length(names))
+  if (length(names) > 0)
   {
-    if (!is.null(values[i])) {
-      options = paste(options,paste(" -",names[i],sep=""))
-      if(is.character(values[i]) || is.numeric(values[i])) {
-        options = paste(options, " ", values[i])
-      }   
+   for (i in 1:length(names))
+   {
+    if (!is.null(values[[i]])) {
+     options = paste(options,paste(" -",names[i],sep=""))
+     if(is.character(values[[i]]) || is.numeric(values[[i]])) {
+      options = paste(options, " ", values[i])
+     }   
     }
+   }
   }
   
   # return the two items
@@ -410,6 +417,8 @@ createOptions <- function(names,values)
 """)
 f.close()
 
+
+# Define a function make and record temp files
 f = open("%s/R/establishPaths.r" % fileinput, "w")
 f.write("""
 #' Determines if arguments are paths or R objects. Makes temp files when
@@ -426,7 +435,6 @@ establishPaths <- function(input,name="",allowRobjects=TRUE)
   # convert to list if neccesary
   if (!inherits(input, "list")  )
   {
-    print ("convert")
     input = list(input)
   }
   
@@ -467,6 +475,7 @@ establishPaths <- function(input,name="",allowRobjects=TRUE)
 """)
 f.close()
 
+# Define a function to delete temp files
 f = open("%s/R/deleteTempfiles.r" % fileinput, "w")
 f.write("""
 #' Deletes temp files

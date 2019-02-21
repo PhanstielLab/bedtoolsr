@@ -4,19 +4,22 @@
 \alias{pairtobed}
 \title{Report overlaps between a BEDPE file and a BED/GFF/VCF file.}
 \usage{
-pairtobed(a, b, bedpe = NULL, f = NULL, ed = NULL, ubam = NULL,
-  S = NULL, abam = NULL, s = NULL, type = NULL)
+pairtobed(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL,
+  f = NULL, s = NULL, S = NULL, type = NULL)
 }
 \arguments{
 \item{a}{<bedpe>}
 
 \item{b}{<bed/gff/vcf>}
 
-\item{bedpe}{When using BAM input (-abam), write output as BEDPE. The default
+\item{abam}{The A input file is in BAM format.  Output will be BAM as well. Replaces -a.
+- Requires BAM to be grouped or sorted by query.}
+
+\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.
 is to write output in BAM when using -abam.}
 
-\item{f}{Minimum overlap required as fraction of A (e.g. 0.05).
-Default is 1E-9 (effectively 1bp).}
+\item{bedpe}{When using BAM input (-abam), write output as BEDPE. The default
+is to write output in BAM when using -abam.}
 
 \item{ed}{Use BAM total edit distance (NM tag) for BEDPE score.
 - Default for BEDPE is to use the minimum of
@@ -24,17 +27,14 @@ Default is 1E-9 (effectively 1bp).}
 - When -ed is used the total edit distance
   from the two mates is reported as the score.}
 
-\item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.
-is to write output in BAM when using -abam.}
+\item{f}{Minimum overlap required as fraction of A (e.g. 0.05).
+Default is 1E-9 (effectively 1bp).}
 
-\item{S}{Require different strandedness when finding overlaps.
+\item{s}{Require same strandedness when finding overlaps.
 Default is to ignore stand.
 Not applicable with -type inspan or -type outspan.}
 
-\item{abam}{The A input file is in BAM format.  Output will be BAM as well. Replaces -a.
-- Requires BAM to be grouped or sorted by query.}
-
-\item{s}{Require same strandedness when finding overlaps.
+\item{S}{Require different strandedness when finding overlaps.
 Default is to ignore stand.
 Not applicable with -type inspan or -type outspan.}
 

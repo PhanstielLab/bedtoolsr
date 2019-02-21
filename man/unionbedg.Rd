@@ -5,18 +5,12 @@
 \title{Combines multiple BedGraph files into a single file,
 allowing coverage comparisons between them.}
 \usage{
-unionbedg(i, g = NULL, filler = NULL, header = NULL, names = NULL,
-  empty = NULL, examples = NULL)
+unionbedg(i, header = NULL, names = NULL, g = NULL, empty = NULL,
+  filler = NULL, examples = NULL)
 }
 \arguments{
 \item{i}{FILE1 FILE2 .. FILEn
 Assumes that each BedGraph file is sorted by chrom/start}
-
-\item{g}{Use genome file to calculate empty regions.
-- STRING.}
-
-\item{filler}{Use TEXT when representing intervals having no value.
-- Default is '0', but you can use 'N/A' or any text.}
 
 \item{header}{Print a header line.
 (chrom/start/end + names of each file).}
@@ -24,9 +18,15 @@ Assumes that each BedGraph file is sorted by chrom/start}
 \item{names}{A list of names (one/file) to describe each file in -i.
 These names will be printed in the header line.}
 
+\item{g}{Use genome file to calculate empty regions.
+- STRING.}
+
 \item{empty}{Report empty regions (i.e., start/end intervals w/o
 values in all files).
 - Requires the '-g FILE' parameter.}
+
+\item{filler}{Use TEXT when representing intervals having no value.
+- Default is '0', but you can use 'N/A' or any text.}
 
 \item{examples}{Show detailed usage examples.}
 }

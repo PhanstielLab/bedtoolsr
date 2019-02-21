@@ -1,9 +1,14 @@
 #' Merges overlapping BED/GFF/VCF entries into a single interval.
 #' 
 #' @param i <bed/gff/vcf>
-#' @param c Specify columns from the B file to map onto intervals in A.
-#' Default: 5.
-#' Multiple columns can be specified in a comma-delimited list.
+#' @param s Force strandedness.  That is, only merge features
+#' that are on the same strand.
+#' - By default, merging is done without respect to strand.
+#' 
+#' @param S Force merge for one specific strand only.
+#' Follow with + or - to force merge from only
+#' the forward or reverse strand, respectively.
+#' - By default, merging is done without respect to strand.
 #' 
 #' @param d Maximum distance between features allowed for features
 #' to be merged.
@@ -11,16 +16,9 @@
 #' - (INTEGER)
 #' - Note: negative values enforce the number of b.p. required for overlap.
 #' 
-#' @param bed If using BAM input, write output as BED.
-#' 
-#' @param delim Specify a custom delimiter for the collapse operations.
-#' - Example: -delim "|"
-#' - Default: ",".
-#' 
-#' @param S Force merge for one specific strand only.
-#' Follow with + or - to force merge from only
-#' the forward or reverse strand, respectively.
-#' - By default, merging is done without respect to strand.
+#' @param c Specify columns from the B file to map onto intervals in A.
+#' Default: 5.
+#' Multiple columns can be specified in a comma-delimited list.
 #' 
 #' @param o Specify the operation that should be applied to -c.
 #' Valid operations:
@@ -47,17 +45,15 @@
 #' the mean of column 4, and the count of column 6.
 #' The order of output columns will match the ordering given in the command.
 #' 
-#' @param header Print the header from the A file prior to results.
-#' 
-#' @param s Force strandedness.  That is, only merge features
-#' that are on the same strand.
-#' - By default, merging is done without respect to strand.
+#' @param delim Specify a custom delimiter for the collapse operations.
+#' - Example: -delim "|"
+#' - Default: ",".
 #' 
 #' @param prec Sets the decimal precision for output (Default: 5)
 #' 
-#' @param iobuf Specify amount of memory to use for input buffer.
-#' Takes an integer argument. Optional suffixes K/M/G supported.
-#' Note: currently has no effect with compressed files.
+#' @param bed If using BAM input, write output as BED.
+#' 
+#' @param header Print the header from the A file prior to results.
 #' 
 #' @param nobuf Disable buffered output. Using this option will cause each line
 #' of output to be printed as it is generated, rather than saved
@@ -66,106 +62,29 @@
 #' other software tools and scripts that need to process one
 #' line of bedtools output at a time.
 #' 
-merge <- function(i, c = NULL, d = NULL, bed = NULL, delim = NULL, S = NULL, o = NULL, header = NULL, s = NULL, prec = NULL, iobuf = NULL, nobuf = NULL)
+#' @param iobuf Specify amount of memory to use for input buffer.
+#' Takes an integer argument. Optional suffixes K/M/G supported.
+#' Note: currently has no effect with compressed files.
+#' 
+merge <- function(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL, delim = NULL, prec = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
 { 
+	# Required Inputs
+	i = establishPaths(input=i,name="i")
 
-            if (!is.character(i) && !is.numeric(i)) {
-            iTable = paste0(tempdir(), "/iTable.txt")
-            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            i=iTable } 
-            
-		options = "" 
- 
-            if (!is.null(c)) {
-            options = paste(options," -c")
-            if(is.character(c) || is.numeric(c)) {
-            options = paste(options, " ", c)
-            }   
-            }
-             
-            if (!is.null(d)) {
-            options = paste(options," -d")
-            if(is.character(d) || is.numeric(d)) {
-            options = paste(options, " ", d)
-            }   
-            }
-             
-            if (!is.null(bed)) {
-            options = paste(options," -bed")
-            if(is.character(bed) || is.numeric(bed)) {
-            options = paste(options, " ", bed)
-            }   
-            }
-             
-            if (!is.null(delim)) {
-            options = paste(options," -delim")
-            if(is.character(delim) || is.numeric(delim)) {
-            options = paste(options, " ", delim)
-            }   
-            }
-             
-            if (!is.null(S)) {
-            options = paste(options," -S")
-            if(is.character(S) || is.numeric(S)) {
-            options = paste(options, " ", S)
-            }   
-            }
-             
-            if (!is.null(o)) {
-            options = paste(options," -o")
-            if(is.character(o) || is.numeric(o)) {
-            options = paste(options, " ", o)
-            }   
-            }
-             
-            if (!is.null(header)) {
-            options = paste(options," -header")
-            if(is.character(header) || is.numeric(header)) {
-            options = paste(options, " ", header)
-            }   
-            }
-             
-            if (!is.null(s)) {
-            options = paste(options," -s")
-            if(is.character(s) || is.numeric(s)) {
-            options = paste(options, " ", s)
-            }   
-            }
-             
-            if (!is.null(prec)) {
-            options = paste(options," -prec")
-            if(is.character(prec) || is.numeric(prec)) {
-            options = paste(options, " ", prec)
-            }   
-            }
-             
-            if (!is.null(iobuf)) {
-            options = paste(options," -iobuf")
-            if(is.character(iobuf) || is.numeric(iobuf)) {
-            options = paste(options, " ", iobuf)
-            }   
-            }
-             
-            if (!is.null(nobuf)) {
-            options = paste(options," -nobuf")
-            if(is.character(nobuf) || is.numeric(nobuf)) {
-            options = paste(options, " ", nobuf)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("s","S","d","c","o","delim","prec","bed","header","nobuf","iobuf"),values= list(s,S,d,c,o,delim,prec,bed,header,nobuf,iobuf))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools merge ", options, " -i ", i, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools merge ", options, " -i ", i[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("iTable")) { 
-        file.remove (iTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,i[[2]]))
+	return (results)
+}

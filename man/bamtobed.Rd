@@ -4,9 +4,8 @@
 \alias{bamtobed}
 \title{Converts BAM alignments to BED6 or BEDPE format.}
 \usage{
-bamtobed(i, bedpe = NULL, color = NULL, ed = NULL, cigar = NULL,
-  mate1 = NULL, splitD = NULL, tag = NULL, split = NULL,
-  bed12 = NULL)
+bamtobed(i, bedpe = NULL, mate1 = NULL, bed12 = NULL, split = NULL,
+  splitD = NULL, ed = NULL, tag = NULL, color = NULL, cigar = NULL)
 }
 \arguments{
 \item{i}{<bam>}
@@ -14,8 +13,17 @@ bamtobed(i, bedpe = NULL, color = NULL, ed = NULL, cigar = NULL,
 \item{bedpe}{Write BEDPE format.
 - Requires BAM to be grouped or sorted by query.}
 
-\item{color}{An R,G,B string for the color used with BED12 format.
-Default is (255,0,0).}
+\item{mate1}{When writing BEDPE (-bedpe) format, 
+always report mate one as the first BEDPE "block".}
+
+\item{bed12}{Write "blocked" BED format (aka "BED12"). Forces -split.
+http://genome-test.cse.ucsc.edu/FAQ/FAQformat#format1}
+
+\item{split}{Report "split" BAM alignments as separate BED entries.
+Splits only on N CIGAR operations.}
+
+\item{splitD}{Split alignments based on N and D CIGAR operators.
+Forces -split.}
 
 \item{ed}{Use BAM edit distance (NM tag) for BED score.
 - Default for BED is to use mapping quality.
@@ -24,23 +32,14 @@ Default is (255,0,0).}
 - When -ed is used with -bedpe, the total edit
   distance from the two mates is reported.}
 
-\item{cigar}{Add the CIGAR string to the BED entry as a 7th column.}
-
-\item{mate1}{When writing BEDPE (-bedpe) format, 
-always report mate one as the first BEDPE "block".}
-
-\item{splitD}{Split alignments based on N and D CIGAR operators.
-Forces -split.}
-
 \item{tag}{Use other NUMERIC BAM alignment tag for BED score.
 - Default for BED is to use mapping quality.
   Disallowed with BEDPE output.}
 
-\item{split}{Report "split" BAM alignments as separate BED entries.
-Splits only on N CIGAR operations.}
+\item{color}{An R,G,B string for the color used with BED12 format.
+Default is (255,0,0).}
 
-\item{bed12}{Write "blocked" BED format (aka "BED12"). Forces -split.
-http://genome-test.cse.ucsc.edu/FAQ/FAQformat#format1}
+\item{cigar}{Add the CIGAR string to the BED entry as a 7th column.}
 }
 \description{
 Converts BAM alignments to BED6 or BEDPE format.

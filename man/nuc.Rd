@@ -4,25 +4,25 @@
 \alias{nuc}
 \title{Profiles the nucleotide content of intervals in a fasta file.}
 \usage{
-nuc(fi, bed, C = NULL, seq = NULL, pattern = NULL,
-  fullHeader = NULL, s = NULL)
+nuc(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL,
+  fullHeader = NULL)
 }
 \arguments{
 \item{fi}{<fasta>}
 
 \item{bed}{<bed/gff/vcf>}
 
-\item{C}{Ignore case when matching -pattern. By defaulty, case matters.}
+\item{s}{Profile the sequence according to strand.}
 
 \item{seq}{Print the extracted sequence}
 
 \item{pattern}{Report the number of times a user-defined sequence
 is observed (case-sensitive).}
 
+\item{C}{Ignore case when matching -pattern. By defaulty, case matters.}
+
 \item{fullHeader}{Use full fasta header.
 - By default, only the word before the first space or tab is used.}
-
-\item{s}{Profile the sequence according to strand.}
 }
 \description{
 Profiles the nucleotide content of intervals in a fasta file.

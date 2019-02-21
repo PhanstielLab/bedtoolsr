@@ -8,5 +8,5 @@ test_that("multiplication works", {
   B.bed = data.frame(V1="chr1",
                      V2=10,
                      V3=25)
-  expect_equal(bedtoolsr::slop(A.bed,b=5,g=genome), B.bed)
+  expect_equal(bedtoolsr::slop(i=A.bed,b=5,g=genome), B.bed)
 })

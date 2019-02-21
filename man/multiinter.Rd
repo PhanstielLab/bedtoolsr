@@ -5,30 +5,30 @@
 \title{Identifies common intervals among multiple
 BED/GFF/VCF files.}
 \usage{
-multiinter(i, g = NULL, header = NULL, filler = NULL,
-  cluster = NULL, names = NULL, empty = NULL, examples = NULL)
+multiinter(i, cluster = NULL, header = NULL, names = NULL, g = NULL,
+  empty = NULL, filler = NULL, examples = NULL)
 }
 \arguments{
 \item{i}{FILE1 FILE2 .. FILEn
 Requires that each interval file is sorted by chrom/start.}
 
-\item{g}{Use genome file to calculate empty regions.
-- STRING.}
+\item{cluster}{Invoke Ryan Layers's clustering algorithm.}
 
 \item{header}{Print a header line.
 (chrom/start/end + names of each file).}
 
-\item{filler}{Use TEXT when representing intervals having no value.
-- Default is '0', but you can use 'N/A' or any text.}
-
-\item{cluster}{Invoke Ryan Layers's clustering algorithm.}
-
 \item{names}{A list of names (one/file) to describe each file in -i.
 These names will be printed in the header line.}
+
+\item{g}{Use genome file to calculate empty regions.
+- STRING.}
 
 \item{empty}{Report empty regions (i.e., start/end intervals w/o
 values in all files).
 - Requires the '-g FILE' parameter.}
+
+\item{filler}{Use TEXT when representing intervals having no value.
+- Default is '0', but you can use 'N/A' or any text.}
 
 \item{examples}{Show detailed usage examples.}
 }

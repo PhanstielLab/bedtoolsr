@@ -4,14 +4,14 @@
 \alias{links}
 \title{Creates HTML links to an UCSC Genome Browser from a feature file.}
 \usage{
-links(i, org = NULL, base = NULL, db = NULL)
+links(i, base = NULL, org = NULL, db = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf> > out.html}
 
-\item{org}{The organism. Default: human}
-
 \item{base}{The browser basename.  Default: http://genome.ucsc.edu}
+
+\item{org}{The organism. Default: human}
 
 \item{db}{The build.  Default: hg18}
 }

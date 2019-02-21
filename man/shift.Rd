@@ -4,18 +4,17 @@
 \alias{shift}
 \title{Shift each feature by requested number of base pairs.}
 \usage{
-shift(i, g, p = NULL, s = NULL, m = NULL, pct = NULL,
-  header = NULL)
+shift(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
 \item{g}{<genome>}
 
-\item{p}{Shift features on the + strand by -p base pairs.
+\item{s}{Shift the BED/GFF/VCF entry -s base pairs.
 - (Integer) or (Float, e.g. 0.1) if used with -pct.}
 
-\item{s}{Shift the BED/GFF/VCF entry -s base pairs.
+\item{p}{Shift features on the + strand by -p base pairs.
 - (Integer) or (Float, e.g. 0.1) if used with -pct.}
 
 \item{m}{Shift features on the - strand by -m base pairs.

@@ -6,43 +6,24 @@
 #' 
 reldist <- function(a, b, detail = NULL)
 { 
+	# Required Inputs
+	a = establishPaths(input=a,name="a")
+	b = establishPaths(input=b,name="b")
 
-            if (!is.character(a) && !is.numeric(a)) {
-            aTable = paste0(tempdir(), "/aTable.txt")
-            write.table(a, aTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            a=aTable } 
-            
-            if (!is.character(b) && !is.numeric(b)) {
-            bTable = paste0(tempdir(), "/bTable.txt")
-            write.table(b, bTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            b=bTable } 
-            
-		options = "" 
- 
-            if (!is.null(detail)) {
-            options = paste(options," -detail")
-            if(is.character(detail) || is.numeric(detail)) {
-            options = paste(options, " ", detail)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("detail"),values= list(detail))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools reldist ", options, " -a ", a, " -b ", b, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools reldist ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("aTable")) { 
-        file.remove (aTable)
-        } 
- 
-        if(exists("bTable")) { 
-        file.remove (bTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,a[[2]],b[[2]]))
+	return (results)
+}

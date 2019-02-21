@@ -4,8 +4,8 @@
 \alias{flank}
 \title{Creates flanking interval(s) for each BED/GFF/VCF feature.}
 \usage{
-flank(i, g, b = NULL, l = NULL, pct = NULL, header = NULL,
-  s = NULL, r = NULL)
+flank(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL,
+  header = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -19,19 +19,19 @@ flank(i, g, b = NULL, l = NULL, pct = NULL, header = NULL,
 orig. start coordinate.
 - (Integer) or (Float, e.g. 0.1) if used with -pct.}
 
-\item{pct}{Define -l and -r as a fraction of the feature's length.
-E.g. if used on a 1000bp feature, -l 0.50, 
-will add 500 bp "upstream".  Default = false.}
-
-\item{header}{Print the header from the input file prior to results.}
+\item{r}{The number of base pairs that a flank should end from
+orig. end coordinate.
+- (Integer) or (Float, e.g. 0.1) if used with -pct.}
 
 \item{s}{Define -l and -r based on strand.
 E.g. if used, -l 500 for a negative-stranded feature, 
 it will start the flank 500 bp downstream.  Default = false.}
 
-\item{r}{The number of base pairs that a flank should end from
-orig. end coordinate.
-- (Integer) or (Float, e.g. 0.1) if used with -pct.}
+\item{pct}{Define -l and -r as a fraction of the feature's length.
+E.g. if used on a 1000bp feature, -l 0.50, 
+will add 500 bp "upstream".  Default = false.}
+
+\item{header}{Print the header from the input file prior to results.}
 }
 \description{
 Creates flanking interval(s) for each BED/GFF/VCF feature.

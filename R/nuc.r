@@ -2,85 +2,38 @@
 #' 
 #' @param fi <fasta>
 #' @param bed <bed/gff/vcf>
-#' @param C Ignore case when matching -pattern. By defaulty, case matters.
+#' @param s Profile the sequence according to strand.
 #' 
 #' @param seq Print the extracted sequence
 #' 
 #' @param pattern Report the number of times a user-defined sequence
 #'  is observed (case-sensitive).
 #' 
+#' @param C Ignore case when matching -pattern. By defaulty, case matters.
+#' 
 #' @param fullHeader Use full fasta header.
 #' - By default, only the word before the first space or tab is used.
 #' 
-#' @param s Profile the sequence according to strand.
-#' 
-nuc <- function(fi, bed, C = NULL, seq = NULL, pattern = NULL, fullHeader = NULL, s = NULL)
+nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHeader = NULL)
 { 
+	# Required Inputs
+	fi = establishPaths(input=fi,name="fi")
+	bed = establishPaths(input=bed,name="bed")
 
-            if (!is.character(fi) && !is.numeric(fi)) {
-            fiTable = paste0(tempdir(), "/fiTable.txt")
-            write.table(fi, fiTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            fi=fiTable } 
-            
-            if (!is.character(bed) && !is.numeric(bed)) {
-            bedTable = paste0(tempdir(), "/bedTable.txt")
-            write.table(bed, bedTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            bed=bedTable } 
-            
-		options = "" 
- 
-            if (!is.null(C)) {
-            options = paste(options," -C")
-            if(is.character(C) || is.numeric(C)) {
-            options = paste(options, " ", C)
-            }   
-            }
-             
-            if (!is.null(seq)) {
-            options = paste(options," -seq")
-            if(is.character(seq) || is.numeric(seq)) {
-            options = paste(options, " ", seq)
-            }   
-            }
-             
-            if (!is.null(pattern)) {
-            options = paste(options," -pattern")
-            if(is.character(pattern) || is.numeric(pattern)) {
-            options = paste(options, " ", pattern)
-            }   
-            }
-             
-            if (!is.null(fullHeader)) {
-            options = paste(options," -fullHeader")
-            if(is.character(fullHeader) || is.numeric(fullHeader)) {
-            options = paste(options, " ", fullHeader)
-            }   
-            }
-             
-            if (!is.null(s)) {
-            options = paste(options," -s")
-            if(is.character(s) || is.numeric(s)) {
-            options = paste(options, " ", s)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("s","seq","pattern","C","fullHeader"),values= list(s,seq,pattern,C,fullHeader))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools nuc ", options, " -fi ", fi, " -bed ", bed, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools nuc ", options, " -fi ", fi[[1]], " -bed ", bed[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("fiTable")) { 
-        file.remove (fiTable)
-        } 
- 
-        if(exists("bedTable")) { 
-        file.remove (bedTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,fi[[2]],bed[[2]]))
+	return (results)
+}

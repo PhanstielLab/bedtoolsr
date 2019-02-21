@@ -1,10 +1,6 @@
 #' Generate random intervals among a genome.
 #' 
 #' @param g <genome>
-#' @param seed Supply an integer seed for the shuffling.
-#' - By default, the seed is chosen automatically.
-#' - (INTEGER)
-#' 
 #' @param l The length of the intervals to generate.
 #' - Default = 100.
 #' - (INTEGER)
@@ -13,50 +9,29 @@
 #' - Default = 1,000,000.
 #' - (INTEGER)
 #' 
-random <- function(g, seed = NULL, l = NULL, n = NULL)
+#' @param seed Supply an integer seed for the shuffling.
+#' - By default, the seed is chosen automatically.
+#' - (INTEGER)
+#' 
+random <- function(g, l = NULL, n = NULL, seed = NULL)
 { 
+	# Required Inputs
+	g = establishPaths(input=g,name="g")
 
-            if (!is.character(g) && !is.numeric(g)) {
-            gTable = paste0(tempdir(), "/gTable.txt")
-            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            g=gTable } 
-            
-		options = "" 
- 
-            if (!is.null(seed)) {
-            options = paste(options," -seed")
-            if(is.character(seed) || is.numeric(seed)) {
-            options = paste(options, " ", seed)
-            }   
-            }
-             
-            if (!is.null(l)) {
-            options = paste(options," -l")
-            if(is.character(l) || is.numeric(l)) {
-            options = paste(options, " ", l)
-            }   
-            }
-             
-            if (!is.null(n)) {
-            options = paste(options," -n")
-            if(is.character(n) || is.numeric(n)) {
-            options = paste(options, " ", n)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("l","n","seed"),values= list(l,n,seed))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools random ", options, " -g ", g, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools random ", options, " -g ", g[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("gTable")) { 
-        file.remove (gTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,g[[2]]))
+	return (results)
+}

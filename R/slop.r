@@ -8,93 +8,39 @@
 #' @param l The number of base pairs to subtract from the start coordinate.
 #' - (Integer) or (Float, e.g. 0.1) if used with -pct.
 #' 
+#' @param r The number of base pairs to add to the end coordinate.
+#' - (Integer) or (Float, e.g. 0.1) if used with -pct.
+#' 
+#' @param s Define -l and -r based on strand.
+#' E.g. if used, -l 500 for a negative-stranded feature, 
+#' it will add 500 bp downstream.  Default = false.
+#' 
 #' @param pct Define -l and -r as a fraction of the feature's length.
 #' E.g. if used on a 1000bp feature, -l 0.50, 
 #' will add 500 bp "upstream".  Default = false.
 #' 
 #' @param header Print the header from the input file prior to results.
 #' 
-#' @param s Define -l and -r based on strand.
-#' E.g. if used, -l 500 for a negative-stranded feature, 
-#' it will add 500 bp downstream.  Default = false.
-#' 
-#' @param r The number of base pairs to add to the end coordinate.
-#' - (Integer) or (Float, e.g. 0.1) if used with -pct.
-#' 
-slop <- function(i, g, b = NULL, l = NULL, pct = NULL, header = NULL, s = NULL, r = NULL)
+slop <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, header = NULL)
 { 
+	# Required Inputs
+	i = establishPaths(input=i,name="i")
+	g = establishPaths(input=g,name="g")
 
-            if (!is.character(i) && !is.numeric(i)) {
-            iTable = paste0(tempdir(), "/iTable.txt")
-            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            i=iTable } 
-            
-            if (!is.character(g) && !is.numeric(g)) {
-            gTable = paste0(tempdir(), "/gTable.txt")
-            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            g=gTable } 
-            
-		options = "" 
- 
-            if (!is.null(b)) {
-            options = paste(options," -b")
-            if(is.character(b) || is.numeric(b)) {
-            options = paste(options, " ", b)
-            }   
-            }
-             
-            if (!is.null(l)) {
-            options = paste(options," -l")
-            if(is.character(l) || is.numeric(l)) {
-            options = paste(options, " ", l)
-            }   
-            }
-             
-            if (!is.null(pct)) {
-            options = paste(options," -pct")
-            if(is.character(pct) || is.numeric(pct)) {
-            options = paste(options, " ", pct)
-            }   
-            }
-             
-            if (!is.null(header)) {
-            options = paste(options," -header")
-            if(is.character(header) || is.numeric(header)) {
-            options = paste(options, " ", header)
-            }   
-            }
-             
-            if (!is.null(s)) {
-            options = paste(options," -s")
-            if(is.character(s) || is.numeric(s)) {
-            options = paste(options, " ", s)
-            }   
-            }
-             
-            if (!is.null(r)) {
-            options = paste(options," -r")
-            if(is.character(r) || is.numeric(r)) {
-            options = paste(options, " ", r)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("b","l","r","s","pct","header"),values= list(b,l,r,s,pct,header))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools slop ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools slop ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("iTable")) { 
-        file.remove (iTable)
-        } 
- 
-        if(exists("gTable")) { 
-        file.remove (gTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,i[[2]],g[[2]]))
+	return (results)
+}

@@ -1,3 +1,4 @@
+
 #' Determines if arguments are paths or R objects. Makes temp files when
 #' neccesary. Makes a list of files to use in bedtools call. Makes a list
 #' of temp files to delete at end of function 
@@ -7,12 +8,11 @@
 #' @param allowRobjects boolean whether or not to allow R objects as inputs
 #' 
 #' ### Define a function that determines establishes files and paths for bedtools functions
-establishpaths <- function(input,name="",allowRobjects=TRUE)
+establishPaths <- function(input,name="",allowRobjects=TRUE)
 {
   # convert to list if neccesary
   if (!inherits(input, "list")  )
   {
-    print ("convert")
     input = list(input)
   }
   

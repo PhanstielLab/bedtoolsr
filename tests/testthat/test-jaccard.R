@@ -13,8 +13,5 @@ test_that("jaccard works", {
                      "jaccard" = 0.25,
                      "n_intersections" = 1)
   
-  
-  
-  
   expect_equal(bedtoolsr::jaccard(a = A.bed, b = B.bed), C.bed)
 })

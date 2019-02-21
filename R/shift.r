@@ -2,10 +2,10 @@
 #' 
 #' @param i <bed/gff/vcf>
 #' @param g <genome>
-#' @param p Shift features on the + strand by -p base pairs.
+#' @param s Shift the BED/GFF/VCF entry -s base pairs.
 #' - (Integer) or (Float, e.g. 0.1) if used with -pct.
 #' 
-#' @param s Shift the BED/GFF/VCF entry -s base pairs.
+#' @param p Shift features on the + strand by -p base pairs.
 #' - (Integer) or (Float, e.g. 0.1) if used with -pct.
 #' 
 #' @param m Shift features on the - strand by -m base pairs.
@@ -17,73 +17,26 @@
 #' 
 #' @param header Print the header from the input file prior to results.
 #' 
-shift <- function(i, g, p = NULL, s = NULL, m = NULL, pct = NULL, header = NULL)
+shift <- function(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NULL)
 { 
+	# Required Inputs
+	i = establishPaths(input=i,name="i")
+	g = establishPaths(input=g,name="g")
 
-            if (!is.character(i) && !is.numeric(i)) {
-            iTable = paste0(tempdir(), "/iTable.txt")
-            write.table(i, iTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            i=iTable } 
-            
-            if (!is.character(g) && !is.numeric(g)) {
-            gTable = paste0(tempdir(), "/gTable.txt")
-            write.table(g, gTable, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
-            g=gTable } 
-            
-		options = "" 
- 
-            if (!is.null(p)) {
-            options = paste(options," -p")
-            if(is.character(p) || is.numeric(p)) {
-            options = paste(options, " ", p)
-            }   
-            }
-             
-            if (!is.null(s)) {
-            options = paste(options," -s")
-            if(is.character(s) || is.numeric(s)) {
-            options = paste(options, " ", s)
-            }   
-            }
-             
-            if (!is.null(m)) {
-            options = paste(options," -m")
-            if(is.character(m) || is.numeric(m)) {
-            options = paste(options, " ", m)
-            }   
-            }
-             
-            if (!is.null(pct)) {
-            options = paste(options," -pct")
-            if(is.character(pct) || is.numeric(pct)) {
-            options = paste(options, " ", pct)
-            }   
-            }
-             
-            if (!is.null(header)) {
-            options = paste(options," -header")
-            if(is.character(header) || is.numeric(header)) {
-            options = paste(options, " ", header)
-            }   
-            }
-            
+	options = "" 
+
+	# Options
+	options = createOptions(names = c("s","p","m","pct","header"),values= list(s,p,m,pct,header))
+
 	# establish output file 
 	tempfile = tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools shift ", options, " -i ", i, " -g ", g, " > ", tempfile) 
+	cmd = paste0(bedtools.path, "bedtools shift ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t") 
-        if (file.exists(tempfile)){ 
-        file.remove(tempfile) 
-        }
-        return (results)
-        }
-         
-        if(exists("iTable")) { 
-        file.remove (iTable)
-        } 
- 
-        if(exists("gTable")) { 
-        file.remove (gTable)
-        } 
+	results = read.table(tempfile,header=FALSE,sep="\t")
+
+	# Delete temp files 
+	deleteTempfiles(c(tempfile,i[[2]],g[[2]]))
+	return (results)
+}
