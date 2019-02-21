@@ -14,10 +14,10 @@ If an option with a numeric value has multiple numbers, attach as a string. Exam
 6. Make changes below, remove necessary files from NAMESPACE export (look at log file too)
 7. Create documentation using the following commands in terminal
 
-install.packages('roxygenate')
+install.packages('roxygen2')
 install.packages('devtools')
 library('devtools')
-library('roxygenate')
+library('roxygen2')
 setwd(***put the directory path of your package here****)
 devtools::document()
 
