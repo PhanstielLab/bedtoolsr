@@ -55,8 +55,8 @@
 jaccard <- function(a, b, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
 { 
 	# Required Inputs
-	a = establishPaths(input=a,name="a")
-	b = establishPaths(input=b,name="b")
+	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
+	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
 
 	options = "" 
 

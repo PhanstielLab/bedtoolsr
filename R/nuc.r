@@ -17,8 +17,8 @@
 nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHeader = NULL)
 { 
 	# Required Inputs
-	fi = establishPaths(input=fi,name="fi")
-	bed = establishPaths(input=bed,name="bed")
+	fi = establishPaths(input=fi,name="fi",allowRobjects=TRUE)
+	bed = establishPaths(input=bed,name="bed",allowRobjects=TRUE)
 
 	options = "" 
 

@@ -11,8 +11,8 @@
 bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	fq = establishPaths(input=fq,name="fq")
+	i = establishPaths(input=i,name="i",allowRobjects=FALSE)
+	fq = establishPaths(input=fq,name="fq",allowRobjects=FALSE)
 
 	options = "" 
 

@@ -4,8 +4,8 @@
 \alias{sample}
 \title{Take sample of input file(s) using reservoir sampling algorithm.}
 \usage{
-sample(i, n = NULL, seed = NULL, ubam = NULL, s = NULL, header = NULL,
-  bed = NULL, nobuf = NULL, iobuf = NULL)
+sample(i, n = NULL, seed = NULL, ubam = NULL, s = NULL,
+  header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}

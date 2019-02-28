@@ -13,7 +13,7 @@
 cluster <- function(i, s = NULL, d = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
 
 	options = "" 
 

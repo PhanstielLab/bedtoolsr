@@ -23,8 +23,8 @@
 annotate <- function(i, files, names = NULL, counts = NULL, both = NULL, s = NULL, S = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	files = establishPaths(input=files,name="files")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	files = establishPaths(input=files,name="files",allowRobjects=TRUE)
 
 	options = "" 
 

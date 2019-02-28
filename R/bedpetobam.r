@@ -10,8 +10,8 @@
 bedpetobam <- function(i, g, mapq = NULL, ubam = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	g = establishPaths(input=g,name="g")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
 
 	options = "" 
 

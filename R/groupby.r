@@ -30,9 +30,9 @@
 groupby <- function(g, c, o, i = NULL, full = NULL, inheader = NULL, outheader = NULL, header = NULL, ignorecase = NULL, prec = NULL, delim = NULL)
 { 
 	# Required Inputs
-	g = establishPaths(input=g,name="g")
-	c = establishPaths(input=c,name="c")
-	o = establishPaths(input=o,name="o")
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
+	c = establishPaths(input=c,name="c",allowRobjects=TRUE)
+	o = establishPaths(input=o,name="o",allowRobjects=TRUE)
 
 	options = "" 
 

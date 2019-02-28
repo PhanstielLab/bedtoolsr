@@ -54,8 +54,8 @@
 window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NULL, r = NULL, sw = NULL, sm = NULL, Sm = NULL, u = NULL, c = NULL, v = NULL, header = NULL)
 { 
 	# Required Inputs
-	a = establishPaths(input=a,name="a")
-	b = establishPaths(input=b,name="b")
+	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
+	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
 
 	options = "" 
 

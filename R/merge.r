@@ -69,7 +69,7 @@
 merge <- function(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL, delim = NULL, prec = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
 
 	options = "" 
 

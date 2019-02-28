@@ -32,8 +32,8 @@
 multicov <- function(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL, r = NULL, q = NULL, D = NULL, F = NULL, p = NULL)
 { 
 	# Required Inputs
-	bams = establishPaths(input=bams,name="bams")
-	bed = establishPaths(input=bed,name="bed")
+	bams = establishPaths(input=bams,name="bams",allowRobjects=TRUE)
+	bed = establishPaths(input=bed,name="bed",allowRobjects=TRUE)
 
 	options = "" 
 

@@ -34,7 +34,7 @@
 sample <- function(i, n = NULL, seed = NULL, ubam = NULL, s = NULL, header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
 
 	options = "" 
 

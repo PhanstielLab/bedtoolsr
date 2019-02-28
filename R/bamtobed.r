@@ -35,7 +35,7 @@
 bamtobed <- function(i, bedpe = NULL, mate1 = NULL, bed12 = NULL, split = NULL, splitD = NULL, ed = NULL, tag = NULL, color = NULL, cigar = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
+	i = establishPaths(input=i,name="i",allowRobjects=FALSE)
 
 	options = "" 
 

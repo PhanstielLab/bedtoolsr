@@ -25,8 +25,8 @@
 getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, split = NULL, tab = NULL, s = NULL, fullHeader = NULL)
 { 
 	# Required Inputs
-	fi = establishPaths(input=fi,name="fi")
-	bed = establishPaths(input=bed,name="bed")
+	fi = establishPaths(input=fi,name="fi",allowRobjects=TRUE)
+	bed = establishPaths(input=bed,name="bed",allowRobjects=TRUE)
 
 	options = "" 
 

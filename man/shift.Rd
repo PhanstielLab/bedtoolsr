@@ -4,7 +4,8 @@
 \alias{shift}
 \title{Shift each feature by requested number of base pairs.}
 \usage{
-shift(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NULL)
+shift(i, g, s = NULL, p = NULL, m = NULL, pct = NULL,
+  header = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

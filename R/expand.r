@@ -6,7 +6,7 @@
 expand <- function(c, i = NULL)
 { 
 	# Required Inputs
-	c = establishPaths(input=c,name="c")
+	c = establishPaths(input=c,name="c",allowRobjects=TRUE)
 
 	options = "" 
 

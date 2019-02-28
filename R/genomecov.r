@@ -72,8 +72,8 @@
 genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL, du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL, trackline = NULL, trackopts = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	g = establishPaths(input=g,name="g")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
 
 	options = "" 
 

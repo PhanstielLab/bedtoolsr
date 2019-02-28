@@ -22,7 +22,7 @@
 sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL, g = NULL, faidx = NULL, header = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
 
 	options = "" 
 

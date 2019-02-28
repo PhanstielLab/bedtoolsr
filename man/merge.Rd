@@ -5,8 +5,8 @@
 \title{Merges overlapping BED/GFF/VCF entries into a single interval.}
 \usage{
 merge(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL,
-  delim = NULL, prec = NULL, bed = NULL, header = NULL, nobuf = NULL,
-  iobuf = NULL)
+  delim = NULL, prec = NULL, bed = NULL, header = NULL,
+  nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

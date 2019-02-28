@@ -5,7 +5,8 @@
 \title{Converts BAM alignments to BED6 or BEDPE format.}
 \usage{
 bamtobed(i, bedpe = NULL, mate1 = NULL, bed12 = NULL, split = NULL,
-  splitD = NULL, ed = NULL, tag = NULL, color = NULL, cigar = NULL)
+  splitD = NULL, ed = NULL, tag = NULL, color = NULL,
+  cigar = NULL)
 }
 \arguments{
 \item{i}{<bam>}

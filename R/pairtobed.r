@@ -48,8 +48,8 @@
 pairtobed <- function(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL, f = NULL, s = NULL, S = NULL, type = NULL)
 { 
 	# Required Inputs
-	a = establishPaths(input=a,name="a")
-	b = establishPaths(input=b,name="b")
+	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
+	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
 
 	options = "" 
 

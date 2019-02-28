@@ -31,8 +31,8 @@
 pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, is = NULL, rdn = NULL)
 { 
 	# Required Inputs
-	a = establishPaths(input=a,name="a")
-	b = establishPaths(input=b,name="b")
+	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
+	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
 
 	options = "" 
 

@@ -29,9 +29,9 @@
 tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	files = establishPaths(input=files,name="files")
-	labels = establishPaths(input=labels,name="labels")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	files = establishPaths(input=files,name="files",allowRobjects=TRUE)
+	labels = establishPaths(input=labels,name="labels",allowRobjects=TRUE)
 
 	options = "" 
 

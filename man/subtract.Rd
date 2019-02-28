@@ -5,10 +5,10 @@
 \title{Removes the portion(s) of an interval that is overlapped
 by another feature(s).}
 \usage{
-subtract(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL, s = NULL,
-  S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL,
-  g = NULL, nonamecheck = NULL, sorted = NULL, bed = NULL,
-  header = NULL, nobuf = NULL, iobuf = NULL)
+subtract(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL,
+  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
+  split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
+  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}

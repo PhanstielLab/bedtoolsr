@@ -1,8 +1,29 @@
+# import packages
 import os 
 import datetime
 import time
 import re
-# define dictionaries
+
+
+# -------------- Anomalies ------------ #
+
+# Converts bedtools arguments into R friendly format
+optionConverter = {
+	"name+": "nameplus",
+	"3": "three",
+	"5": "five",
+}
+
+# Functions in which header = TRUE
+hasheader = set(['jaccard'])
+
+# Functions that should not allow R object as input
+noRinput = set(['bamtobed','bamtofastq'])
+
+# Functions that should not allow R object as output
+noRoutput = set([''])
+
+# -------------- # Define dictionaries ------------ #
 
 #functionList has all of the bedtools functions 
 functionList = []
@@ -13,24 +34,21 @@ optionDict = {}
 #infoDict has all of the headers of that function and their immediate definition
 infoDict = {}
 
-
 #usageDict has the required parameters of the function as the word and the format as the definition.
 #Ex: usageWord = a, usageDefinition =<bed/gff/vcf/bam>
 
 #usageDict required parameters are recognized by a "-" in front of name in the "Usage" section of bedtools help menu
 
-
 usageDict = {}
 version = ""
 createR = 1
 now = datetime.datetime.now()
-fileinput=""
+bedtoolsrpath=""
 currentoption = ""
 
+#-------------------------------- Functions -------------------------------#
 
-
-
-#captures all the commands in main bedtools menu
+### Define a function that captures all the commands in main bedtools menu
 def captureCommands():
     global version
     text_file2.seek(0)
@@ -41,17 +59,12 @@ def captureCommands():
         if(words[0] == "Version:"):
             version = words[-1].rstrip()
 
-
-
-
-#captures all of the information below a header until next1 or next2
+### Define a function that captures all of the information below a header until next1 or next2
 def capture(header, header1):
     global createR
     
-
     #start at the beginning of text file
     text_file.seek(0)
-
 
     #split each line by a space
     for line in text_file:
@@ -59,7 +72,6 @@ def capture(header, header1):
 
         firstWord = words[0]
         
-
         #add to word and definition
         if(firstWord == header or firstWord == header1):
             definition = ""
@@ -72,7 +84,6 @@ def capture(header, header1):
         createR = 0
         text_file4.write(currentoption.rstrip() + " could not be created because " + header[:-1] + " did not exist\n")
         return
-    
 
     #print the lines before the next header
     for line in text_file:
@@ -84,7 +95,6 @@ def capture(header, header1):
         if (header != "Summary:"):
             break
 
-
     #add word to dictionary                 
     infoDict[word] = definition 
     if(header == "Usage:"):
@@ -93,14 +103,13 @@ def capture(header, header1):
 
 def basic() :
 
-
     capture("Tool:", "Tool:\n")
     infoDict["ToolName"] = infoDict["Tool"].split(" ")[1].rstrip()
     capture("Summary:", "Summary\n")
     capture("Usage:", "Usage:\t")
     
 
-
+### Define a function that reads in all of the options in each bedtools function
 def options():
 
     text_file.seek(0)
@@ -108,20 +117,15 @@ def options():
         firstWord = line.split(" ")[0]  
 
         if(firstWord == "Options:" or firstWord == "Options:\n"):
-
             break
-    
     
     if(firstWord != "Options:" and firstWord != "Options:\n"):  
         return
 
-    
     for line in text_file:
-        
         
         #option lines starts at the option menu and is an array of word separated by a tab
         read = line.split("\t")
-        
         
         ## if the first word is Notes we have reached the end of the option menu and must break
         if(read[0] != "\n" and len(read)==1):
@@ -145,30 +149,37 @@ def options():
             partialdef = (" ").join(read[2:])           
             definition = definition + partialdef            
             optionDict[word] = definition       
-    
 
 
-
+### Define a function that write R functions 
 def bedtoolsFunction(command):
-
-
-    
+	
+	# Determine if the header of the output file should be read
+    readheader = "FALSE"
+    if command in hasheader:
+        readheader = "TRUE"
+	
+	# Determine if the R object inputs are allowed
+    allowRobjectsInput = "TRUE"
+    if command in noRinput:
+        allowRobjectsInput = "FALSE"
+	
+	# Determine if the header of the output file should be read
+    allowRobjectsOutput = "TRUE"	
+	
     UsageArray = infoDict["Usage"].split("-")
     for x in range (1, len(UsageArray)):
         usageWord = "".join(UsageArray[x].split(" ")[0])
         usageDefinition = " ".join(UsageArray[x].split(" ")[1:])
-    
         usageDict[usageWord.rstrip()] = usageDefinition.rstrip()
     
-    
-
     for i in usageDict:
         if i in optionDict:
             del optionDict[i]
 
     comment = "#' "
     
-    file = open(fileinput + "/R/%s.r" % command, "w")
+    file = open(bedtoolsrpath + "/R/%s.r" % command, "w")
 
     summarySplit = infoDict["Summary"].split("\n")
 
@@ -183,14 +194,11 @@ def bedtoolsFunction(command):
             file.write(comment + line)
             file.write("\n")
 
+    # Convert to R friendly options
     for option in optionDict:
       roption = option
-      if(option == "3"):
-            roption = "three"
-      elif(option == "5"):
-            roption = "five"
-      elif(option == "name+"):
-            roption = "nameplus"
+      if option in optionConverter.keys():
+            roption = optionConverter[option]
 
       optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
       optionSplit = optionLines.split("\n")
@@ -201,12 +209,8 @@ def bedtoolsFunction(command):
     setOptions= ""
     for option in optionDict:
       roption = option
-      if(option == "3"):
-            roption = "three"
-      elif(option == "5"):
-            roption = "five"
-      elif(option == "name+"):
-            roption = "nameplus"
+      if option in optionConverter.keys():
+            roption = optionConverter[option]
       setOptions = setOptions + roption + " = " + "NULL" + ", "
     setOptions = setOptions[:-2]
 
@@ -223,7 +227,7 @@ def bedtoolsFunction(command):
     file.write("\t# Required Inputs\n")
     for key in usageDict:
       file.write ("\t")
-      file.write("""%s = establishPaths(input=%s,name="%s")""" % (key,key,key))
+      file.write("""%s = establishPaths(input=%s,name="%s",allowRobjects=%s)""" % (key,key,key,allowRobjectsInput))
       file.write ("\n")
     file.write ("\n")
     file.write('\toptions = "" \n' )
@@ -235,12 +239,8 @@ def bedtoolsFunction(command):
     optionsr = list()
     for option in optionDict:
       roption = option
-      if(option == "3"):
-            roption = "three"
-      elif(option == "5"):
-            roption = "five"
-      elif(option == "name+"):
-            roption = "nameplus"
+      if option in optionConverter.keys():
+            roption = optionConverter[option]
       optionsbedtools.append("\"" + option + "\"")
       optionsr.append(roption)     
     optionsbedtoolscombined = ",".join(optionsbedtools)
@@ -260,7 +260,7 @@ def bedtoolsFunction(command):
     file.write('\tbedtools.path <- getOption(\"bedtools.path\")\n')
     file.write('\tif(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
     file.write('\tcmd = paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile) \n\tsystem(cmd) \n')
-    file.write('\tresults = read.table(tempfile,header=FALSE,sep="\\t")')
+    file.write('\tresults = read.table(tempfile,header=%s,sep="\\t")' % readheader)
     
     # Delete the temp files
     file.write('\n\n\t# Delete temp files \n')
@@ -274,13 +274,16 @@ def bedtoolsFunction(command):
     
     # Return the results
     file.write("\n\treturn (results)\n}")
-    
+
+
+#-------------------------------- Main Code -------------------------------#  
+  
 while True: 
-    fileinput = input("Where would you like to make your R package? ").rstrip()
-    fileinput = os.path.expanduser(fileinput)
-    if not fileinput:
+    bedtoolsrpath = input("Where would you like to make your R package? ").rstrip()
+    bedtoolsrpath = os.path.expanduser(bedtoolsrpath)
+    if not bedtoolsrpath:
         continue
-    if(os.path.isdir(fileinput) == False):
+    if(os.path.isdir(bedtoolsrpath) == False):
         print("This is not a valid path")
         continue
     else:
@@ -302,17 +305,20 @@ while True:
     else:
         break
 
-os.system("%s &> %s/bedtools.txt" % (bedtoolsinputmain, fileinput))
-text_file2 = open(fileinput + "/bedtools.txt", "r")
-text_file3 = open(fileinput + "/bedtoolsCommands.txt", "w")
+os.system("%s &> %s/bedtools.txt" % (bedtoolsinputmain, bedtoolsrpath))
+text_file2 = open(bedtoolsrpath + "/bedtools.txt", "r")
+text_file3 = open(bedtoolsrpath + "/bedtoolsCommands.txt", "w")
 captureCommands()
 text_file2.close()
 
-os.system("mkdir " + fileinput + "/man")
-os.system("mkdir " + fileinput + "/R")
-os.system("mkdir " + fileinput + "/dev")
-text_file4 = open(fileinput + "/dev/log.txt", "w")
-text_file3 = open(fileinput + "/bedtoolsCommands.txt", "r")
+os.system("mkdir " + bedtoolsrpath + "/man")
+os.system("mkdir " + bedtoolsrpath + "/R")
+os.system("mkdir " + bedtoolsrpath + "/dev")
+text_file4 = open(bedtoolsrpath + "/dev/log.txt", "w")
+text_file3 = open(bedtoolsrpath + "/bedtoolsCommands.txt", "r")
+
+
+print ("Building R functions")
 
 for line in text_file3:
     if line.startswith("makewindows") or line.startswith("split"):
@@ -322,22 +328,23 @@ for line in text_file3:
     infoDict.clear()
     usageDict.clear()
     snippedLine = line[:-1]
-    os.system("%s %s -h &> %s/bedtools%s.txt" % (bedtoolsinputmain, snippedLine, fileinput, snippedLine))
-    text_file = open("%s/bedtools%s.txt" % (fileinput, snippedLine), "r+")
+    os.system("%s %s -h &> %s/bedtools%s.txt" % (bedtoolsinputmain, snippedLine, bedtoolsrpath, snippedLine))
+    text_file = open("%s/bedtools%s.txt" % (bedtoolsrpath, snippedLine), "r+")
     currentoption = line
     basic()
     options()
     if (createR == 1):
+        print (snippedLine)
         bedtoolsFunction(snippedLine)
         functionList.append(line.rstrip())
     text_file.close()
-    os.system("rm %s/bedtools%s.txt" % (fileinput, snippedLine))
+    os.system("rm %s/bedtools%s.txt" % (bedtoolsrpath, snippedLine))
 
 text_file3.close()
 text_file4.close()
-os.system("rm %s/bedtools.txt" % fileinput)
-os.system("rm %s/bedtoolsCommands.txt" % fileinput)
-f=open("%s/DESCRIPTION" % fileinput, "w")
+os.system("rm %s/bedtools.txt" % bedtoolsrpath)
+os.system("rm %s/bedtoolsCommands.txt" % bedtoolsrpath)
+f=open("%s/DESCRIPTION" % bedtoolsrpath, "w")
 f.write("Package: bedtoolsr\n")
 f.write("Encoding: UTF-8\n")
 f.write("Type: Package\n")
@@ -349,13 +356,13 @@ f.write("Author: Mayura Patwardhan, Craig Wenger, Doug Phanstiel\n")
 f.write("Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.\n")
 f.write("License: MIT\n")
 f.close()
-f = open("%s/NAMESPACE" % fileinput, "w")
+f = open("%s/NAMESPACE" % bedtoolsrpath, "w")
 exportfunctions = ""
 for function in functionList:
     exportfunctions = exportfunctions + function + ", "
 exportfunctions = exportfunctions[:-2]
 f.write("export(" + exportfunctions + ")")
-f = open("%s/R/zzz.r" % fileinput, "w")
+f = open("%s/R/zzz.r" % bedtoolsrpath, "w")
 f.write("""
 .onLoad <- function(libname, pkgname) {
     installed.packages<-installed.packages()
@@ -383,10 +390,15 @@ f.write("""
 """)
 f.close()
 
-#------- Make helper R functions -------#
+
+
+#-------------------------------- Make helper R functions -----------------------#
+
+
+print ("Writing helper functions")
 
 # Define a function to create options
-f = open("%s/R/createOptions.r" % fileinput, "w")
+f = open("%s/R/createOptions.r" % bedtoolsrpath, "w")
 f.write("""
 #' Creates options based on user input
 #' 
@@ -419,7 +431,7 @@ f.close()
 
 
 # Define a function make and record temp files
-f = open("%s/R/establishPaths.r" % fileinput, "w")
+f = open("%s/R/establishPaths.r" % bedtoolsrpath, "w")
 f.write("""
 #' Determines if arguments are paths or R objects. Makes temp files when
 #' neccesary. Makes a list of files to use in bedtools call. Makes a list
@@ -476,7 +488,7 @@ establishPaths <- function(input,name="",allowRobjects=TRUE)
 f.close()
 
 # Define a function to delete temp files
-f = open("%s/R/deleteTempfiles.r" % fileinput, "w")
+f = open("%s/R/deleteTempfiles.r" % bedtoolsrpath, "w")
 f.write("""
 #' Deletes temp files
 #' 
@@ -494,4 +506,31 @@ deleteTempfiles <- function(tempfiles)
 }
 """)
 f.close()
+
+
+
+#-------------------------------- Create documentation -----------------------#
+
+
+
+f = open("%s/dev/document.r" % bedtoolsrpath, "w")
+f.write("""print ("Building man files")
+library('devtools')
+library('roxygen2')
+library('testthat')
+setwd('""")
+f.write(bedtoolsrpath)
+f.write("""')
+devtools::document()
+
+# Test Functions
+library("bedtoolsr")
+print ("Testing functions")
+test_package(package = 'bedtoolsr')
+""")
+f.close()
+
+os.system("Rscript " + bedtoolsrpath + "/dev/document.r")
+print ("Done!")
+
 

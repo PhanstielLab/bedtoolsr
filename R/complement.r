@@ -5,8 +5,8 @@
 complement <- function(i, g)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	g = establishPaths(input=g,name="g")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
 
 	options = "" 
 

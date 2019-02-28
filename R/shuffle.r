@@ -55,8 +55,8 @@
 shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL, f = NULL, chromFirst = NULL, bedpe = NULL, maxTries = NULL, noOverlapping = NULL, allowBeyondChromEnd = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	g = establishPaths(input=g,name="g")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
 
 	options = "" 
 

@@ -97,8 +97,8 @@
 intersect <- function(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL, wao = NULL, u = NULL, c = NULL, v = NULL, ubam = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL, names = NULL, filenames = NULL, sortout = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
 { 
 	# Required Inputs
-	a = establishPaths(input=a,name="a")
-	b = establishPaths(input=b,name="b")
+	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
+	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
 
 	options = "" 
 

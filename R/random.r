@@ -16,7 +16,7 @@
 random <- function(g, l = NULL, n = NULL, seed = NULL)
 { 
 	# Required Inputs
-	g = establishPaths(input=g,name="g")
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
 
 	options = "" 
 

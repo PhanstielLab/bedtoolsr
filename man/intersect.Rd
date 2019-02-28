@@ -5,11 +5,11 @@
 \title{Report overlaps between two feature files.}
 \usage{
 intersect(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL,
-  wao = NULL, u = NULL, c = NULL, v = NULL, ubam = NULL, s = NULL,
-  S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL,
-  g = NULL, nonamecheck = NULL, sorted = NULL, names = NULL,
-  filenames = NULL, sortout = NULL, bed = NULL, header = NULL,
-  nobuf = NULL, iobuf = NULL)
+  wao = NULL, u = NULL, c = NULL, v = NULL, ubam = NULL,
+  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
+  split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
+  names = NULL, filenames = NULL, sortout = NULL, bed = NULL,
+  header = NULL, nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf/bam>}

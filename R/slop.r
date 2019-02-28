@@ -24,8 +24,8 @@
 slop <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, header = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
-	g = establishPaths(input=g,name="g")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
 
 	options = "" 
 

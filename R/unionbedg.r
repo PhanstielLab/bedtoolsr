@@ -24,7 +24,7 @@
 unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL)
 { 
 	# Required Inputs
-	i = establishPaths(input=i,name="i")
+	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
 
 	options = "" 
 

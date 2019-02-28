@@ -6,9 +6,9 @@
 reports all features in B that overlap the window. For each
 overlap the entire entry in A and B are reported.}
 \usage{
-window(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NULL,
-  r = NULL, sw = NULL, sm = NULL, Sm = NULL, u = NULL, c = NULL,
-  v = NULL, header = NULL)
+window(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL,
+  l = NULL, r = NULL, sw = NULL, sm = NULL, Sm = NULL,
+  u = NULL, c = NULL, v = NULL, header = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}

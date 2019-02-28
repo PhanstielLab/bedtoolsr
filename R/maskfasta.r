@@ -16,9 +16,9 @@
 maskfasta <- function(fi, fo, bed, soft = NULL, mc = NULL, fullHeader = NULL)
 { 
 	# Required Inputs
-	fi = establishPaths(input=fi,name="fi")
-	fo = establishPaths(input=fo,name="fo")
-	bed = establishPaths(input=bed,name="bed")
+	fi = establishPaths(input=fi,name="fi",allowRobjects=TRUE)
+	fo = establishPaths(input=fo,name="fo",allowRobjects=TRUE)
+	bed = establishPaths(input=bed,name="bed",allowRobjects=TRUE)
 
 	options = "" 
 

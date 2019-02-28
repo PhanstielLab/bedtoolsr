@@ -4,10 +4,10 @@
 \alias{map}
 \title{Apply a function to a column from B intervals that overlap A.}
 \usage{
-map(a, b, c = NULL, o = NULL, delim = NULL, prec = NULL, s = NULL,
-  S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL,
-  g = NULL, nonamecheck = NULL, bed = NULL, header = NULL,
-  nobuf = NULL, iobuf = NULL)
+map(a, b, c = NULL, o = NULL, delim = NULL, prec = NULL,
+  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
+  split = NULL, g = NULL, nonamecheck = NULL, bed = NULL,
+  header = NULL, nobuf = NULL, iobuf = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
