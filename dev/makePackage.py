@@ -3,7 +3,7 @@ import os
 import datetime
 import time
 import re
-
+import argparse
 
 # -------------- Anomalies ------------ #
 
@@ -277,33 +277,25 @@ def bedtoolsFunction(command):
 
 
 #-------------------------------- Main Code -------------------------------#  
-  
-while True: 
-    bedtoolsrpath = input("Where would you like to make your R package? ").rstrip()
-    bedtoolsrpath = os.path.expanduser(bedtoolsrpath)
-    if not bedtoolsrpath:
-        continue
-    if(os.path.isdir(bedtoolsrpath) == False):
-        print("This is not a valid path")
-        continue
-    else:
-        break
 
-bedtoolsinput = input("What is the bedtools path? ")
-if(bedtoolsinput == ""):
-    bedtoolsinputmain = "bedtools"
-else:
-    bedtoolsinput = os.path.expanduser(bedtoolsinput)
-    bedtoolsinputmain = bedtoolsinput + "/bedtools"
+# setup parser
+parser = argparse.ArgumentParser()  
+parser.add_argument("-O", "--output", help="directory to write package to", default="~/Desktop/test")
+parser.add_argument("-B", "--bedtools", help="path to your bedtools", default="/Users/dphansti/Tools/bedtools2/bin/bedtools")
+parser.add_argument("-V", "--version", help="version number of package", default="1")
 
-while True:
-    versionsuffixinput = input("What version suffix do you want added? ")
-    try:
-        versionsuffix = int(versionsuffixinput)
-    except ValueError:
-        print("Please enter an integer.")
-    else:
-        break
+# read arguments from the command line
+args = parser.parse_args()
+
+bedtoolsrpath     = os.path.expanduser(args.output) 
+bedtoolsinputmain = os.path.expanduser(args.bedtools) 
+versionsuffix     = int(args.version) 
+
+print (bedtoolsinputmain)
+print (bedtoolsrpath)
+print (versionsuffix)
+
+
 
 os.system("%s &> %s/bedtools.txt" % (bedtoolsinputmain, bedtoolsrpath))
 text_file2 = open(bedtoolsrpath + "/bedtools.txt", "r")
