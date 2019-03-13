@@ -214,7 +214,7 @@ def readbedtoolsfxns(bedtoolspath, bedtoolsRpath):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-B", "--bedtools", help="path to your bedtools", default="")
-parser.add_argument("-O", "--output", help="directory to write package to", default=".")
+parser.add_argument("-O", "--output", help="directory to write package to", default=os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 parser.add_argument("-V", "--version", help="version number of package", default="1")
 args = parser.parse_args()
 
