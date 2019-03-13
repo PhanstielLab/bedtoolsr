@@ -3,15 +3,15 @@
 #' @param fi <fasta>
 #' @param fo <fasta>
 #' @param bed <bed/gff/vcf>
-#' @param soft  Enforce "soft" masking.
-#'  Mask with lower-case bases, instead of masking with Ns.
+#' @param soft Enforce "soft" masking.
+#'     Mask with lower-case bases, instead of masking with Ns.
 #' 
-#' @param mc  Replace masking character.
-#'  Use another character, instead of masking with Ns.
+#' @param mc Replace masking character.
+#'     Use another character, instead of masking with Ns.
 #' 
 #' @param fullHeader Use full fasta header.
-#'  By default, only the word before the first space or tab
-#'  is used.
+#'     By default, only the word before the first space or tab
+#'     is used.
 #' 
 maskfasta <- function(fi, fo, bed, soft = NULL, mc = NULL, fullHeader = NULL)
 { 

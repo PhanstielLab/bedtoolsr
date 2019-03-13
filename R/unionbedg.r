@@ -2,22 +2,23 @@
 #' allowing coverage comparisons between them.
 #' 
 #' @param i FILE1 FILE2 .. FILEn
-#' Assumes that each BedGraph file is sorted by chrom/start
-#' @param header  Print a header line.
-#'  (chrom/start/end + names of each file).
+#'   Assumes that each BedGraph file is sorted by chrom/start 
+#'   and that the intervals in each are non-overlapping.
+#' @param header Print a header line.
+#'     (chrom/start/end + names of each file).
 #' 
-#' @param names  A list of names (one/file) to describe each file in -i.
-#'  These names will be printed in the header line.
+#' @param names A list of names (one/file) to describe each file in -i.
+#'     These names will be printed in the header line.
 #' 
-#' @param g  Use genome file to calculate empty regions.
-#'  - STRING.
+#' @param g Use genome file to calculate empty regions.
+#'     - STRING.
 #' 
-#' @param empty  Report empty regions (i.e., start/end intervals w/o
-#'  values in all files).
-#'  - Requires the '-g FILE' parameter.
+#' @param empty Report empty regions (i.e., start/end intervals w/o
+#'     values in all files).
+#'     - Requires the '-g FILE' parameter.
 #' 
 #' @param filler Use TEXT when representing intervals having no value.
-#'  - Default is '0', but you can use 'N/A' or any text.
+#'     - Default is '0', but you can use 'N/A' or any text.
 #' 
 #' @param examples Show detailed usage examples.
 #' 

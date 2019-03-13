@@ -3,10 +3,10 @@
 #' @param i <BAM>
 #' @param fq <FQ>
 #' @param fq2 FASTQ for second end.  Used if BAM contains paired-end data.
-#' BAM should be sorted by query name is creating paired FASTQ.
+#'   BAM should be sorted by query name is creating paired FASTQ.
 #' 
 #' @param tags Create FASTQ based on the mate info
-#' in the BAM R2 and Q2 tags.
+#'   in the BAM R2 and Q2 tags.
 #' 
 bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL)
 { 

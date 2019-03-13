@@ -1,17 +1,17 @@
 #' Sorts a feature file in various and useful ways.
 #' 
 #' @param i <bed/gff/vcf>
-#' @param sizeA   Sort by feature size in ascending order.
+#' @param sizeA Sort by feature size in ascending order.
 #' 
-#' @param sizeD   Sort by feature size in descending order.
+#' @param sizeD Sort by feature size in descending order.
 #' 
-#' @param chrThenSizeA  Sort by chrom (asc), then feature size (asc).
+#' @param chrThenSizeA Sort by chrom (asc), then feature size (asc).
 #' 
-#' @param chrThenSizeD  Sort by chrom (asc), then feature size (desc).
+#' @param chrThenSizeD Sort by chrom (asc), then feature size (desc).
 #' 
-#' @param chrThenScoreA  Sort by chrom (asc), then score (asc).
+#' @param chrThenScoreA Sort by chrom (asc), then score (asc).
 #' 
-#' @param chrThenScoreD  Sort by chrom (asc), then score (desc).
+#' @param chrThenScoreD Sort by chrom (asc), then score (desc).
 #' 
 #' @param g Sort according to the chromosomes declared in "genome.txt"
 #' 

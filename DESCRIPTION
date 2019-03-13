@@ -2,8 +2,8 @@ Package: bedtoolsr
 Encoding: UTF-8
 Type: Package
 Title: Bedtools Wrapper
-Version: 2.27.1-6
-Date: 2019-02-28
+Version: 2.27.1-7
+Date: 2019-03-13
 Author: Mayura Patwardhan, Craig Wenger, Doug Phanstiel
 Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.
 License: MIT

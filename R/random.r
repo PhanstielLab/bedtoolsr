@@ -2,16 +2,16 @@
 #' 
 #' @param g <genome>
 #' @param l The length of the intervals to generate.
-#' - Default = 100.
-#' - (INTEGER)
+#'   - Default = 100.
+#'   - (INTEGER)
 #' 
 #' @param n The number of intervals to generate.
-#' - Default = 1,000,000.
-#' - (INTEGER)
+#'   - Default = 1,000,000.
+#'   - (INTEGER)
 #' 
 #' @param seed Supply an integer seed for the shuffling.
-#' - By default, the seed is chosen automatically.
-#' - (INTEGER)
+#'   - By default, the seed is chosen automatically.
+#'   - (INTEGER)
 #' 
 random <- function(g, l = NULL, n = NULL, seed = NULL)
 { 

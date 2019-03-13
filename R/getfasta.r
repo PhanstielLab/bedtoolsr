@@ -9,18 +9,18 @@
 #' @param nameplus Use the name field and coordinates for the FASTA header
 #' 
 #' @param split given BED12 fmt., extract and concatenate the sequences
-#' from the BED "blocks" (e.g., exons)
+#'   from the BED "blocks" (e.g., exons)
 #' 
 #' @param tab Write output in TAB delimited format.
-#' - Default is FASTA format.
+#'   - Default is FASTA format.
 #' 
 #' @param s Force strandedness. If the feature occupies the antisense,
-#' strand, the sequence will be reverse complemented.
-#' - By default, strand information is ignored.
+#'   strand, the sequence will be reverse complemented.
+#'   - By default, strand information is ignored.
 #' 
 #' @param fullHeader Use full fasta header.
-#' - By default, only the word before the first space or tab 
-#' is used.
+#'   - By default, only the word before the first space or tab 
+#'   is used.
 #' 
 getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, split = NULL, tab = NULL, s = NULL, fullHeader = NULL)
 { 

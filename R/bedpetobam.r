@@ -3,7 +3,7 @@
 #' @param i <bed/gff/vcf>
 #' @param g <genome>
 #' @param mapq Set the mappinq quality for the BAM records.
-#' (INT) Default: 255
+#'   (INT) Default: 255
 #' 
 #' @param ubam Write uncompressed BAM output. Default writes compressed BAM.
 #' 

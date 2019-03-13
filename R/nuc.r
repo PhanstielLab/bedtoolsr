@@ -7,12 +7,12 @@
 #' @param seq Print the extracted sequence
 #' 
 #' @param pattern Report the number of times a user-defined sequence
-#'  is observed (case-sensitive).
+#'     is observed (case-sensitive).
 #' 
 #' @param C Ignore case when matching -pattern. By defaulty, case matters.
 #' 
 #' @param fullHeader Use full fasta header.
-#' - By default, only the word before the first space or tab is used.
+#'   - By default, only the word before the first space or tab is used.
 #' 
 nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHeader = NULL)
 { 

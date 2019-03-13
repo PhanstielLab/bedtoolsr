@@ -2,7 +2,7 @@
 #' 
 #' @param a <bed/gff/vcf>
 #' @param b <bed/gff/vcf>
-#' @param detail Instead of a summary, report the relative   distance for each interval in A
+#' @param detail Instead of a summary, report the relative distance for each interval in A
 #' 
 reldist <- function(a, b, detail = NULL)
 { 

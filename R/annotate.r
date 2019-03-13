@@ -4,21 +4,21 @@
 #' @param i <bed/gff/vcf>
 #' @param files FILE1 FILE2..FILEn
 #' @param names A list of names (one / file) to describe each file in -i.
-#' These names will be printed as a header line.
+#'   These names will be printed as a header line.
 #' 
 #' @param counts Report the count of features in each file that overlap -i.
-#' - Default is to report the fraction of -i covered by each file.
+#'   - Default is to report the fraction of -i covered by each file.
 #' 
 #' @param both Report the counts followed by the  percent coverage.
-#' - Default is to report the fraction of -i covered by each file.
+#'   - Default is to report the fraction of -i covered by each file.
 #' 
 #' @param s Require same strandedness.  That is, only counts overlaps
-#' on the _same_ strand.
-#' - By default, overlaps are counted without respect to strand.
+#'   on the _same_ strand.
+#'   - By default, overlaps are counted without respect to strand.
 #' 
 #' @param S Require different strandedness.  That is, only count overlaps
-#' on the _opposite_ strand.
-#' - By default, overlaps are counted without respect to strand.
+#'   on the _opposite_ strand.
+#'   - By default, overlaps are counted without respect to strand.
 #' 
 annotate <- function(i, files, names = NULL, counts = NULL, both = NULL, s = NULL, S = NULL)
 { 

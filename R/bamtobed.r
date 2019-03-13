@@ -2,33 +2,33 @@
 #' 
 #' @param i <bam>
 #' @param bedpe Write BEDPE format.
-#' - Requires BAM to be grouped or sorted by query.
+#'   - Requires BAM to be grouped or sorted by query.
 #' 
 #' @param mate1 When writing BEDPE (-bedpe) format, 
-#' always report mate one as the first BEDPE "block".
+#'   always report mate one as the first BEDPE "block".
 #' 
 #' @param bed12 Write "blocked" BED format (aka "BED12"). Forces -split.
-#' http://genome-test.cse.ucsc.edu/FAQ/FAQformat#format1
+#'   http://genome-test.cse.ucsc.edu/FAQ/FAQformat#format1
 #' 
 #' @param split Report "split" BAM alignments as separate BED entries.
-#' Splits only on N CIGAR operations.
+#'   Splits only on N CIGAR operations.
 #' 
 #' @param splitD Split alignments based on N and D CIGAR operators.
-#' Forces -split.
+#'   Forces -split.
 #' 
 #' @param ed Use BAM edit distance (NM tag) for BED score.
-#' - Default for BED is to use mapping quality.
-#' - Default for BEDPE is to use the minimum of
-#'   the two mapping qualities for the pair.
-#' - When -ed is used with -bedpe, the total edit
-#'   distance from the two mates is reported.
+#'   - Default for BED is to use mapping quality.
+#'   - Default for BEDPE is to use the minimum of
+#'     the two mapping qualities for the pair.
+#'   - When -ed is used with -bedpe, the total edit
+#'     distance from the two mates is reported.
 #' 
 #' @param tag Use other NUMERIC BAM alignment tag for BED score.
-#' - Default for BED is to use mapping quality.
-#'   Disallowed with BEDPE output.
+#'   - Default for BED is to use mapping quality.
+#'     Disallowed with BEDPE output.
 #' 
 #' @param color An R,G,B string for the color used with BED12 format.
-#' Default is (255,0,0).
+#'   Default is (255,0,0).
 #' 
 #' @param cigar Add the CIGAR string to the BED entry as a 7th column.
 #' 

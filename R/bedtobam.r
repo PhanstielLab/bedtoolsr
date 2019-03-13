@@ -3,10 +3,10 @@
 #' @param i <bed/gff/vcf>
 #' @param g <genome>
 #' @param mapq Set the mappinq quality for the BAM records.
-#' (INT) Default: 255
+#'   (INT) Default: 255
 #' 
 #' @param bed12 The BED file is in BED12 format.  The BAM CIGAR
-#' string will reflect BED "blocks".
+#'   string will reflect BED "blocks".
 #' 
 #' @param ubam Write uncompressed BAM output. Default writes compressed BAM.
 #' 

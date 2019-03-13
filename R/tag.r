@@ -5,26 +5,26 @@
 #' @param files FILE1 .. FILEn
 #' @param labels LAB1 .. LABn
 #' @param s Require overlaps on the same strand.  That is, only tag alignments that have the same
-#' strand as a feature in the annotation file(s).
+#'   strand as a feature in the annotation file(s).
 #' 
 #' @param S Require overlaps on the opposite strand.  That is, only tag alignments that have the opposite
-#' strand as a feature in the annotation file(s).
+#'   strand as a feature in the annotation file(s).
 #' 
 #' @param f Minimum overlap required as a fraction of the alignment.
-#' - Default is 1E-9 (i.e., 1bp).
-#' - FLOAT (e.g. 0.50)
+#'   - Default is 1E-9 (i.e., 1bp).
+#'   - FLOAT (e.g. 0.50)
 #' 
 #' @param tag Dictate what the tag should be. Default is YB.
-#' - STRING (two characters, e.g., YK)
+#'   - STRING (two characters, e.g., YK)
 #' 
 #' @param names Use the name field from the annotation files to populate tags.
-#' By default, the -labels values are used.
+#'   By default, the -labels values are used.
 #' 
 #' @param scores Use the score field from the annotation files to populate tags.
-#' By default, the -labels values are used.
+#'   By default, the -labels values are used.
 #' 
 #' @param intervals Use the full interval (including name, score, and strand) to populate tags.
-#'  Requires the -labels option to identify from which file the interval came.
+#'     Requires the -labels option to identify from which file the interval came.
 #' 
 tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL)
 { 

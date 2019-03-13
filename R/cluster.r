@@ -2,13 +2,13 @@
 #' 
 #' @param i <bed/gff/vcf>
 #' @param s Force strandedness.  That is, only merge features
-#' that are the same strand.
-#' - By default, merging is done without respect to strand.
+#'   that are the same strand.
+#'   - By default, merging is done without respect to strand.
 #' 
 #' @param d Maximum distance between features allowed for features
-#' to be merged.
-#' - Def. 0. That is, overlapping & book-ended features are merged.
-#' - (INTEGER)
+#'   to be merged.
+#'   - Def. 0. That is, overlapping & book-ended features are merged.
+#'   - (INTEGER)
 #' 
 cluster <- function(i, s = NULL, d = NULL)
 { 
