@@ -1,4 +1,3 @@
-
 #' Determines if arguments are paths or R objects. Makes temp files when
 #' neccesary. Makes a list of files to use in bedtools call. Makes a list
 #' of temp files to delete at end of function 

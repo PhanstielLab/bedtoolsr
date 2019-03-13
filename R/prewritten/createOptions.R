@@ -1,4 +1,3 @@
-
 #' Creates options based on user input
 #' 
 #' @param names vector of names of options
@@ -11,15 +10,15 @@ createOptions <- function(names,values)
   options = "" 
   if (length(names) > 0)
   {
-   for (i in 1:length(names))
-   {
-    if (!is.null(values[[i]])) {
-     options = paste(options,paste(" -",names[i],sep=""))
-     if(is.character(values[[i]]) || is.numeric(values[[i]])) {
-      options = paste(options, " ", values[i])
-     }   
+    for (i in 1:length(names))
+    {
+      if (!is.null(values[[i]])) {
+        options = paste(options,paste(" -",names[i],sep=""))
+        if(is.character(values[[i]]) || is.numeric(values[[i]])) {
+          options = paste(options, " ", values[i])
+        }   
+      }
     }
-   }
   }
   
   # return the two items
