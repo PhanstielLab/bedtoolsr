@@ -223,7 +223,7 @@ bedtoolsRpath = os.path.expanduser(args.output)
 versionsuffix = int(args.version)
 
 print("Reading in anomalies...")
-with open("anomalies.json", "r") as anomaliesfile:
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "anomalies.json"), "r") as anomaliesfile:
     anomalies = json.load(anomaliesfile)
 
 print("Creating directories...")
@@ -242,7 +242,7 @@ bedtoolsFxns, version = readbedtoolsfxns(bedtoolspath, bedtoolsRpath)
 print("Writing bedtoolsr function...")
 validbedtoolsFxns = []
 for bedtoolsFxn in bedtoolsFxns:
-        infoDict, usageDict, optionDict = captureFxnInfo (bedtoolsFxn, bedtoolspath, bedtoolsRpath)
+        infoDict, usageDict, optionDict = captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath)
         if(infoDict is None or usageDict is None or optionDict is None):
             continue
         writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath)
@@ -269,16 +269,16 @@ with open(os.path.join(bedtoolsRpath, "NAMESPACE"), "w") as namespacefile:
 print("Copying helper functions...")
 
 # Functino to handle initialization
-shutil.copy2(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "dev", "zzz.R"), os.path.join(bedtoolsRpath, "R"))
+shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "zzz.R"), os.path.join(bedtoolsRpath, "R"))
 
 # Function to create options
-shutil.copy2(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "dev", "createOptions.R"), os.path.join(bedtoolsRpath, "R"))
+shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "createOptions.R"), os.path.join(bedtoolsRpath, "R"))
 
 # Function to make and record temp files
-shutil.copy2(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "dev", "establishPaths.R"), os.path.join(bedtoolsRpath, "R"))
+shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "establishPaths.R"), os.path.join(bedtoolsRpath, "R"))
 
 # Function to delete temp files
-shutil.copy2(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "dev", "deleteTempFiles.R"), os.path.join(bedtoolsRpath, "R"))
+shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "deleteTempFiles.R"), os.path.join(bedtoolsRpath, "R"))
 
 # Create documentation
 print("Writing documentation...")
