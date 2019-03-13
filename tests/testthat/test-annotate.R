@@ -1,43 +1,25 @@
 context("test-annotate")
 
 test_that("annotate works", {
-  
-  variants.bed = data.frame(V1 = c("chr1","chr2","chr3"),
-                            V2 = c(100,500,1000), 
-                            V3 = c(200,1000,5000), 
-                            V4 = c("nasty","ugly","big"),
-                            V5 = c(1,2,3), 
-                            V6 = c("-","+","-"))
-
-  genes.bed = data.frame(V1 = c("chr1","chr1","chr3"),
-                         V2 = c(150,175,0), 
-                         V3 = c(200,250,10000), 
-                         V4 = c("geneA","geneB","geneC"),
-                         V5 = c(1,2,3), 
-                         V6 = c("+","+","-"))
-  
-  conserve.bed = data.frame(V1=c("chr1","chr2","chr3"),
-                         V2 = c(0,700,4000), 
-                         V3 = c(10000,10000,10000), 
-                         V4 = c("cons1","cons2","cons3"),
-                         V5 = c(1,2,3), 
-                         V6 = c("+","-","+"))  
-   
-  known_var.bed = data.frame(V1 = c("chr1","chr1","chr2"),
-                            V2 = c(0,150,0), 
-                            V3 = c(120,160,10000), 
-                            V4 = c("known1","known2","known3"),
-                            V5 = c("-","-","+"))   
-
-  results.bed = data.frame(V1 = c("chr1","chr2","chr3"),
-                                      V2 = c(100,500,1000), 
-                                      V3 = c(200,1000,5000), 
-                                      V4 = c("nasty","ugly","big"),
-                                      V5 = c(1,2,3), 
-                                      V6 = c("-","+","-"),
-                                      V7 = c(0.500000,0.000000,1.000000),
-                                      V8 = c(1.000000,0.600000,0.250000),
-                                      V9 = c(0.300000,1.000000,0.000000))
-
-  expect_equal(bedtoolsr::annotate (i=variants.bed, files= list(genes.bed,conserve.bed,known_var.bed)), results.bed)
+  variants.bed <- read.table(text=
+"chr1 100  200   nasty 1  -
+chr2 500  1000  ugly  2  +
+chr3 1000 5000  big   3  -")
+  genes.bed <- read.table(text=
+"chr1 150  200   geneA 1  +
+chr1 175  250   geneB 2  +
+chr3 0    10000 geneC 3  -")
+  conserve.bed <- read.table(text=
+"chr1 0    10000 cons1 1  +
+chr2 700  10000 cons2 2  -
+chr3 4000 10000 cons3 3  +")  
+  known_var.bed <- read.table(text=
+"chr1 0    120   known1   -
+chr1 150  160   known2   -
+chr2 0    10000 known3   +")
+  results <- read.table(text=
+"chr1  100     200     nasty   1       -       0.500000        1.000000        0.300000
+chr2  500     1000    ugly    2       +       0.000000        0.600000        1.000000
+chr3  1000    5000    big     3       -       1.000000        0.250000        0.000000")
+  expect_equal(bedtoolsr::annotate(variants.bed, list(genes.bed, conserve.bed, known_var.bed)), results)
 })

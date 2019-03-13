@@ -1,18 +1,12 @@
 context("test-closest")
 
 test_that("closest works", {
-  A.bed = data.frame(chrom="chr1",
-                     start=30000,
-                     end=30010)
-  B.bed = data.frame(chrom=c("chr1","chr1"),
-                     start=c(10000,20000),
-                     end=c(10010,20010))
-  C.bed = data.frame(V1="chr1",
-                     V2=30000,
-                     V3=30010,
-                     V4="chr1",
-                     V5=20000,
-                     V6=20010)
-  
-  expect_equal(bedtoolsr::closest(A.bed,B.bed),C.bed)
+  A.bed <- read.table(text=
+"chr1  10  20  a1  1 -")
+  B.bed <- read.table(text=
+"chr1  7   8   b1  1 -
+chr1  15  25  b2  2 +")
+  results <- read.table(text=
+"chr1  10  20  a1  1 - chr1  15  25  b2  2 +")
+  expect_equal(bedtoolsr::closest(A.bed, B.bed), results)
 })

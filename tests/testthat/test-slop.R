@@ -1,12 +1,13 @@
 context("test-slop")
 
-test_that("multiplication works", {
-  A.bed = data.frame(chrom="chr1",
-                     start=15,
-                     end=20)
-  genome = data.frame(chrom=c("chr1","chr2"),size=c(1000,5000))
-  B.bed = data.frame(V1="chr1",
-                     V2=10,
-                     V3=25)
-  expect_equal(bedtoolsr::slop(i=A.bed,b=5,g=genome), B.bed)
+test_that("slop works", {
+  A.bed <- read.table(text=
+"chr1 5 100
+chr1 800 980")
+  my.genome <- read.table(text=
+"chr1 1000")
+  results <- read.table(text=
+"chr1 0 105
+chr1 795 985")
+  expect_equal(bedtoolsr::slop(A.bed, my.genome, b=5), results)
 })
