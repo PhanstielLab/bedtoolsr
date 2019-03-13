@@ -189,7 +189,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         tempfiles.append(key + "[[2]]")
     filestodelete = ",".join(tempfiles)
     file.write ("\t")
-    file.write("""deleteTempfiles(c(%s))""" % filestodelete)
+    file.write("""deleteTempFiles(c(%s))""" % filestodelete)
     
     # Return the results
     file.write("\n\treturn (results)\n}")
