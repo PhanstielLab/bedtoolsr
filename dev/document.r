@@ -1,9 +1,10 @@
+args <- commandArgs(trailingOnly = TRUE)
+
 print ("Building man files")
 library('devtools')
 library('roxygen2')
 library('testthat')
-setwd('/Users/dphansti/Desktop/bedtoolsr')
-devtools::document()
+devtools::document(args[1])
 
 # Test Functions
 library("bedtoolsr")
