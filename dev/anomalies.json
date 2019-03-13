@@ -6,7 +6,7 @@
 		"5": "five", 
 		"name+": "nameplus"
 	}, 
-	"hasHeader": ["jaccard"], 
+	"hasHeader": ["fisher", "jaccard"], 
 	"noRinput": ["bamtobed", "bamtofastq"], 
 	"noRoutput": []
 }
