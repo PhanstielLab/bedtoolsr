@@ -264,8 +264,6 @@ print("Writing NAMESPACE file...")
 with open(os.path.join(bedtoolsRpath, "NAMESPACE"), "w") as namespacefile:
     namespacefile.write("export(" + ", ".join(validbedtoolsFxns) + ")")
 
-#-------------------------------- Make helper R functions -----------------------#
-
 print("Copying helper functions...")
 
 # Functino to handle initialization
@@ -279,6 +277,11 @@ shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "establis
 
 # Function to delete temp files
 shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "deleteTempFiles.R"), os.path.join(bedtoolsRpath, "R"))
+
+# Copy tests
+if(not os.path.exists(os.path.join(bedtoolsRpath, "tests"))):
+    print("Copying tests...")
+    shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tests"), os.path.join(bedtoolsRpath, "tests"))
 
 # Create documentation
 print("Writing documentation...")
