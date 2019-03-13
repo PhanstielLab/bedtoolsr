@@ -1,0 +1,12 @@
+{
+	"skipFunctions": ["makewindows", "split"], 
+	"optionConverter": 
+	{
+		"3": "three", 
+		"5": "five", 
+		"name+": "nameplus"
+	}, 
+	"hasHeader": ["jaccard"], 
+	"noRinput": ["bamtobed", "bamtofastq"], 
+	"noRoutput": []
+}

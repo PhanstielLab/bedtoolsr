@@ -5,27 +5,7 @@ import re
 import argparse
 import shutil
 from collections import OrderedDict
-
-# -------------- Anomalies ------------ #
-
-# Functions that we should just skip
-skipFunctions = set(['makewindows', 'split'])
-
-# Converts bedtools arguments into R friendly format
-optionConverter = {
-    "name+": "nameplus",
-    "3": "three",
-    "5": "five",
-}
-
-# Functions in which header = TRUE
-hasheader = set(['jaccard'])
-
-# Functions that should not allow R object as input
-noRinput = set(['bamtobed', 'bamtofastq'])
-
-# Functions that should not allow R object as output
-noRoutput = set([''])
+import json
 
 #-------------------------------- Functions -------------------------------#
 
@@ -96,22 +76,21 @@ def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
             if i in optionDict:
                 del optionDict[i]
     
-    return (infoDict, usageDict, optionDict)
-
+    return(infoDict, usageDict, optionDict)
 
 ### Define a function that write R functions 
-def writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath):
+def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     
     command = infoDict["ToolName"]
     
     # Determine if the header of the output file should be read
     readheader = "FALSE"
-    if command in hasheader:
+    if command in anomalies["hasHeader"]:
         readheader = "TRUE"
     
     # Determine if the R object inputs are allowed
     allowRobjectsInput = "TRUE"
-    if command in noRinput:
+    if command in anomalies["noRinput"]:
         allowRobjectsInput = "FALSE"
     
     # Determine if the header of the output file should be read
@@ -137,8 +116,8 @@ def writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath):
     # Convert to R friendly options
     for option in optionDict:
       roption = option
-      if option in optionConverter.keys():
-            roption = optionConverter[option]
+      if option in anomalies["optionConverter"].keys():
+            roption = anomalies["optionConverter"][option]
 
       optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
       optionSplit = optionLines.split("\n")
@@ -149,8 +128,8 @@ def writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath):
     setOptions= ""
     for option in optionDict:
       roption = option
-      if option in optionConverter.keys():
-            roption = optionConverter[option]
+      if option in anomalies["optionConverter"].keys():
+            roption = anomalies["optionConverter"][option]
       setOptions = setOptions + roption + " = " + "NULL" + ", "
     setOptions = setOptions[:-2]
 
@@ -179,8 +158,8 @@ def writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath):
     optionsr = list()
     for option in optionDict:
       roption = option
-      if option in optionConverter.keys():
-            roption = optionConverter[option]
+      if option in anomalies["optionConverter"].keys():
+            roption = anomalies["optionConverter"][option]
       optionsbedtools.append("\"" + option + "\"")
       optionsr.append(roption)     
     optionsbedtoolscombined = ",".join(optionsbedtools)
@@ -215,11 +194,8 @@ def writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath):
     # Return the results
     file.write("\n\treturn (results)\n}")
 
-
-#-------------------------------- Doug Functions -------------------------------#
-
 ### Define a function that reads in bedtools functions
-def readbedtoolsfxns (bedtoolspath, bedtoolsRpath):
+def readbedtoolsfxns(bedtoolspath, bedtoolsRpath):
     
     os.system(os.path.join(bedtoolspath, "bedtools") + " &> " + os.path.join(bedtoolsRpath, "bedtools.txt"))
     bedtoolsoutput = open(os.path.join(bedtoolsRpath, "bedtools.txt"), "r")
@@ -227,7 +203,7 @@ def readbedtoolsfxns (bedtoolspath, bedtoolsRpath):
     version = ""
     for line in bedtoolsoutput:
         words = line.split(" ")
-        if(line[:4] == '    ' and line[4] != '-' and words[4] not in skipFunctions):
+        if(line[:4] == '    ' and line[4] != '-' and words[4] not in anomalies["skipFunctions"]):
             fxnset.append(words[4])
         if(words[0] == "Version:"):
             version = words[-1].rstrip()
@@ -246,6 +222,11 @@ bedtoolspath = os.path.expanduser(args.bedtools)
 bedtoolsRpath = os.path.expanduser(args.output)
 versionsuffix = int(args.version)
 
+print("Reading in anomalies...")
+with open("anomalies.json", "r") as anomaliesfile:
+    anomalies = json.load(anomaliesfile)
+
+print("Creating directories...")
 if not os.path.exists(bedtoolsRpath):
     os.makedirs(bedtoolsRpath)
 if not os.path.exists(os.path.join(bedtoolsRpath, "man")):
@@ -267,6 +248,7 @@ for bedtoolsFxn in bedtoolsFxns:
         writeRfxn (infoDict, usageDict, optionDict, bedtoolsRpath)
         validbedtoolsFxns.append(bedtoolsFxn)
 
+print("Writing DESCRIPTION file...")
 with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
     descriptionfile.write("Package: bedtoolsr\n")
     descriptionfile.write("Encoding: UTF-8\n")
@@ -278,6 +260,7 @@ with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
     descriptionfile.write("Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.\n")
     descriptionfile.write("License: MIT\n")
 
+print("Writing NAMESPACE file...")
 with open(os.path.join(bedtoolsRpath, "NAMESPACE"), "w") as namespacefile:
     namespacefile.write("export(" + ", ".join(validbedtoolsFxns) + ")")
 
