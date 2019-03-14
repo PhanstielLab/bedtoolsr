@@ -4,6 +4,8 @@ language: R
 sudo: false
 cache: packages
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y bedtools
+addons:
+  homebrew:
+    packages:
+    - bedtools
+    update: true
