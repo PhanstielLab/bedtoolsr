@@ -3,7 +3,7 @@ R package wrapping bedtools
 
 ## Installing
 
-bedtoolsr can be installed directly from guthub using the following commands:
+bedtoolsr can be installed directly from GitHub using the following commands:
 
 ```
 install.packages("devtools")
