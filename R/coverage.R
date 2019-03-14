@@ -86,7 +86,7 @@ coverage <- function(a, b, hist = NULL, d = NULL, counts = NULL, mean = NULL, s 
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools coverage ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))

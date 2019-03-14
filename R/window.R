@@ -68,7 +68,7 @@ window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NUL
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools window ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))

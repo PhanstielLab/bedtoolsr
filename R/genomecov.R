@@ -86,7 +86,7 @@ genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = N
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools genomecov ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,i[[2]],g[[2]]))

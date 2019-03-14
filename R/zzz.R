@@ -1,5 +1,5 @@
 .onLoad <- function(libname, pkgname) {
-  installed.packages<-installed.packages()
+  installed.packages<-utils::installed.packages()
   row<-which(installed.packages[, 1]=="bedtoolsr")
   if(length(row)>0) {
     bedtoolsr_version<-installed.packages[row, 3]

@@ -40,7 +40,7 @@ flank <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, head
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools flank ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,i[[2]],g[[2]]))

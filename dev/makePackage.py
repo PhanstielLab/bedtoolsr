@@ -179,7 +179,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     file.write('\tbedtools.path <- getOption(\"bedtools.path\")\n')
     file.write('\tif(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
     file.write('\tcmd = paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile) \n\tsystem(cmd) \n')
-    file.write('\tresults = read.table(tempfile,header=%s,sep="\\t")' % readheader)
+    file.write('\tresults = utils::read.table(tempfile,header=%s,sep="\\t")' % readheader)
     
     # Delete the temp files
     file.write('\n\n\t# Delete temp files \n')
@@ -259,6 +259,10 @@ with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
     descriptionfile.write("Author: Mayura Patwardhan, Craig Wenger, Doug Phanstiel\n")
     descriptionfile.write("Maintainer: Doug Phanstiel <douglas_phanstiel@med.unc.edu>\n")
     descriptionfile.write("Description: The purpose of my project is to write an R package that allows seamless use of bedtools from within the R environment. To accomplish this, I will write a python script that reads in the bedtools code and writes the entire R package.  By generating the code in this fashion, we can ensure that our package can easily be generated for all current and future versions of bedtools.\n")
+    descriptionfile.write("Imports:\n")
+    descriptionfile.write("    utils\n")
+    descriptionfile.write("Suggests:\n")
+    descriptionfile.write("    testthat\n")
     descriptionfile.write("License: MIT\n")
 
 print("Writing NAMESPACE file...")

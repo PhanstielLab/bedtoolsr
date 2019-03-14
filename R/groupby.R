@@ -45,7 +45,7 @@ groupby <- function(g, c, o, i = NULL, full = NULL, inheader = NULL, outheader =
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools groupby ", options, " -g ", g[[1]], " -c ", c[[1]], " -o ", o[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,g[[2]],c[[2]],o[[2]]))

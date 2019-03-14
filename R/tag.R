@@ -44,7 +44,7 @@ tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, name
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools tag ", options, " -i ", i[[1]], " -files ", files[[1]], " -labels ", labels[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,i[[2]],files[[2]],labels[[2]]))

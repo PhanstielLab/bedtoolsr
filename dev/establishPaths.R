@@ -33,7 +33,7 @@ establishPaths <- function(input,name="",allowRobjects=TRUE)
       
       # write a temp file
       filepath = paste0(tempdir(), "/" ,name,"_",i,".txt")
-      write.table(item, filepath, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
+      utils::write.table(item, filepath, append = "FALSE", sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
       
       # record temp file for deletion
       inputtmps = c(inputtmps,filepath)

@@ -69,7 +69,7 @@ jaccard <- function(a, b, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = 
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools jaccard ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=TRUE,sep="\t")
+	results = utils::read.table(tempfile,header=TRUE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))

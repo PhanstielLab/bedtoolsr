@@ -45,7 +45,7 @@ pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, is =
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools pairtopair ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))

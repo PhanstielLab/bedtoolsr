@@ -46,7 +46,7 @@ multicov <- function(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL, r = 
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools multicov ", options, " -bams ", bams[[1]], " -bed ", bed[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,bams[[2]],bed[[2]]))

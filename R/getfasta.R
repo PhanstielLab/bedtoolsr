@@ -39,7 +39,7 @@ getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, split = N
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools getfasta ", options, " -fi ", fi[[1]], " -bed ", bed[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,fi[[2]],bed[[2]]))

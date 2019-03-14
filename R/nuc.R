@@ -31,7 +31,7 @@ nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHea
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd = paste0(bedtools.path, "bedtools nuc ", options, " -fi ", fi[[1]], " -bed ", bed[[1]], " > ", tempfile) 
 	system(cmd) 
-	results = read.table(tempfile,header=FALSE,sep="\t")
+	results = utils::read.table(tempfile,header=FALSE,sep="\t")
 
 	# Delete temp files 
 	deleteTempFiles(c(tempfile,fi[[2]],bed[[2]]))
