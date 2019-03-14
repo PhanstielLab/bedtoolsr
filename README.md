@@ -75,7 +75,7 @@ The following funtions are currently _not_ supported:
 ### Example Usage
 
 ```
-A.bed = data.frame(chrom=c("chr1","chr1"), start=c(10, 30), end=c(20, 40))
+A.bed = data.frame(chrom=c("chr1", "chr1"), start=c(10, 30), end=c(20, 40))
 B.bed = data.frame(chrom=c("chr1"), start=15, end=20)
 
 > bedtoolsr::intersect(A.bed, B.bed)
@@ -97,7 +97,7 @@ douglas_phanstiel@med.unc.edu
 
 This package was developed with a Python script that runs all bedtools utilities to determine their command-line usage, and automatically writes the wrapper R functions. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools. If you want to do this, run [makePackage.py](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/makePackage.py). There are command-line arguments for the location of bedtools, where the output package should go, and the package version suffix. Special cases are specified in [anomalies.json](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/anomalies.json).
 
-### Build Status
+## Build Status
 
 [![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
 
