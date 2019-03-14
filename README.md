@@ -75,10 +75,10 @@ The following funtions are currently _not_ supported:
 ### Example Usage
 
 ```
-A.bed = data.frame(chrom=c("chr1","chr1"),start=c(10,30),end=c(20,40))
-B.bed = data.frame(chrom=c("chr1"),start=15,end=20)
+A.bed = data.frame(chrom=c("chr1","chr1"), start=c(10, 30), end=c(20, 40))
+B.bed = data.frame(chrom=c("chr1"), start=15, end=20)
 
-> bedtoolsr::intersect(A.bed,B.bed)
+> bedtoolsr::intersect(A.bed, B.bed)
     V1 V2 V3
 1 chr1 15 20
 ```
@@ -95,15 +95,7 @@ douglas_phanstiel@med.unc.edu
 
 ## Building for Your Version of Bedtools
 
-This package was developed with a Python script that runs all bedtools utilities to determine their command-line usage, and automatically writes the wrapper R functions. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools. If you want to do this, run [makePackage.py](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/makePackage.py). It will ask you where to build the package and where your instance of bedtools is located. Then run [createRdfiles.R](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/createRdfiles.R) with R to produce documentation.
-
-### Configuration Notes
-
-As noted above, this package was developed with a Python script that runs all bedtools utilities help commands to determine their command-line usage, and automatically writes the wrapper R functions. Due to some irregularities in the help information of certain utilities we had to make minor manual changes to some R functions after running the python script.  They are documented below.
-
-* `genomecov`: `5` parameter changed to `five` and `3` parameter changed to `three` for R compatibility
-* `getfasta`: `name+` parameter changed to `nameplus` for R compatibility
-* `jaccard`: changed header from "FALSE" to "TRUE"
+This package was developed with a Python script that runs all bedtools utilities to determine their command-line usage, and automatically writes the wrapper R functions. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools. If you want to do this, run [makePackage.py](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/makePackage.py). There are command-line arguments for the location of bedtools, where the output package should go, and the package version suffix.
 
 ### Build Status
 
