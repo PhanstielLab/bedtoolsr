@@ -105,6 +105,8 @@ As noted above, this package was developed with a Python script that runs all be
 * `getfasta`: `name+` parameter changed to `nameplus` for R compatibility
 * `jaccard`: changed header from "FALSE" to "TRUE"
 
+### Build Status
 
+[![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
 
 
