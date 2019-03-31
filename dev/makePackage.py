@@ -29,6 +29,8 @@ def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
     infoDict["Summary"] = match.groups()[0].replace("\t", "").replace("         ", "").replace("\n ", "\n") + "\n"
     
     match = re.search("Usage:(.+)", help, re.DOTALL)
+    if(match is None and bedtoolsFxn in anomalies["missingUsage"]):
+        match = re.search("(.+)", anomalies["missingUsage"][bedtoolsFxn], re.DOTALL)
     if(match is None):
         print("WARNING: " + bedtoolsFxn + " could not be created because usage is not defined.")
         usageDict = None

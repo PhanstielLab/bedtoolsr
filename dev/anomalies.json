@@ -8,5 +8,9 @@
 	}, 
 	"hasHeader": ["fisher", "jaccard"], 
 	"noRinput": ["bamtobed", "bamtofastq"], 
-	"noRoutput": []
+	"noRoutput": [],
+    "missingUsage":
+    {
+        "overlap": "bedtools overlap -i <bed/gff/vcf/bam> -cols [columns]"
+    }
 }
