@@ -120,12 +120,11 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         roption = option
         if option in anomalies["optionConverter"].keys():
             roption = anomalies["optionConverter"][option]
-
-    optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
-    optionSplit = optionLines.split("\n")
-    for line in optionSplit:
-        file.write(comment + line)
-        file.write("\n")
+        optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
+        optionSplit = optionLines.split("\n")
+        for line in optionSplit:
+            file.write(comment + line)
+            file.write("\n")
 
     setOptions= ""
     for option in optionDict:
