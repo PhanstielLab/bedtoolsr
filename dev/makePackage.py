@@ -11,23 +11,23 @@ import json
 
 # Define a function that captures all of the information below a header until next1 or next2
 def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
-    
+
     print(bedtoolsFxn)
-    
+
     helpcmdsfilename = os.path.join(bedtoolsRpath, bedtoolsFxn + ".txt")
     os.system(os.path.join(bedtoolspath, "bedtools") + " " + bedtoolsFxn + " -h &> " + helpcmdsfilename)
     helpcmdsfile = open(helpcmdsfilename, "r")
     help = helpcmdsfile.read()
     helpcmdsfile.close()
     os.remove(helpcmdsfilename)
-    
+
     infoDict = OrderedDict()
     infoDict["ToolName"] = bedtoolsFxn
     match = re.search("Tool:\s+(.+)", help)
     infoDict["Tool"] = match.groups()[0]
     match = re.search("Summary:\s+(.+?)\n\n", help, re.DOTALL)
     infoDict["Summary"] = match.groups()[0].replace("\t", "").replace("         ", "").replace("\n ", "\n") + "\n"
-    
+
     match = re.search("Usage:(.+)", help, re.DOTALL)
     if(match is None and bedtoolsFxn in anomalies["missingUsage"]):
         match = re.search("(.+)", anomalies["missingUsage"][bedtoolsFxn], re.DOTALL)
@@ -48,7 +48,7 @@ def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
             usageWord = "".join(usageArray[x].split(" ")[0])
             usageDefinition = " ".join(usageArray[x].split(" ")[1:])
             usageDict[usageWord.rstrip()] = usageDefinition.rstrip()
-    
+
     optionDict = OrderedDict()
     match = re.search("Options:(.+)", help, re.DOTALL)
     if(match is not None):
@@ -77,29 +77,29 @@ def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
         for i in usageDict:
             if i in optionDict:
                 del optionDict[i]
-    
+
     return(infoDict, usageDict, optionDict)
 
 ### Define a function that write R functions 
 def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
-    
+
     command = infoDict["ToolName"]
-    
+
     # Determine if the header of the output file should be read
     readheader = "FALSE"
     if command in anomalies["hasHeader"]:
         readheader = "TRUE"
-    
+
     # Determine if the R object inputs are allowed
     allowRobjectsInput = "TRUE"
     if command in anomalies["noRinput"]:
         allowRobjectsInput = "FALSE"
-    
+
     # Determine if the header of the output file should be read
     allowRobjectsOutput = "TRUE"
 
     comment = "#' "
-    
+
     file = open(os.path.join(bedtoolsRpath, "R", "%s.R" % command), "w")
 
     summarySplit = infoDict["Summary"].split("\n")
@@ -117,22 +117,22 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
 
     # Convert to R friendly options
     for option in optionDict:
-      roption = option
-      if option in anomalies["optionConverter"].keys():
+        roption = option
+        if option in anomalies["optionConverter"].keys():
             roption = anomalies["optionConverter"][option]
 
-      optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
-      optionSplit = optionLines.split("\n")
-      for line in optionSplit:
-            file.write(comment + line)
-            file.write("\n")
+    optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
+    optionSplit = optionLines.split("\n")
+    for line in optionSplit:
+        file.write(comment + line)
+        file.write("\n")
 
     setOptions= ""
     for option in optionDict:
-      roption = option
-      if option in anomalies["optionConverter"].keys():
+        roption = option
+        if option in anomalies["optionConverter"].keys():
             roption = anomalies["optionConverter"][option]
-      setOptions = setOptions + roption + " = " + "NULL" + ", "
+        setOptions = setOptions + roption + " = " + "NULL" + ", "
     setOptions = setOptions[:-2]
 
     usageDictOptions = ""
@@ -141,60 +141,61 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         usageDictOptions = usageDictOptions + key + ", "
     if (len(setOptions) == 0):
         usageDictOptions = usageDictOptions[:-2]
-    file.write(infoDict["ToolName"] + " <- " + "function(" + usageDictOptions  + setOptions + ")\n")
-    file.write ("{ \n")
-    
+    file.write(infoDict["ToolName"] + " <- " + "function(" + usageDictOptions + setOptions + ")\n")
+    file.write("{\n")
+
     # Establish the file paths and write temp files
     file.write("\t# Required Inputs\n")
     for key in usageDict:
-      file.write ("\t")
-      file.write("""%s = establishPaths(input=%s,name="%s",allowRobjects=%s)""" % (key,key,key,allowRobjectsInput))
-      file.write ("\n")
-    file.write ("\n")
-    file.write('\toptions = "" \n' )
-    file.write ("\n")
+        if any(x in usageDict[key] for x in ["bed", "gff", "vcf", "bam", "genome", "FILE"]):
+            file.write("\t")
+            file.write("""%s <- establishPaths(input=%s, name="%s", allowRobjects=%s)""" % (key, key, key, allowRobjectsInput))
+            file.write("\n")
+    file.write("\n")
+    file.write('\toptions <- ""\n')
+    file.write("\n")
 
     # Establish the options
     file.write("\t# Options\n")
     optionsbedtools = list()
     optionsr = list()
     for option in optionDict:
-      roption = option
-      if option in anomalies["optionConverter"].keys():
+        roption = option
+        if option in anomalies["optionConverter"].keys():
             roption = anomalies["optionConverter"][option]
-      optionsbedtools.append("\"" + option + "\"")
-      optionsr.append(roption)     
+        optionsbedtools.append("\"" + option + "\"")
+        optionsr.append(roption)
     optionsbedtoolscombined = ",".join(optionsbedtools)
     optionsrcombined = ",".join(optionsr)
     file.write ("\t")
-    file.write("""options = createOptions(names = c(%s),values= list(%s))""" % (optionsbedtoolscombined,optionsrcombined))      
+    file.write("""options <- createOptions(names=c(%s), values=list(%s))""" % (optionsbedtoolscombined, optionsrcombined))      
     file.write ("\n")
-    
-    
+
     # Launch the bedtools command
     file.write('\n\t# establish output file \n')
-    file.write('\ttempfile = tempfile("bedtoolsr", fileext=".txt")\n' )
+    file.write('\ttempfile <- tempfile("bedtoolsr", fileext=".txt")\n' )
     cmdstring = ""
     for key in usageDict:
         cmdstring = cmdstring + ', " -%s ", %s[[1]]' % (key, key)
 
     file.write('\tbedtools.path <- getOption(\"bedtools.path\")\n')
     file.write('\tif(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
-    file.write('\tcmd = paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile) \n\tsystem(cmd) \n')
-    file.write('\tresults = utils::read.table(tempfile,header=%s,sep="\\t")' % readheader)
-    
+    file.write('\tcmd <- paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring + ', " > ", tempfile)\n\tsystem(cmd)\n')
+    file.write('\tresults <- utils::read.table(tempfile, header=%s, sep="\\t")' % readheader)
+
     # Delete the temp files
-    file.write('\n\n\t# Delete temp files \n')
+    file.write('\n\n\t# Delete temp files\n')
     tempfiles = list()
     tempfiles.append("tempfile")
     for key in usageDict:
-        tempfiles.append(key + "[[2]]")
+        if any(x in usageDict[key] for x in ["bed", "gff", "vcf", "bam", "genome", "FILE"]):
+            tempfiles.append(key + "[[2]]")
     filestodelete = ",".join(tempfiles)
     file.write ("\t")
     file.write("""deleteTempFiles(c(%s))""" % filestodelete)
-    
+
     # Return the results
-    file.write("\n\treturn (results)\n}")
+    file.write("\n\treturn(results)\n}")
 
 ### Define a function that reads in bedtools functions
 def readbedtoolsfxns(bedtoolspath, bedtoolsRpath):
