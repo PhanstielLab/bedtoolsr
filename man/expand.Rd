@@ -4,12 +4,14 @@
 \alias{expand}
 \title{Replicate lines in a file based on columns of comma-separated values.}
 \usage{
-expand(i, c = NULL)
+expand(i, c = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
 
 \item{c}{}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Replicate lines in a file based on columns of comma-separated values.

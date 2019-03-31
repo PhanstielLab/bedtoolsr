@@ -6,7 +6,7 @@
 \usage{
 sort(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL,
   chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL,
-  g = NULL, faidx = NULL, header = NULL)
+  g = NULL, faidx = NULL, header = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -28,6 +28,8 @@ sort(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL,
 \item{faidx}{Sort according to the chromosomes declared in "names.txt"}
 
 \item{header}{Print the header from the A file prior to results.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Sorts a feature file in various and useful ways.

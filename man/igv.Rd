@@ -6,7 +6,7 @@
 at each interval defined in a BED/GFF/VCF file.}
 \usage{
 igv(i, path = NULL, sess = NULL, sort = NULL, clps = NULL,
-  name = NULL, slop = NULL, img = NULL)
+  name = NULL, slop = NULL, img = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -34,6 +34,8 @@ Default is to use the "chr:start-pos.ext".}
 \item{img}{The type of image to be created. 
 Options: png, eps, svg
 Default is png.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Creates a batch script to create IGV images 

@@ -4,12 +4,14 @@
 \alias{bed12tobed6}
 \title{Splits BED12 features into discrete BED6 features.}
 \usage{
-bed12tobed6(i, n = NULL)
+bed12tobed6(i, n = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed12>}
 
 \item{n}{Force the score to be the (1-based) block number from the BED12.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Splits BED12 features into discrete BED6 features.

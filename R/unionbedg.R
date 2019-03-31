@@ -22,7 +22,9 @@
 #' 
 #' @param examples Show detailed usage examples.
 #' 
-unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -38,10 +40,14 @@ unionbedg <- function(i, header = NULL, names = NULL, g = NULL, empty = NULL, fi
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools unionbedg ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

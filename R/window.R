@@ -51,7 +51,9 @@
 #' 
 #' @param header Print the header from the A file prior to results.
 #' 
-window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NULL, r = NULL, sw = NULL, sm = NULL, Sm = NULL, u = NULL, c = NULL, v = NULL, header = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NULL, r = NULL, sw = NULL, sm = NULL, Sm = NULL, u = NULL, c = NULL, v = NULL, header = NULL, output = NULL)
 {
 	# Required Inputs
 	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
@@ -68,10 +70,14 @@ window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NUL
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools window ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

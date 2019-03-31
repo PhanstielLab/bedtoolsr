@@ -6,7 +6,7 @@
 \usage{
 shuffle(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL,
   f = NULL, chromFirst = NULL, bedpe = NULL, maxTries = NULL,
-  noOverlapping = NULL, allowBeyondChromEnd = NULL)
+  noOverlapping = NULL, allowBeyondChromEnd = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -58,6 +58,8 @@ the end of the chromosome.  In this case, the end coordinate of the
 shuffled interval will be set to the chromosome's length.
 By default, an interval's original length must be fully-contained
 within the chromosome.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Randomly permute the locations of a feature file among a genome.

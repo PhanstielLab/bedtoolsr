@@ -52,7 +52,9 @@
 #'   By default, an interval's original length must be fully-contained
 #'   within the chromosome.
 #' 
-shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL, f = NULL, chromFirst = NULL, bedpe = NULL, maxTries = NULL, noOverlapping = NULL, allowBeyondChromEnd = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL, f = NULL, chromFirst = NULL, bedpe = NULL, maxTries = NULL, noOverlapping = NULL, allowBeyondChromEnd = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -69,10 +71,14 @@ shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL, f
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools shuffle ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

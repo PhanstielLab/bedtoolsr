@@ -6,7 +6,7 @@
 on the intervals in -i.}
 \usage{
 annotate(i, files, names = NULL, counts = NULL, both = NULL,
-  s = NULL, S = NULL)
+  s = NULL, S = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -29,6 +29,8 @@ on the _same_ strand.
 \item{S}{Require different strandedness.  That is, only count overlaps
 on the _opposite_ strand.
 - By default, overlaps are counted without respect to strand.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Annotates the depth & breadth of coverage of features from mult. files

@@ -7,7 +7,7 @@
 map(a, b, c = NULL, o = NULL, delim = NULL, prec = NULL,
   s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
   split = NULL, g = NULL, nonamecheck = NULL, bed = NULL,
-  header = NULL, nobuf = NULL, iobuf = NULL)
+  header = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
@@ -96,6 +96,8 @@ line of bedtools output at a time.}
 \item{iobuf}{Specify amount of memory to use for input buffer.
 Takes an integer argument. Optional suffixes K/M/G supported.
 Note: currently has no effect with compressed files.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Apply a function to a column from B intervals that overlap A.

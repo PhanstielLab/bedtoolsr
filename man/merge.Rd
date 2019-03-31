@@ -6,7 +6,7 @@
 \usage{
 merge(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL,
   delim = NULL, prec = NULL, bed = NULL, header = NULL,
-  nobuf = NULL, iobuf = NULL)
+  nobuf = NULL, iobuf = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -75,6 +75,8 @@ line of bedtools output at a time.}
 \item{iobuf}{Specify amount of memory to use for input buffer.
 Takes an integer argument. Optional suffixes K/M/G supported.
 Note: currently has no effect with compressed files.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Merges overlapping BED/GFF/VCF entries into a single interval.

@@ -5,7 +5,8 @@
 \title{Take sample of input file(s) using reservoir sampling algorithm.}
 \usage{
 sample(i, n = NULL, seed = NULL, ubam = NULL, s = NULL,
-  header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL)
+  header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL,
+  output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
@@ -39,6 +40,8 @@ line of bedtools output at a time.}
 \item{iobuf}{Specify amount of memory to use for input buffer.
 Takes an integer argument. Optional suffixes K/M/G supported.
 Note: currently has no effect with compressed files.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Take sample of input file(s) using reservoir sampling algorithm.

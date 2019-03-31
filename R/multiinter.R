@@ -23,7 +23,9 @@
 #' 
 #' @param examples Show detailed usage examples.
 #' 
-multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL, empty = NULL, filler = NULL, examples = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -39,10 +41,14 @@ multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NULL,
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools multiinter ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

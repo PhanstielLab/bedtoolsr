@@ -7,7 +7,7 @@
 genomecov(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL,
   bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL,
   du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL,
-  trackline = NULL, trackopts = NULL)
+  trackline = NULL, trackopts = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -80,6 +80,8 @@ Useful for normalizing coverage by, e.g., reads per million (RPM).
    -trackopts 'name="My Track" visibility=2 color=255,30,30'
    Note the use of single-quotes if you have spaces in your parameters.
 - (TEXT)}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Compute the coverage of a feature file among a genome.

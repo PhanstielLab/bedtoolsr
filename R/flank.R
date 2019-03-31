@@ -23,7 +23,9 @@
 #' 
 #' @param header Print the header from the input file prior to results.
 #' 
-flank <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, header = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+flank <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, header = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -40,10 +42,14 @@ flank <- function(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL, head
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools flank ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

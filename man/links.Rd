@@ -4,7 +4,7 @@
 \alias{links}
 \title{Creates HTML links to an UCSC Genome Browser from a feature file.}
 \usage{
-links(i, base = NULL, org = NULL, db = NULL)
+links(i, base = NULL, org = NULL, db = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf> > out.html}
@@ -14,6 +14,8 @@ links(i, base = NULL, org = NULL, db = NULL)
 \item{org}{The organism. Default: human}
 
 \item{db}{The build.  Default: hg18}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Creates HTML links to an UCSC Genome Browser from a feature file.

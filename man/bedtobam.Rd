@@ -4,7 +4,8 @@
 \alias{bedtobam}
 \title{Converts feature records to BAM format.}
 \usage{
-bedtobam(i, g, mapq = NULL, bed12 = NULL, ubam = NULL)
+bedtobam(i, g, mapq = NULL, bed12 = NULL, ubam = NULL,
+  output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -18,6 +19,8 @@ bedtobam(i, g, mapq = NULL, bed12 = NULL, ubam = NULL)
 string will reflect BED "blocks".}
 
 \item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Converts feature records to BAM format.

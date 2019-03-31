@@ -8,7 +8,9 @@
 #' @param tags Create FASTQ based on the mate info
 #'   in the BAM R2 and Q2 tags.
 #' 
-bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=FALSE)
@@ -25,10 +27,14 @@ bamtofastq <- function(i, fq, fq2 = NULL, tags = NULL)
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools bamtofastq ", options, " -i ", i[[1]], " -fq ", fq[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]], fq[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

@@ -2,7 +2,9 @@
 #' 
 #' @param i <bed/gff/vcf/bam>
 #' @param c 
-expand <- function(i, c = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+expand <- function(i, c = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -18,10 +20,14 @@ expand <- function(i, c = NULL)
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools expand ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

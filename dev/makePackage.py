@@ -110,9 +110,6 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     if command in anomalies["noRinput"]:
         allowRobjectsInput = "FALSE"
 
-    # Determine if the header of the output file should be read
-    allowRobjectsOutput = "TRUE"
-
     comment = "#' "
 
     file = open(os.path.join(bedtoolsRpath, "R", "%s.R" % command), "w")
@@ -127,8 +124,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         usageLines =  "@param " + key + " " + usageDict[key].replace("%", " percent")
         usageSplit = usageLines.split("\n")
         for line in usageSplit:
-            file.write(comment + line)
-            file.write("\n")
+            file.write(comment + line + "\n")
 
     # Convert to R friendly options
     for option in optionDict:
@@ -138,8 +134,11 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         optionLines = "@param " + roption + " " + optionDict[option].replace("%", " percent")
         optionSplit = optionLines.split("\n")
         for line in optionSplit:
-            file.write(comment + line)
-            file.write("\n")
+            file.write(comment + line + "\n")
+
+    if(not command in anomalies["noRoutput"]):
+        file.write(comment + "@param output Output filepath instead of returning output in R.\n")
+        file.write(comment + "\n")
 
     setOptions= ""
     for option in optionDict:
@@ -147,13 +146,16 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         if option in anomalies["optionConverter"].keys():
             roption = anomalies["optionConverter"][option]
         setOptions += roption + " = NULL, "
-    setOptions = setOptions[:-2]
+    if(not command in anomalies["noRoutput"]):
+        setOptions += "output = NULL"
+    else:
+        setOptions = setOptions[:-2]
 
     usageDictOptions = ""
 
     for key in usageDict:
         usageDictOptions += key + (" = NULL, " if bedtoolsFxn in anomalies["allowNullEvenIfFile"] and key in anomalies["allowNullEvenIfFile"][bedtoolsFxn] else ", ")
-    if (len(setOptions) == 0):
+    if(len(setOptions) == 0):
         usageDictOptions = usageDictOptions[:-2]
     file.write(infoDict["ToolName"] + " <- " + "function(" + usageDictOptions + setOptions + ")\n")
     file.write("{\n")
@@ -198,10 +200,14 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     file.write('\tif(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
     file.write('\tcmd <- paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring)
     if(command in anomalies["noRoutput"]):
-        file.write(")\n\toutput <- system(cmd, intern=TRUE)\n\tprint(output)\n")
+        file.write(")\n\tconsole.output <- system(cmd, intern=TRUE)\n\tprint(console.output)\n")
     else:
-        file.write(', " > ", tempfile)\n\tsystem(cmd)\n')
-        file.write('\tresults <- utils::read.table(tempfile, header=%s, sep="\\t")\n' % readheader)
+        file.write(', " > ", tempfile)\n')
+        file.write('\tsystem(cmd)\n')
+        file.write('\tif(!is.null(output))\n')
+        file.write('\t\tfile.copy(tempfile, output)\n')
+        file.write('\telse\n')
+        file.write('\t\tresults <- utils::read.table(tempfile, header=%s, sep="\\t")\n' % readheader)
 
     # Delete the temp files
     file.write('\n\t# Delete temp files\n')
@@ -214,7 +220,8 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
 
     # Return the results
     if(not command in anomalies["noRoutput"]):
-        file.write("\n\n\treturn(results)")
+        file.write('\n\n\tif(is.null(output))\n')
+        file.write("\t\treturn(results)")
     file.write("\n}")
 
 ### Define a function that reads in bedtools functions

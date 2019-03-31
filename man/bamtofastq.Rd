@@ -4,7 +4,7 @@
 \alias{bamtofastq}
 \title{Convert BAM alignments to FASTQ files.}
 \usage{
-bamtofastq(i, fq, fq2 = NULL, tags = NULL)
+bamtofastq(i, fq, fq2 = NULL, tags = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<BAM>}
@@ -16,6 +16,8 @@ BAM should be sorted by query name is creating paired FASTQ.}
 
 \item{tags}{Create FASTQ based on the mate info
 in the BAM R2 and Q2 tags.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Convert BAM alignments to FASTQ files.

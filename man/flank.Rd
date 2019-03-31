@@ -5,7 +5,7 @@
 \title{Creates flanking interval(s) for each BED/GFF/VCF feature.}
 \usage{
 flank(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL,
-  header = NULL)
+  header = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -32,6 +32,8 @@ E.g. if used on a 1000bp feature, -l 0.50,
 will add 500 bp "upstream".  Default = false.}
 
 \item{header}{Print the header from the input file prior to results.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Creates flanking interval(s) for each BED/GFF/VCF feature.

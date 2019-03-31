@@ -45,7 +45,9 @@
 #'   notospan Report A if ospan of A doesn't overlap B.
 #'      - Note: If chrom1 <> chrom2, entry is ignored.
 #' 
-pairtobed <- function(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL, f = NULL, s = NULL, S = NULL, type = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+pairtobed <- function(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL, f = NULL, s = NULL, S = NULL, type = NULL, output = NULL)
 {
 	# Required Inputs
 	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
@@ -62,10 +64,14 @@ pairtobed <- function(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL, f
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools pairtobed ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

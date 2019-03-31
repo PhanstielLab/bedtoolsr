@@ -31,7 +31,9 @@
 #'   Takes an integer argument. Optional suffixes K/M/G supported.
 #'   Note: currently has no effect with compressed files.
 #' 
-sample <- function(i, n = NULL, seed = NULL, ubam = NULL, s = NULL, header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+sample <- function(i, n = NULL, seed = NULL, ubam = NULL, s = NULL, header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -47,10 +49,14 @@ sample <- function(i, n = NULL, seed = NULL, ubam = NULL, s = NULL, header = NUL
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools sample ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

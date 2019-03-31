@@ -4,7 +4,7 @@
 \alias{bedpetobam}
 \title{Converts feature records to BAM format.}
 \usage{
-bedpetobam(i, g, mapq = NULL, ubam = NULL)
+bedpetobam(i, g, mapq = NULL, ubam = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -15,6 +15,8 @@ bedpetobam(i, g, mapq = NULL, ubam = NULL)
 (INT) Default: 255}
 
 \item{ubam}{Write uncompressed BAM output. Default writes compressed BAM.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Converts feature records to BAM format.

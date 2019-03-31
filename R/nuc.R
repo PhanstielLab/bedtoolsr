@@ -14,7 +14,9 @@
 #' @param fullHeader Use full fasta header.
 #'   - By default, only the word before the first space or tab is used.
 #' 
-nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHeader = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHeader = NULL, output = NULL)
 {
 	# Required Inputs
 	fi <- establishPaths(input=fi, name="fi", allowRobjects=TRUE)
@@ -31,10 +33,14 @@ nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, fullHea
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools nuc ", options, " -fi ", fi[[1]], " -bed ", bed[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, fi[[2]], bed[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

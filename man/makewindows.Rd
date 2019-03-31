@@ -5,7 +5,7 @@
 \title{Makes adjacent or sliding windows across a genome or BED file.}
 \usage{
 makewindows(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL,
-  reverse = NULL, i = NULL)
+  reverse = NULL, i = NULL, output = NULL)
 }
 \arguments{
 \item{g}{<genome> OR}
@@ -31,6 +31,8 @@ With this option, a name column will be added.
  "-i winnum" - use the window number as the ID (e.g. 1,2,3,4...).
  "-i srcwinnum" - use the source interval's name with the window number.
 See below for usage examples.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Makes adjacent or sliding windows across a genome or BED file.

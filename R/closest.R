@@ -114,7 +114,9 @@
 #'   Takes an integer argument. Optional suffixes K/M/G supported.
 #'   Note: currently has no effect with compressed files.
 #' 
-closest <- function(a, b, d = NULL, D = NULL, io = NULL, iu = NULL, id = NULL, fu = NULL, fd = NULL, t = NULL, mdb = NULL, k = NULL, N = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL, names = NULL, filenames = NULL, sortout = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+closest <- function(a, b, d = NULL, D = NULL, io = NULL, iu = NULL, id = NULL, fu = NULL, fd = NULL, t = NULL, mdb = NULL, k = NULL, N = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL, names = NULL, filenames = NULL, sortout = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
 {
 	# Required Inputs
 	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
@@ -131,10 +133,14 @@ closest <- function(a, b, d = NULL, D = NULL, io = NULL, iu = NULL, id = NULL, f
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools closest ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

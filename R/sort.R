@@ -19,7 +19,9 @@
 #' 
 #' @param header Print the header from the A file prior to results.
 #' 
-sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL, g = NULL, faidx = NULL, header = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL, g = NULL, faidx = NULL, header = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -35,10 +37,14 @@ sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenSize
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools sort ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

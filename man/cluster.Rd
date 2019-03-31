@@ -4,7 +4,7 @@
 \alias{cluster}
 \title{Clusters overlapping/nearby BED/GFF/VCF intervals.}
 \usage{
-cluster(i, s = NULL, d = NULL)
+cluster(i, s = NULL, d = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -17,6 +17,8 @@ that are the same strand.
 to be merged.
 - Def. 0. That is, overlapping & book-ended features are merged.
 - (INTEGER)}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Clusters overlapping/nearby BED/GFF/VCF intervals.

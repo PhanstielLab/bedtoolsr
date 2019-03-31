@@ -25,8 +25,8 @@ split <- function(i, n = NULL, p = NULL, a = NULL)
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools split ", options, " -i ", i[[1]])
-	output <- system(cmd, intern=TRUE)
-	print(output)
+	console.output <- system(cmd, intern=TRUE)
+	print(console.output)
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))

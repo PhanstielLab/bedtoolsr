@@ -7,7 +7,7 @@ common column groupings. Akin to the SQL "group by" command.}
 \usage{
 groupby(i, g = NULL, c = NULL, o = NULL, full = NULL,
   inheader = NULL, outheader = NULL, header = NULL,
-  ignorecase = NULL, prec = NULL, delim = NULL)
+  ignorecase = NULL, prec = NULL, delim = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
@@ -38,6 +38,8 @@ will use "col_1", "col_2", etc. as the column names.}
 \item{delim}{Specify a custom delimiter for the collapse operations.
 - Example: -delim "|"
 - Default: ",".}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Summarizes a dataset column based upon

@@ -4,7 +4,7 @@
 \alias{random}
 \title{Generate random intervals among a genome.}
 \usage{
-random(g, l = NULL, n = NULL, seed = NULL)
+random(g, l = NULL, n = NULL, seed = NULL, output = NULL)
 }
 \arguments{
 \item{g}{<genome>}
@@ -20,6 +20,8 @@ random(g, l = NULL, n = NULL, seed = NULL)
 \item{seed}{Supply an integer seed for the shuffling.
 - By default, the seed is chosen automatically.
 - (INTEGER)}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Generate random intervals among a genome.

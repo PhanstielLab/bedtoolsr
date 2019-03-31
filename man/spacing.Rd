@@ -4,10 +4,12 @@
 \alias{spacing}
 \title{Report (last col.) the gap lengths between intervals in a file.}
 \usage{
-spacing(i)
+spacing(i, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Report (last col.) the gap lengths between intervals in a file.

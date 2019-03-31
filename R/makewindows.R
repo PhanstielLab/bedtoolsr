@@ -21,7 +21,9 @@
 #'    "-i srcwinnum" - use the source interval's name with the window number.
 #'   See below for usage examples.
 #' 
-makewindows <- function(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL, reverse = NULL, i = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+makewindows <- function(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL, reverse = NULL, i = NULL, output = NULL)
 {
 	# Required Inputs
 	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
@@ -38,10 +40,14 @@ makewindows <- function(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL, revers
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools makewindows ", options, ifelse(!is.null(g), paste0(" -g ", g[[1]]), ""), ifelse(!is.null(b), paste0(" -b ", b[[1]]), ""), " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, g[[2]], b[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

@@ -26,7 +26,9 @@
 #'     Requires the -labels option to identify from which file the interval came.
 #' 
 #' @param labels LAB1 .. LABn
-tag <- function(i, files, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL, labels = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+tag <- function(i, files, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL, labels = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -43,10 +45,14 @@ tag <- function(i, files, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools tag ", options, " -i ", i[[1]], " -files ", files[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]], files[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

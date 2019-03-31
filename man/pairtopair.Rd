@@ -5,7 +5,7 @@
 \title{Report overlaps between two paired-end BED files (BEDPE).}
 \usage{
 pairtopair(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL,
-  is = NULL, rdn = NULL)
+  is = NULL, rdn = NULL, output = NULL)
 }
 \arguments{
 \item{a}{<BEDPE>}
@@ -37,6 +37,8 @@ notboth Report overlaps if one or neither of A's overlap B.
 
 \item{rdn}{Require the hits to have different names (i.e. avoid self-hits).
 - By default, same names are allowed.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Report overlaps between two paired-end BED files (BEDPE).

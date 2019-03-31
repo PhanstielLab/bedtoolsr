@@ -29,7 +29,9 @@
 #' @param p Only count proper pairs.  Default counts all alignments with
 #'   MAPQ > -q argument, regardless of the BAM FLAG field.
 #' 
-multicov <- function(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL, r = NULL, q = NULL, D = NULL, F = NULL, p = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+multicov <- function(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL, r = NULL, q = NULL, D = NULL, F = NULL, p = NULL, output = NULL)
 {
 	# Required Inputs
 	bams <- establishPaths(input=bams, name="bams", allowRobjects=TRUE)
@@ -46,10 +48,14 @@ multicov <- function(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL, r = 
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools multicov ", options, " -bams ", bams[[1]], " -bed ", bed[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, bams[[2]], bed[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

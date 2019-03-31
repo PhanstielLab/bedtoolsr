@@ -8,7 +8,7 @@ overlap the entire entry in A and B are reported.}
 \usage{
 window(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL,
   l = NULL, r = NULL, sw = NULL, sm = NULL, Sm = NULL,
-  u = NULL, c = NULL, v = NULL, header = NULL)
+  u = NULL, c = NULL, v = NULL, header = NULL, output = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
@@ -61,6 +61,8 @@ for a negative-stranded feature will add 500 bp downstream.
 - Similar to "grep -v."}
 
 \item{header}{Print the header from the A file prior to results.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Examines a "window" around each feature in A and

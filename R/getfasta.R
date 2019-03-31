@@ -22,7 +22,9 @@
 #'   - By default, only the word before the first space or tab 
 #'   is used.
 #' 
-getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, split = NULL, tab = NULL, s = NULL, fullHeader = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, split = NULL, tab = NULL, s = NULL, fullHeader = NULL, output = NULL)
 {
 	# Required Inputs
 	fi <- establishPaths(input=fi, name="fi", allowRobjects=TRUE)
@@ -39,10 +41,14 @@ getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, split = N
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools getfasta ", options, " -fi ", fi[[1]], " -bed ", bed[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, fi[[2]], bed[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

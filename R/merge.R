@@ -66,7 +66,9 @@
 #'   Takes an integer argument. Optional suffixes K/M/G supported.
 #'   Note: currently has no effect with compressed files.
 #' 
-merge <- function(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL, delim = NULL, prec = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+merge <- function(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL, delim = NULL, prec = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -82,10 +84,14 @@ merge <- function(i, s = NULL, S = NULL, d = NULL, c = NULL, o = NULL, delim = N
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools merge ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

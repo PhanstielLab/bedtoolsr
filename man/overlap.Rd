@@ -6,12 +6,14 @@
 or distance (negative values) between genome features
 and reports the result at the end of the same line.}
 \usage{
-overlap(i, cols = NULL)
+overlap(i, cols = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
 
 \item{cols}{<columns>}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Computes the amount of overlap (positive values)

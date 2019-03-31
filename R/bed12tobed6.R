@@ -3,7 +3,9 @@
 #' @param i <bed12>
 #' @param n Force the score to be the (1-based) block number from the BED12.
 #' 
-bed12tobed6 <- function(i, n = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+bed12tobed6 <- function(i, n = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -19,10 +21,14 @@ bed12tobed6 <- function(i, n = NULL)
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools bed12tobed6 ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

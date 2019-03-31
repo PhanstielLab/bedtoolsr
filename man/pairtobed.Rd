@@ -5,7 +5,7 @@
 \title{Report overlaps between a BEDPE file and a BED/GFF/VCF file.}
 \usage{
 pairtobed(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL,
-  f = NULL, s = NULL, S = NULL, type = NULL)
+  f = NULL, s = NULL, S = NULL, type = NULL, output = NULL)
 }
 \arguments{
 \item{a}{<bedpe>}
@@ -54,6 +54,8 @@ notispan Report A if ispan of A doesn't overlap B.
    - Note: If chrom1 <> chrom2, entry is ignored.
 notospan Report A if ospan of A doesn't overlap B.
    - Note: If chrom1 <> chrom2, entry is ignored.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Report overlaps between a BEDPE file and a BED/GFF/VCF file.

@@ -5,7 +5,8 @@
 \title{Counts sequence coverage for multiple bams at specific loci.}
 \usage{
 multicov(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL,
-  r = NULL, q = NULL, D = NULL, F = NULL, p = NULL)
+  r = NULL, q = NULL, D = NULL, F = NULL, p = NULL,
+  output = NULL)
 }
 \arguments{
 \item{bams}{aln.1.bam aln.2.bam ... aln.n.bam}
@@ -38,6 +39,8 @@ that overlap A on the _opposite_ strand.
 
 \item{p}{Only count proper pairs.  Default counts all alignments with
 MAPQ > -q argument, regardless of the BAM FLAG field.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Counts sequence coverage for multiple bams at specific loci.

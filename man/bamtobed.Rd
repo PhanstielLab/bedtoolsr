@@ -6,7 +6,7 @@
 \usage{
 bamtobed(i, bedpe = NULL, mate1 = NULL, bed12 = NULL, split = NULL,
   splitD = NULL, ed = NULL, tag = NULL, color = NULL,
-  cigar = NULL)
+  cigar = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bam>}
@@ -41,6 +41,8 @@ Forces -split.}
 Default is (255,0,0).}
 
 \item{cigar}{Add the CIGAR string to the BED entry as a 7th column.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Converts BAM alignments to BED6 or BEDPE format.

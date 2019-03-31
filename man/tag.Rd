@@ -6,7 +6,8 @@
 on the intervals in -i.}
 \usage{
 tag(i, files, s = NULL, S = NULL, f = NULL, tag = NULL,
-  names = NULL, scores = NULL, intervals = NULL, labels = NULL)
+  names = NULL, scores = NULL, intervals = NULL, labels = NULL,
+  output = NULL)
 }
 \arguments{
 \item{i}{<BAM>}
@@ -36,6 +37,8 @@ By default, the -labels values are used.}
 Requires the -labels option to identify from which file the interval came.}
 
 \item{labels}{LAB1 .. LABn}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Annotates a BAM file based on overlaps with multiple BED/GFF/VCF files

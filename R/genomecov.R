@@ -69,7 +69,9 @@
 #'        Note the use of single-quotes if you have spaces in your parameters.
 #'     - (TEXT)
 #' 
-genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL, du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL, trackline = NULL, trackopts = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL, du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL, trackline = NULL, trackopts = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -86,10 +88,14 @@ genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = N
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools genomecov ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

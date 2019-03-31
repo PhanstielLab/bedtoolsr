@@ -6,7 +6,8 @@
 BED/GFF/VCF files.}
 \usage{
 multiinter(i, cluster = NULL, header = NULL, names = NULL,
-  g = NULL, empty = NULL, filler = NULL, examples = NULL)
+  g = NULL, empty = NULL, filler = NULL, examples = NULL,
+  output = NULL)
 }
 \arguments{
 \item{i}{FILE1 FILE2 .. FILEn
@@ -31,6 +32,8 @@ values in all files).
 - Default is '0', but you can use 'N/A' or any text.}
 
 \item{examples}{Show detailed usage examples.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Identifies common intervals among multiple

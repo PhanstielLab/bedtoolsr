@@ -5,7 +5,7 @@
 \title{Shift each feature by requested number of base pairs.}
 \usage{
 shift(i, g, s = NULL, p = NULL, m = NULL, pct = NULL,
-  header = NULL)
+  header = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
@@ -26,6 +26,8 @@ E.g. if used on a 1000bp feature, -s 0.50,
 will shift the feature 500 bp "upstream".  Default = false.}
 
 \item{header}{Print the header from the input file prior to results.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Shift each feature by requested number of base pairs.

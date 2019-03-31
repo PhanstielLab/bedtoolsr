@@ -13,7 +13,9 @@
 #'   - By default, the seed is chosen automatically.
 #'   - (INTEGER)
 #' 
-random <- function(g, l = NULL, n = NULL, seed = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+random <- function(g, l = NULL, n = NULL, seed = NULL, output = NULL)
 {
 	# Required Inputs
 	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
@@ -29,10 +31,14 @@ random <- function(g, l = NULL, n = NULL, seed = NULL)
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools random ", options, " -g ", g[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, g[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

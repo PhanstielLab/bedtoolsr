@@ -5,7 +5,8 @@
 \title{Extract DNA sequences from a fasta file based on feature coordinates.}
 \usage{
 getfasta(fi, bed, fo = NULL, name = NULL, nameplus = NULL,
-  split = NULL, tab = NULL, s = NULL, fullHeader = NULL)
+  split = NULL, tab = NULL, s = NULL, fullHeader = NULL,
+  output = NULL)
 }
 \arguments{
 \item{fi}{<fasta>}
@@ -31,6 +32,8 @@ strand, the sequence will be reverse complemented.
 \item{fullHeader}{Use full fasta header.
 - By default, only the word before the first space or tab 
 is used.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Extract DNA sequences from a fasta file based on feature coordinates.

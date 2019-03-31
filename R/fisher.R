@@ -51,7 +51,9 @@
 #'   Takes an integer argument. Optional suffixes K/M/G supported.
 #'   Note: currently has no effect with compressed files.
 #' 
-fisher <- function(a, b, g, m = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, nonamecheck = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
+#' @param output Output filepath instead of returning output in R.
+#' 
+fisher <- function(a, b, g, m = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, nonamecheck = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
 {
 	# Required Inputs
 	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
@@ -69,10 +71,14 @@ fisher <- function(a, b, g, m = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r 
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools fisher ", options, " -a ", a[[1]], " -b ", b[[1]], " -g ", g[[1]], " > ", tempfile)
 	system(cmd)
-	results <- utils::read.table(tempfile, header=TRUE, sep="\t")
+	if(!is.null(output))
+		file.copy(tempfile, output)
+	else
+		results <- utils::read.table(tempfile, header=TRUE, sep="\t")
 
 	# Delete temp files
 	deleteTempFiles(c(tempfile, a[[2]], b[[2]], g[[2]]))
 
-	return(results)
+	if(is.null(output))
+		return(results)
 }

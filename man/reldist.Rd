@@ -4,7 +4,7 @@
 \alias{reldist}
 \title{Calculate the relative distance distribution b/w two feature files.}
 \usage{
-reldist(a, b, detail = NULL)
+reldist(a, b, detail = NULL, output = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
@@ -12,6 +12,8 @@ reldist(a, b, detail = NULL)
 \item{b}{<bed/gff/vcf>}
 
 \item{detail}{Instead of a summary, report the relative distance for each interval in A}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Calculate the relative distance distribution b/w two feature files.

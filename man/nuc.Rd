@@ -5,7 +5,7 @@
 \title{Profiles the nucleotide content of intervals in a fasta file.}
 \usage{
 nuc(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL,
-  fullHeader = NULL)
+  fullHeader = NULL, output = NULL)
 }
 \arguments{
 \item{fi}{<fasta>}
@@ -23,6 +23,8 @@ is observed (case-sensitive).}
 
 \item{fullHeader}{Use full fasta header.
 - By default, only the word before the first space or tab is used.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Profiles the nucleotide content of intervals in a fasta file.

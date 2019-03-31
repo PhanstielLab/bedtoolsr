@@ -8,7 +8,8 @@ by another feature(s).}
 subtract(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL,
   s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
   split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
-  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
+  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL,
+  output = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}
@@ -79,6 +80,8 @@ line of bedtools output at a time.}
 \item{iobuf}{Specify amount of memory to use for input buffer.
 Takes an integer argument. Optional suffixes K/M/G supported.
 Note: currently has no effect with compressed files.}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Removes the portion(s) of an interval that is overlapped

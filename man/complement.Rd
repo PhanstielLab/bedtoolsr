@@ -4,12 +4,14 @@
 \alias{complement}
 \title{Returns the base pair complement of a feature file.}
 \usage{
-complement(i, g)
+complement(i, g, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
 \item{g}{<genome>}
+
+\item{output}{Output filepath instead of returning output in R.}
 }
 \description{
 Returns the base pair complement of a feature file.
