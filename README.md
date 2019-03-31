@@ -56,17 +56,13 @@ options(bedtools.path = "[bedtools path]")
 * jaccard
 * reldist
 * fisher
+* overlap
 * igv
 * links
+* makewindows
 * groupby
 * expand
-
-The following funtions are currently _not_ supported:
-
 * split
-* makewindows
-* overlap
-
 
 ### Known limitations
 
