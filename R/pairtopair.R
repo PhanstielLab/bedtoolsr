@@ -29,25 +29,26 @@
 #'   - By default, same names are allowed.
 #' 
 pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, is = NULL, rdn = NULL)
-{ 
+{
 	# Required Inputs
-	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
-	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
+	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
+	b <- establishPaths(input=b, name="b", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("f","type","slop","ss","is","rdn"),values= list(f,type,slop,ss,is,rdn))
+	options <- createOptions(names=c("f", "type", "slop", "ss", "is", "rdn"), values=list(f, type, slop, ss, is, rdn))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools pairtopair ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools pairtopair ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+
+	return(results)
 }

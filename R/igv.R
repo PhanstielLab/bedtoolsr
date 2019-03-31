@@ -27,24 +27,25 @@
 #'   Default is png.
 #' 
 igv <- function(i, path = NULL, sess = NULL, sort = NULL, clps = NULL, name = NULL, slop = NULL, img = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("path","sess","sort","clps","name","slop","img"),values= list(path,sess,sort,clps,name,slop,img))
+	options <- createOptions(names=c("path", "sess", "sort", "clps", "name", "slop", "img"), values=list(path, sess, sort, clps, name, slop, img))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools igv ", options, " -i ", i[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools igv ", options, " -i ", i[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]]))
+
+	return(results)
 }

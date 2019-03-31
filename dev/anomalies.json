@@ -1,16 +1,28 @@
 {
-	"skipFunctions": ["makewindows", "split"], 
-	"optionConverter": 
+	"allowNullEvenIfFile":
 	{
-		"3": "three", 
-		"5": "five", 
+		"makewindows": ["g", "b"]
+	},
+	"alternativeUsage":
+	{
+		"expand": "bedtools expand -i <bed/gff/vcf/bam> -c [COLS]",
+		"groupby": "bedtools groupby [OPTIONS] -i <bed/gff/vcf/bam> -g <group columns> -c <op. column> -o <operation>",
+		"makewindows": "bedtools makewindows [OPTIONS] -g <genome> OR -b <bed>  -w <window_size> OR -n <number of windows>",
+		"overlap": "bedtools overlap -i <bed/gff/vcf/bam> -cols <columns>"
+	},
+	"fileOptions": ["bed", "BEDPE", "gff", "vcf", "bam", "BAM", "fasta", "FQ", "genome", "FILE"],
+	"hasHeader": ["fisher", "jaccard"],
+	"ignoreOptions":
+	{
+		"split": ["h", "v"]
+	},
+	"noRinput": ["bamtobed", "bamtofastq"],
+	"noRoutput": ["split"],
+	"optionConverter":
+	{
+		"3": "three",
+		"5": "five",
 		"name+": "nameplus"
-	}, 
-	"hasHeader": ["fisher", "jaccard"], 
-	"noRinput": ["bamtobed", "bamtofastq"], 
-	"noRoutput": [],
-    "missingUsage":
-    {
-        "overlap": "bedtools overlap -i <bed/gff/vcf/bam> -cols [columns]"
-    }
+	},
+	"skipFunctions": []
 }

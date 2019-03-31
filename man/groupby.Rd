@@ -5,18 +5,18 @@
 \title{Summarizes a dataset column based upon
 common column groupings. Akin to the SQL "group by" command.}
 \usage{
-groupby(g, c, o, i = NULL, full = NULL, inheader = NULL,
-  outheader = NULL, header = NULL, ignorecase = NULL, prec = NULL,
-  delim = NULL)
+groupby(i, g = NULL, c = NULL, o = NULL, full = NULL,
+  inheader = NULL, outheader = NULL, header = NULL,
+  ignorecase = NULL, prec = NULL, delim = NULL)
 }
 \arguments{
-\item{g}{}
+\item{i}{<bed/gff/vcf/bam>}
 
-\item{c}{}
+\item{g}{<group columns>}
 
-\item{o}{}
+\item{c}{<op. column>}
 
-\item{i}{Input file. Assumes "stdin" if omitted.}
+\item{o}{<operation>}
 
 \item{full}{Print all columns from input file.  The first line in the group is used.
 Default: print only grouped columns.}

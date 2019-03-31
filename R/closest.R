@@ -115,25 +115,26 @@
 #'   Note: currently has no effect with compressed files.
 #' 
 closest <- function(a, b, d = NULL, D = NULL, io = NULL, iu = NULL, id = NULL, fu = NULL, fd = NULL, t = NULL, mdb = NULL, k = NULL, N = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL, names = NULL, filenames = NULL, sortout = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
-{ 
+{
 	# Required Inputs
-	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
-	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
+	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
+	b <- establishPaths(input=b, name="b", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("d","D","io","iu","id","fu","fd","t","mdb","k","N","s","S","f","F","r","e","split","g","nonamecheck","names","filenames","sortout","bed","header","nobuf","iobuf"),values= list(d,D,io,iu,id,fu,fd,t,mdb,k,N,s,S,f,F,r,e,split,g,nonamecheck,names,filenames,sortout,bed,header,nobuf,iobuf))
+	options <- createOptions(names=c("d", "D", "io", "iu", "id", "fu", "fd", "t", "mdb", "k", "N", "s", "S", "f", "F", "r", "e", "split", "g", "nonamecheck", "names", "filenames", "sortout", "bed", "header", "nobuf", "iobuf"), values=list(d, D, io, iu, id, fu, fd, t, mdb, k, N, s, S, f, F, r, e, split, g, nonamecheck, names, filenames, sortout, bed, header, nobuf, iobuf))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools closest ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools closest ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+
+	return(results)
 }

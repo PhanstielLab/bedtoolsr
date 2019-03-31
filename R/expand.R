@@ -1,27 +1,27 @@
 #' Replicate lines in a file based on columns of comma-separated values.
 #' 
+#' @param i <bed/gff/vcf/bam>
 #' @param c 
-#' @param i Input file. Assumes "stdin" if omitted.
-#' 
-expand <- function(c, i = NULL)
-{ 
+expand <- function(i, c = NULL)
+{
 	# Required Inputs
-	c = establishPaths(input=c,name="c",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("i"),values= list(i))
+	options <- createOptions(names=c("c"), values=list(c))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools expand ", options, " -c ", c[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools expand ", options, " -i ", i[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,c[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]]))
+
+	return(results)
 }

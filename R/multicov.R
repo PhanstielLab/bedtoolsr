@@ -30,25 +30,26 @@
 #'   MAPQ > -q argument, regardless of the BAM FLAG field.
 #' 
 multicov <- function(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL, r = NULL, q = NULL, D = NULL, F = NULL, p = NULL)
-{ 
+{
 	# Required Inputs
-	bams = establishPaths(input=bams,name="bams",allowRobjects=TRUE)
-	bed = establishPaths(input=bed,name="bed",allowRobjects=TRUE)
+	bams <- establishPaths(input=bams, name="bams", allowRobjects=TRUE)
+	bed <- establishPaths(input=bed, name="bed", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("split","s","S","f","r","q","D","F","p"),values= list(split,s,S,f,r,q,D,F,p))
+	options <- createOptions(names=c("split", "s", "S", "f", "r", "q", "D", "F", "p"), values=list(split, s, S, f, r, q, D, F, p))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools multicov ", options, " -bams ", bams[[1]], " -bed ", bed[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools multicov ", options, " -bams ", bams[[1]], " -bed ", bed[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,bams[[2]],bed[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, bams[[2]], bed[[2]]))
+
+	return(results)
 }

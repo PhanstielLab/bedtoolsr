@@ -13,19 +13,19 @@
 #' 
 #' @param w Base pairs added upstream and downstream of each entry
 #'   in A when searching for overlaps in B.
-#'   - Creates symterical "windows" around A.
+#'   - Creates symmetrical "windows" around A.
 #'   - Default is 1000 bp.
 #'   - (INTEGER)
 #' 
 #' @param l Base pairs added upstream (left of) of each entry
 #'   in A when searching for overlaps in B.
-#'   - Allows one to define assymterical "windows".
+#'   - Allows one to define asymmetrical "windows".
 #'   - Default is 1000 bp.
 #'   - (INTEGER)
 #' 
 #' @param r Base pairs added downstream (right of) of each entry
 #'   in A when searching for overlaps in B.
-#'   - Allows one to define assymterical "windows".
+#'   - Allows one to define asymmetrical "windows".
 #'   - Default is 1000 bp.
 #'   - (INTEGER)
 #' 
@@ -52,25 +52,26 @@
 #' @param header Print the header from the A file prior to results.
 #' 
 window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = NULL, r = NULL, sw = NULL, sm = NULL, Sm = NULL, u = NULL, c = NULL, v = NULL, header = NULL)
-{ 
+{
 	# Required Inputs
-	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
-	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
+	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
+	b <- establishPaths(input=b, name="b", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("abam","ubam","bed","w","l","r","sw","sm","Sm","u","c","v","header"),values= list(abam,ubam,bed,w,l,r,sw,sm,Sm,u,c,v,header))
+	options <- createOptions(names=c("abam", "ubam", "bed", "w", "l", "r", "sw", "sm", "Sm", "u", "c", "v", "header"), values=list(abam, ubam, bed, w, l, r, sw, sm, Sm, u, c, v, header))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools window ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools window ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+
+	return(results)
 }

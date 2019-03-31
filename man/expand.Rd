@@ -4,12 +4,12 @@
 \alias{expand}
 \title{Replicate lines in a file based on columns of comma-separated values.}
 \usage{
-expand(c, i = NULL)
+expand(i, c = NULL)
 }
 \arguments{
-\item{c}{}
+\item{i}{<bed/gff/vcf/bam>}
 
-\item{i}{Input file. Assumes "stdin" if omitted.}
+\item{c}{}
 }
 \description{
 Replicate lines in a file based on columns of comma-separated values.

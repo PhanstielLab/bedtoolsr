@@ -1,14 +1,18 @@
 .onLoad <- function(libname, pkgname) {
   installed.packages<-utils::installed.packages()
   row<-which(installed.packages[, 1]=="bedtoolsr")
-  if(length(row)>0) {
+  if(length(row)>0)
+  {
     bedtoolsr_version<-installed.packages[row, 3]
     hyphens<-gregexpr("-", bedtoolsr_version)
-    response<-tryCatch({
+    response<-tryCatch(
+    {
       bedtools.path <- getOption("bedtools.path")
       if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
       system(paste0(bedtools.path, "bedtools --version"), intern=T)
-    }, error = function(e) {
+    },
+    error = function(e)
+    {
       warning("bedtools does not appear to be installed or not in your PATH. If it is installed, please add it to your PATH or run:\noptions(bedtools.path = \\\"[bedtools path]\\\")")
       return(NULL)
     })

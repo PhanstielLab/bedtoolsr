@@ -53,25 +53,26 @@
 #'   within the chromosome.
 #' 
 shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL, f = NULL, chromFirst = NULL, bedpe = NULL, maxTries = NULL, noOverlapping = NULL, allowBeyondChromEnd = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
-	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
+	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("excl","incl","chrom","seed","f","chromFirst","bedpe","maxTries","noOverlapping","allowBeyondChromEnd"),values= list(excl,incl,chrom,seed,f,chromFirst,bedpe,maxTries,noOverlapping,allowBeyondChromEnd))
+	options <- createOptions(names=c("excl", "incl", "chrom", "seed", "f", "chromFirst", "bedpe", "maxTries", "noOverlapping", "allowBeyondChromEnd"), values=list(excl, incl, chrom, seed, f, chromFirst, bedpe, maxTries, noOverlapping, allowBeyondChromEnd))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools shuffle ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools shuffle ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]],g[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
+
+	return(results)
 }

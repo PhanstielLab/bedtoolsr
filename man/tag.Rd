@@ -5,15 +5,13 @@
 \title{Annotates a BAM file based on overlaps with multiple BED/GFF/VCF files
 on the intervals in -i.}
 \usage{
-tag(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL,
-  names = NULL, scores = NULL, intervals = NULL)
+tag(i, files, s = NULL, S = NULL, f = NULL, tag = NULL,
+  names = NULL, scores = NULL, intervals = NULL, labels = NULL)
 }
 \arguments{
 \item{i}{<BAM>}
 
 \item{files}{FILE1 .. FILEn}
-
-\item{labels}{LAB1 .. LABn}
 
 \item{s}{Require overlaps on the same strand.  That is, only tag alignments that have the same
 strand as a feature in the annotation file(s).}
@@ -36,6 +34,8 @@ By default, the -labels values are used.}
 
 \item{intervals}{Use the full interval (including name, score, and strand) to populate tags.
 Requires the -labels option to identify from which file the interval came.}
+
+\item{labels}{LAB1 .. LABn}
 }
 \description{
 Annotates a BAM file based on overlaps with multiple BED/GFF/VCF files

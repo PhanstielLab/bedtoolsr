@@ -1,9 +1,10 @@
-#' Splits BED12 features into discrete BED6 features.
+#' Computes the amount of overlap (positive values)
+#' or distance (negative values) between genome features
+#' and reports the result at the end of the same line.
 #' 
-#' @param i <bed12>
-#' @param n Force the score to be the (1-based) block number from the BED12.
-#' 
-bed12tobed6 <- function(i, n = NULL)
+#' @param i <bed/gff/vcf/bam>
+#' @param cols <columns>
+overlap <- function(i, cols = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -11,13 +12,13 @@ bed12tobed6 <- function(i, n = NULL)
 	options <- ""
 
 	# Options
-	options <- createOptions(names=c("n"), values=list(n))
+	options <- createOptions(names=c("cols"), values=list(cols))
 
 	# establish output file 
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd <- paste0(bedtools.path, "bedtools bed12tobed6 ", options, " -i ", i[[1]], " > ", tempfile)
+	cmd <- paste0(bedtools.path, "bedtools overlap ", options, " -i ", i[[1]], " > ", tempfile)
 	system(cmd)
 	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 

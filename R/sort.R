@@ -20,24 +20,25 @@
 #' @param header Print the header from the A file prior to results.
 #' 
 sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL, g = NULL, faidx = NULL, header = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("sizeA","sizeD","chrThenSizeA","chrThenSizeD","chrThenScoreA","chrThenScoreD","g","faidx","header"),values= list(sizeA,sizeD,chrThenSizeA,chrThenSizeD,chrThenScoreA,chrThenScoreD,g,faidx,header))
+	options <- createOptions(names=c("sizeA", "sizeD", "chrThenSizeA", "chrThenSizeD", "chrThenScoreA", "chrThenScoreD", "g", "faidx", "header"), values=list(sizeA, sizeD, chrThenSizeA, chrThenSizeD, chrThenScoreA, chrThenScoreD, g, faidx, header))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools sort ", options, " -i ", i[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools sort ", options, " -i ", i[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]]))
+
+	return(results)
 }

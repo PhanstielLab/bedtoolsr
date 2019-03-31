@@ -95,25 +95,26 @@
 #'   Note: currently has no effect with compressed files.
 #' 
 intersect <- function(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL, wao = NULL, u = NULL, c = NULL, v = NULL, ubam = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL, names = NULL, filenames = NULL, sortout = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
-{ 
+{
 	# Required Inputs
-	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
-	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
+	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
+	b <- establishPaths(input=b, name="b", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("wa","wb","loj","wo","wao","u","c","v","ubam","s","S","f","F","r","e","split","g","nonamecheck","sorted","names","filenames","sortout","bed","header","nobuf","iobuf"),values= list(wa,wb,loj,wo,wao,u,c,v,ubam,s,S,f,F,r,e,split,g,nonamecheck,sorted,names,filenames,sortout,bed,header,nobuf,iobuf))
+	options <- createOptions(names=c("wa", "wb", "loj", "wo", "wao", "u", "c", "v", "ubam", "s", "S", "f", "F", "r", "e", "split", "g", "nonamecheck", "sorted", "names", "filenames", "sortout", "bed", "header", "nobuf", "iobuf"), values=list(wa, wb, loj, wo, wao, u, c, v, ubam, s, S, f, F, r, e, split, g, nonamecheck, sorted, names, filenames, sortout, bed, header, nobuf, iobuf))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools intersect ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools intersect ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+
+	return(results)
 }

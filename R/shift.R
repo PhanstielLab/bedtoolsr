@@ -18,25 +18,26 @@
 #' @param header Print the header from the input file prior to results.
 #' 
 shift <- function(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
-	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
+	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("s","p","m","pct","header"),values= list(s,p,m,pct,header))
+	options <- createOptions(names=c("s", "p", "m", "pct", "header"), values=list(s, p, m, pct, header))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools shift ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools shift ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]],g[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
+
+	return(results)
 }

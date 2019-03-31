@@ -21,25 +21,26 @@
 #'   - By default, overlaps are counted without respect to strand.
 #' 
 annotate <- function(i, files, names = NULL, counts = NULL, both = NULL, s = NULL, S = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
-	files = establishPaths(input=files,name="files",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
+	files <- establishPaths(input=files, name="files", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("names","counts","both","s","S"),values= list(names,counts,both,s,S))
+	options <- createOptions(names=c("names", "counts", "both", "s", "S"), values=list(names, counts, both, s, S))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools annotate ", options, " -i ", i[[1]], " -files ", files[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools annotate ", options, " -i ", i[[1]], " -files ", files[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]],files[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]], files[[2]]))
+
+	return(results)
 }

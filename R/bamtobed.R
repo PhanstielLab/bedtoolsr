@@ -33,24 +33,25 @@
 #' @param cigar Add the CIGAR string to the BED entry as a 7th column.
 #' 
 bamtobed <- function(i, bedpe = NULL, mate1 = NULL, bed12 = NULL, split = NULL, splitD = NULL, ed = NULL, tag = NULL, color = NULL, cigar = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=FALSE)
+	i <- establishPaths(input=i, name="i", allowRobjects=FALSE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("bedpe","mate1","bed12","split","splitD","ed","tag","color","cigar"),values= list(bedpe,mate1,bed12,split,splitD,ed,tag,color,cigar))
+	options <- createOptions(names=c("bedpe", "mate1", "bed12", "split", "splitD", "ed", "tag", "color", "cigar"), values=list(bedpe, mate1, bed12, split, splitD, ed, tag, color, cigar))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools bamtobed ", options, " -i ", i[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools bamtobed ", options, " -i ", i[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]]))
+
+	return(results)
 }

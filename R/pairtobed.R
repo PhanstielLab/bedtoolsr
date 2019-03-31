@@ -46,25 +46,26 @@
 #'      - Note: If chrom1 <> chrom2, entry is ignored.
 #' 
 pairtobed <- function(a, b, abam = NULL, ubam = NULL, bedpe = NULL, ed = NULL, f = NULL, s = NULL, S = NULL, type = NULL)
-{ 
+{
 	# Required Inputs
-	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
-	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
+	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
+	b <- establishPaths(input=b, name="b", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("abam","ubam","bedpe","ed","f","s","S","type"),values= list(abam,ubam,bedpe,ed,f,s,S,type))
+	options <- createOptions(names=c("abam", "ubam", "bedpe", "ed", "f", "s", "S", "type"), values=list(abam, ubam, bedpe, ed, f, s, S, type))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools pairtobed ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools pairtobed ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,a[[2]],b[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+
+	return(results)
 }

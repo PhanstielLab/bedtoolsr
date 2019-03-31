@@ -1,11 +1,10 @@
 #' Summarizes a dataset column based upon
 #' common column groupings. Akin to the SQL "group by" command.
 #' 
-#' @param g 
-#' @param c 
-#' @param o 
-#' @param i Input file. Assumes "stdin" if omitted.
-#' 
+#' @param i <bed/gff/vcf/bam>
+#' @param g <group columns>
+#' @param c <op. column>
+#' @param o <operation>
 #' @param full Print all columns from input file.  The first line in the group is used.
 #'     Default: print only grouped columns.
 #' 
@@ -27,27 +26,26 @@
 #'   - Example: -delim "|"
 #'   - Default: ",".
 #' 
-groupby <- function(g, c, o, i = NULL, full = NULL, inheader = NULL, outheader = NULL, header = NULL, ignorecase = NULL, prec = NULL, delim = NULL)
-{ 
+groupby <- function(i, g = NULL, c = NULL, o = NULL, full = NULL, inheader = NULL, outheader = NULL, header = NULL, ignorecase = NULL, prec = NULL, delim = NULL)
+{
 	# Required Inputs
-	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
-	c = establishPaths(input=c,name="c",allowRobjects=TRUE)
-	o = establishPaths(input=o,name="o",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("i","full","inheader","outheader","header","ignorecase","prec","delim"),values= list(i,full,inheader,outheader,header,ignorecase,prec,delim))
+	options <- createOptions(names=c("g", "c", "o", "full", "inheader", "outheader", "header", "ignorecase", "prec", "delim"), values=list(g, c, o, full, inheader, outheader, header, ignorecase, prec, delim))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools groupby ", options, " -g ", g[[1]], " -c ", c[[1]], " -o ", o[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools groupby ", options, " -i ", i[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,g[[2]],c[[2]],o[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]]))
+
+	return(results)
 }

@@ -70,25 +70,26 @@
 #'     - (TEXT)
 #' 
 genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL, du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL, trackline = NULL, trackopts = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
-	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
+	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("ibam","d","dz","bg","bga","split","strand","pc","fs","du","5","3","max","scale","trackline","trackopts"),values= list(ibam,d,dz,bg,bga,split,strand,pc,fs,du,five,three,max,scale,trackline,trackopts))
+	options <- createOptions(names=c("ibam", "d", "dz", "bg", "bga", "split", "strand", "pc", "fs", "du", "5", "3", "max", "scale", "trackline", "trackopts"), values=list(ibam, d, dz, bg, bga, split, strand, pc, fs, du, five, three, max, scale, trackline, trackopts))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools genomecov ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools genomecov ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]],g[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
+
+	return(results)
 }

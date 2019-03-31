@@ -52,26 +52,27 @@
 #'   Note: currently has no effect with compressed files.
 #' 
 fisher <- function(a, b, g, m = NULL, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL, split = NULL, nonamecheck = NULL, bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL)
-{ 
+{
 	# Required Inputs
-	a = establishPaths(input=a,name="a",allowRobjects=TRUE)
-	b = establishPaths(input=b,name="b",allowRobjects=TRUE)
-	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
+	a <- establishPaths(input=a, name="a", allowRobjects=TRUE)
+	b <- establishPaths(input=b, name="b", allowRobjects=TRUE)
+	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("m","s","S","f","F","r","e","split","nonamecheck","bed","header","nobuf","iobuf"),values= list(m,s,S,f,F,r,e,split,nonamecheck,bed,header,nobuf,iobuf))
+	options <- createOptions(names=c("m", "s", "S", "f", "F", "r", "e", "split", "nonamecheck", "bed", "header", "nobuf", "iobuf"), values=list(m, s, S, f, F, r, e, split, nonamecheck, bed, header, nobuf, iobuf))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools fisher ", options, " -a ", a[[1]], " -b ", b[[1]], " -g ", g[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=TRUE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools fisher ", options, " -a ", a[[1]], " -b ", b[[1]], " -g ", g[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=TRUE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,a[[2]],b[[2]],g[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, a[[2]], b[[2]], g[[2]]))
+
+	return(results)
 }

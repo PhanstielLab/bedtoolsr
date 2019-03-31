@@ -3,7 +3,6 @@
 #' 
 #' @param i <BAM>
 #' @param files FILE1 .. FILEn
-#' @param labels LAB1 .. LABn
 #' @param s Require overlaps on the same strand.  That is, only tag alignments that have the same
 #'   strand as a feature in the annotation file(s).
 #' 
@@ -26,27 +25,28 @@
 #' @param intervals Use the full interval (including name, score, and strand) to populate tags.
 #'     Requires the -labels option to identify from which file the interval came.
 #' 
-tag <- function(i, files, labels, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL)
-{ 
+#' @param labels LAB1 .. LABn
+tag <- function(i, files, s = NULL, S = NULL, f = NULL, tag = NULL, names = NULL, scores = NULL, intervals = NULL, labels = NULL)
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
-	files = establishPaths(input=files,name="files",allowRobjects=TRUE)
-	labels = establishPaths(input=labels,name="labels",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
+	files <- establishPaths(input=files, name="files", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("s","S","f","tag","names","scores","intervals"),values= list(s,S,f,tag,names,scores,intervals))
+	options <- createOptions(names=c("s", "S", "f", "tag", "names", "scores", "intervals", "labels"), values=list(s, S, f, tag, names, scores, intervals, labels))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools tag ", options, " -i ", i[[1]], " -files ", files[[1]], " -labels ", labels[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools tag ", options, " -i ", i[[1]], " -files ", files[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]],files[[2]],labels[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]], files[[2]]))
+
+	return(results)
 }

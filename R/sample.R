@@ -32,24 +32,25 @@
 #'   Note: currently has no effect with compressed files.
 #' 
 sample <- function(i, n = NULL, seed = NULL, ubam = NULL, s = NULL, header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL)
-{ 
+{
 	# Required Inputs
-	i = establishPaths(input=i,name="i",allowRobjects=TRUE)
+	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("n","seed","ubam","s","header","bed","nobuf","iobuf"),values= list(n,seed,ubam,s,header,bed,nobuf,iobuf))
+	options <- createOptions(names=c("n", "seed", "ubam", "s", "header", "bed", "nobuf", "iobuf"), values=list(n, seed, ubam, s, header, bed, nobuf, iobuf))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools sample ", options, " -i ", i[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools sample ", options, " -i ", i[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,i[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, i[[2]]))
+
+	return(results)
 }

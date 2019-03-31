@@ -24,19 +24,19 @@ is to write output in BAM when using -abam.}
 
 \item{w}{Base pairs added upstream and downstream of each entry
 in A when searching for overlaps in B.
-- Creates symterical "windows" around A.
+- Creates symmetrical "windows" around A.
 - Default is 1000 bp.
 - (INTEGER)}
 
 \item{l}{Base pairs added upstream (left of) of each entry
 in A when searching for overlaps in B.
-- Allows one to define assymterical "windows".
+- Allows one to define asymmetrical "windows".
 - Default is 1000 bp.
 - (INTEGER)}
 
 \item{r}{Base pairs added downstream (right of) of each entry
 in A when searching for overlaps in B.
-- Allows one to define assymterical "windows".
+- Allows one to define asymmetrical "windows".
 - Default is 1000 bp.
 - (INTEGER)}
 

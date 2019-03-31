@@ -14,24 +14,25 @@
 #'   - (INTEGER)
 #' 
 random <- function(g, l = NULL, n = NULL, seed = NULL)
-{ 
+{
 	# Required Inputs
-	g = establishPaths(input=g,name="g",allowRobjects=TRUE)
+	g <- establishPaths(input=g, name="g", allowRobjects=TRUE)
 
-	options = "" 
+	options <- ""
 
 	# Options
-	options = createOptions(names = c("l","n","seed"),values= list(l,n,seed))
+	options <- createOptions(names=c("l", "n", "seed"), values=list(l, n, seed))
 
 	# establish output file 
-	tempfile = tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd = paste0(bedtools.path, "bedtools random ", options, " -g ", g[[1]], " > ", tempfile) 
-	system(cmd) 
-	results = utils::read.table(tempfile,header=FALSE,sep="\t")
+	cmd <- paste0(bedtools.path, "bedtools random ", options, " -g ", g[[1]], " > ", tempfile)
+	system(cmd)
+	results <- utils::read.table(tempfile, header=FALSE, sep="\t")
 
-	# Delete temp files 
-	deleteTempFiles(c(tempfile,g[[2]]))
-	return (results)
+	# Delete temp files
+	deleteTempFiles(c(tempfile, g[[2]]))
+
+	return(results)
 }
