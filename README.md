@@ -55,6 +55,27 @@ First, install [testthat](https://github.com/r-lib/testthat) if not already inst
 install.packages('testthat')
 ````
 
+Load bedtoolsr and testthat
+
+```
+library('testthat')
+library('bedtoolsr')
+```
+
+Perform tests
+```
+testthat::test_package("bedtoolsr")
+```
+
+Expected results
+
+
+```
+══ testthat results  ══════════════════════════════════════════════════════
+OK: 24 SKIPPED: 0 FAILED: 0
+```
+
+
 [![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
 
 
