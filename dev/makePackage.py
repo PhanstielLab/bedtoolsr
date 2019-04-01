@@ -314,9 +314,10 @@ shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "establis
 shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "deleteTempFiles.R"), os.path.join(bedtoolsRpath, "R"))
 
 # Copy tests
-if(not os.path.exists(os.path.join(bedtoolsRpath, "tests"))):
-    print("Copying tests...")
-    shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tests"), os.path.join(bedtoolsRpath, "tests"))
+print("Copying tests...")
+if(os.path.exists(os.path.join(bedtoolsRpath, "inst", "tests"))):
+    shutil.rmtree(os.path.join(bedtoolsRpath, "inst", "tests"))
+shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tests"), os.path.join(bedtoolsRpath, "inst", "tests"))
 
 # Create documentation
 print("Writing documentation...")
