@@ -47,7 +47,7 @@ To generate a new version of bedtoolsr, run [makePackage.py](https://github.com/
 
 ## Build Status
 
-Bedtoolsr uses continuous integration made possible by unit tests using the [testthat] (https://github.com/r-lib/testthat) R package.
+Bedtoolsr uses continuous integration made possible by unit tests using the [testthat](https://github.com/r-lib/testthat) R package.
 
 [![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
 
