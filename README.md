@@ -2,7 +2,7 @@
 
 ## Overview
 
-The [BEDTools suite of programs](https://bedtools.readthedocs.io/) is a widely used set of various utilities for genomic analysis. This R package provides a convenient wrapper for bedtools functions allowing for the documentation and use of them from within the R environment. This includes manual pages for all functions as well as key added features including the ability to provide either file paths or R objects as inputs and outputs.
+The [bedtools suite of programs](https://bedtools.readthedocs.io/) is a widely used set of various utilities for genomic analysis. This R package provides a convenient wrapper for bedtools functions allowing for the documentation and use of them from within the R environment. This includes manual pages for all functions as well as key added features including the ability to provide either file paths or R objects as inputs and outputs.
 
 ## Installation
 
@@ -41,7 +41,7 @@ B.bed = data.frame(chrom=c("chr1"), start=15, end=20)
 
 douglas_phanstiel@med.unc.edu
 
-## Building for Your Version of Bedtools
+## Building for a different verstion of bedtools
 
 In order to more easily support past and future versions of bedtools we adopted a metaprogramming approach.  A single python script reads bedtools --help output and automatically generates the entire R package. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools.
 
