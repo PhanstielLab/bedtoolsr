@@ -1,3 +1,5 @@
+[![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
+
 ## Overview
 
 The [BEDTools suite of programs](https://bedtools.readthedocs.io/) is a widely used set of various utilities for genomic analysis. This R package provides a convenient wrapper for bedtools functions allowing for the documentation and use of them from within the R environment. This includes manual pages for all functions as well as key added features including the ability to provide either paths to files or R objects.
@@ -74,8 +76,5 @@ Expected results
 ══ testthat results  ══════════════════════════════════════════════════════
 OK: 24 SKIPPED: 0 FAILED: 0
 ```
-
-
-[![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
 
 
