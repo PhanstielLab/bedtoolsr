@@ -86,12 +86,14 @@ def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
                     del optionDict[i]
 
     if(usageDict is not None):
+        newUsageDict = usageDict.copy()
         for i in usageDict:
             if(not any(x in usageDict[i] for x in anomalies["fileOptions"])):
                 optionDict[i] = usageDict[i]
-                del usageDict[i]
+                del newUsageDict[i]
             elif(i in optionDict):
                 del optionDict[i]
+        usageDict = newUsageDict
 
     return(infoDict, usageDict, optionDict)
 
