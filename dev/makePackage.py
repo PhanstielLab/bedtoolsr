@@ -299,7 +299,7 @@ with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
 
 print("Writing NAMESPACE file...")
 with open(os.path.join(bedtoolsRpath, "NAMESPACE"), "w") as namespacefile:
-    namespacefile.write("export(" + ", ".join(validbedtoolsFxns) + ")")
+    namespacefile.write("export(" + ", ".join(validbedtoolsFxns) + ")\n")
 
 print("Copying helper functions...")
 
@@ -315,11 +315,19 @@ shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "establis
 # Function to delete temp files
 shutil.copy2(os.path.join(os.path.dirname(os.path.realpath(__file__)), "deleteTempFiles.R"), os.path.join(bedtoolsRpath, "R"))
 
-# Copy tests
+# Copy tests to inst
 print("Copying tests...")
 if(os.path.exists(os.path.join(bedtoolsRpath, "inst", "tests"))):
     shutil.rmtree(os.path.join(bedtoolsRpath, "inst", "tests"))
 shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tests"), os.path.join(bedtoolsRpath, "inst", "tests"))
+
+# Copy tests to new tests dir
+origtestpath = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tests")
+newtestpath  = os.path.join(bedtoolsRpath, "tests")
+if (origtestpath != newtestpath):
+	if(os.path.exists(newtestpath)):
+		shutil.rmtree(newtestpath)
+	shutil.copytree(origtestpath, newtestpath)
 
 # Create documentation
 print("Writing documentation...")
