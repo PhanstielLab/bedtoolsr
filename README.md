@@ -19,6 +19,11 @@ Note that if `bedtools` is not found in R's PATH, or you want to use a specific 
 options(bedtools.path = "[bedtools path]")
 ```
 
+You can also install a specific [release](https://github.com/PhanstielLab/bedtoolsr/releases) for a particular version of bedtools. Download the corresponding zip file, decompress, and install from R:
+
+```
+install.packages("/path/to/bedtools_v2.28.0-7", type="source", repos=NULL)
+```
 
 ### Example Usage
 
