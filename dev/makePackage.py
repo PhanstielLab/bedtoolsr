@@ -206,10 +206,15 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     else:
         file.write(', " > ", tempfile)\n')
         file.write('\tsystem(cmd)\n')
-        file.write('\tif(!is.null(output))\n')
-        file.write('\t\tfile.copy(tempfile, output)\n')
-        file.write('\telse\n')
-        file.write('\t\tresults <- utils::read.table(tempfile, header=%s, sep="\\t")\n' % readheader)
+        file.write('\tif(!is.null(output)) {\n')
+        file.write('\t\tif(file.info(tempfile)$size > 0)\n')
+        file.write('\t\t\tfile.copy(tempfile, output)\n')
+        file.write('\t} else {\n')
+        file.write('\t\tif(file.info(tempfile)$size > 0)\n')
+        file.write('\t\t\tresults <- utils::read.table(tempfile, header=%s, sep="\\t")\n' % readheader)
+        file.write('\t\telse\n')
+        file.write('\t\t\tresults <- data.frame()\n')
+        file.write('\t}\n')
 
     # Delete the temp files
     file.write('\n\t# Delete temp files\n')
