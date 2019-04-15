@@ -23,8 +23,8 @@ options(bedtools.path = "[bedtools path]")
 ### Example Usage
 
 ```
-A.bed = data.frame(chrom=c("chr1", "chr1"), start=c(10, 30), end=c(20, 40))
-B.bed = data.frame(chrom=c("chr1"), start=15, end=20)
+A.bed <- data.frame(chrom=c("chr1", "chr1"), start=c(10, 30), end=c(20, 40))
+B.bed <- data.frame(chrom=c("chr1"), start=15, end=20)
 
 > bedtoolsr::bt.intersect(A.bed, B.bed)
     V1 V2 V3
