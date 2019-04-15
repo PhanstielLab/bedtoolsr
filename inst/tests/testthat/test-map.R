@@ -1,1 +1,0 @@
-../../../tests/testthat/test-map.R

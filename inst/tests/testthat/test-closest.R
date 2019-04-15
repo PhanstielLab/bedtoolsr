@@ -1,1 +1,0 @@
-../../../tests/testthat/test-closest.R

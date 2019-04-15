@@ -7,6 +7,8 @@ import shutil
 from collections import OrderedDict
 import json
 
+FUNCTION_PREFIX = "bt."
+
 #-------------------------------- Functions -------------------------------#
 
 # Define a function that captures all of the information below a header until next1 or next2
@@ -114,7 +116,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
 
     comment = "#' "
 
-    file = open(os.path.join(bedtoolsRpath, "R", "%s.R" % command), "w")
+    file = open(os.path.join(bedtoolsRpath, "R", "%s.R" % (FUNCTION_PREFIX + command)), "w")
 
     summarySplit = infoDict["Summary"].split("\n")
 
@@ -159,7 +161,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         usageDictOptions += key + (" = NULL, " if bedtoolsFxn in anomalies["allowNullEvenIfFile"] and key in anomalies["allowNullEvenIfFile"][bedtoolsFxn] else ", ")
     if(len(setOptions) == 0):
         usageDictOptions = usageDictOptions[:-2]
-    file.write(infoDict["ToolName"] + " <- " + "function(" + usageDictOptions + setOptions + ")\n")
+    file.write(FUNCTION_PREFIX + infoDict["ToolName"] + " <- " + "function(" + usageDictOptions + setOptions + ")\n")
     file.write("{\n")
 
     # Establish the file paths and write temp files
@@ -304,7 +306,7 @@ with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
 
 print("Writing NAMESPACE file...")
 with open(os.path.join(bedtoolsRpath, "NAMESPACE"), "w") as namespacefile:
-    namespacefile.write("export(" + ", ".join(validbedtoolsFxns) + ")\n")
+    namespacefile.write("export(" + ", ".join([FUNCTION_PREFIX + s for s in validbedtoolsFxns]) + ")\n")
 
 print("Copying helper functions...")
 
