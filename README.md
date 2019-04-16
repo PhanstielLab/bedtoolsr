@@ -46,13 +46,13 @@ B.bed <- data.frame(chrom=c("chr1"), start=15, end=20)
 
 douglas_phanstiel@med.unc.edu
 
-## Building for a different verstion of bedtools
+## Building for a different version of bedtools
 
 In order to more easily support past and future versions of bedtools we adopted a metaprogramming approach.  A single python script reads bedtools --help output and automatically generates the entire R package. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools.
 
 To generate a new version of bedtoolsr, run [makePackage.py](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/makePackage.py). There are command-line arguments for the location of bedtools, where the output package should go, and the package version suffix. Special cases are specified in [anomalies.json](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/anomalies.json).
 
-## Build Status
+## Testing
 
 Bedtoolsr uses continuous integration made possible by unit tests using the [testthat](https://github.com/r-lib/testthat) R package.  Once installed you can perform unit tests for most of the bedtoolsr functions using the following code:
 
