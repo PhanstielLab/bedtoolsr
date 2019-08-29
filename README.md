@@ -82,4 +82,6 @@ Expected results
 OK: 24 SKIPPED: 0 FAILED: 0
 ```
 
+## Website
 
+For more information please see the [bedtoolsr website](http://phanstiel-lab.med.unc.edu/bedtoolsr.html) 
