@@ -22,8 +22,8 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
   inputtmps <- c()
   for(item in input)
   {
-    i = i + 1
-    filepath = item
+    i <- i + 1
+    filepath <- item
     # if it is an R object
     if(!is.character(item) && !is.numeric(item))
     {
@@ -36,6 +36,10 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
       
       # record temp file for deletion
       inputtmps <- c(inputtmps, filepath)
+    }
+    else if(!file.exists(item) && file.exists(system.file("data", item, package = "bedtoolsr")))
+    {
+      filepath <- system.file("data", item, package = "bedtoolsr")
     }
     
     # record file path for use
