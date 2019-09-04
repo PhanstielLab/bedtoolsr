@@ -1,12 +1,10 @@
-#' Returns the base pair complement of a feature file.
+#' Report summary statistics of the intervals in a file 
 #' 
-#' @param i <bed/gff/vcf>
+#' @param i <bed/gff/vcf/bam>
 #' @param g <genome>
-#' @param L Limit output to solely the chromosomes with records in the input file.
-#' 
 #' @param output Output filepath instead of returning output in R.
 #' 
-bt.complement <- function(i, g, L = NULL, output = NULL)
+bt.summary <- function(i, g, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -15,13 +13,13 @@ bt.complement <- function(i, g, L = NULL, output = NULL)
 	options <- ""
 
 	# Options
-	options <- createOptions(names=c("L"), values=list(L))
+	options <- createOptions(names=c(), values=list())
 
 	# establish output file 
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
-	cmd <- paste0(bedtools.path, "bedtools complement ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
+	cmd <- paste0(bedtools.path, "bedtools summary ", options, " -i ", i[[1]], " -g ", g[[1]], " > ", tempfile)
 	system(cmd)
 	if(!is.null(output)) {
 		if(file.info(tempfile)$size > 0)

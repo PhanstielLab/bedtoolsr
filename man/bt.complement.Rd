@@ -4,12 +4,14 @@
 \alias{bt.complement}
 \title{Returns the base pair complement of a feature file.}
 \usage{
-bt.complement(i, g, output = NULL)
+bt.complement(i, g, L = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}
 
 \item{g}{<genome>}
+
+\item{L}{Limit output to solely the chromosomes with records in the input file.}
 
 \item{output}{Output filepath instead of returning output in R.}
 }

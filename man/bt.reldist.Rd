@@ -11,7 +11,7 @@ bt.reldist(a, b, detail = NULL, output = NULL)
 
 \item{b}{<bed/gff/vcf>}
 
-\item{detail}{Instead of a summary, report the relative distance for each interval in A}
+\item{detail}{Report the relativedistance for each interval in A}
 
 \item{output}{Output filepath instead of returning output in R.}
 }

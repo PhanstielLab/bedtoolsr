@@ -2,7 +2,7 @@
 #' 
 #' @param a <bed/gff/vcf>
 #' @param b <bed/gff/vcf>
-#' @param detail Instead of a summary, report the relative distance for each interval in A
+#' @param detail Report the relativedistance for each interval in A
 #' 
 #' @param output Output filepath instead of returning output in R.
 #' 

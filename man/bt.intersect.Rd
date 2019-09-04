@@ -5,11 +5,12 @@
 \title{Report overlaps between two feature files.}
 \usage{
 bt.intersect(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL,
-  wao = NULL, u = NULL, c = NULL, v = NULL, ubam = NULL,
-  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
-  split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
-  names = NULL, filenames = NULL, sortout = NULL, bed = NULL,
-  header = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
+  wao = NULL, u = NULL, c = NULL, C = NULL, v = NULL,
+  ubam = NULL, s = NULL, S = NULL, f = NULL, F = NULL,
+  r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL,
+  sorted = NULL, names = NULL, filenames = NULL, sortout = NULL,
+  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL,
+  output = NULL)
 }
 \arguments{
 \item{a}{<bed/gff/vcf/bam>}
@@ -42,7 +43,12 @@ pairs of overlap between the two features.
 
 \item{c}{For each entry in A, report the number of overlaps with B.
 - Reports 0 for A entries that have no overlap with B.
-- Overlaps restricted by -f and -r.}
+- Overlaps restricted by -f, -F, -r, and -s.}
+
+\item{C}{For each entry in A, separately report the number of
+- overlaps with each B file on a distinct line.
+- Reports 0 for A entries that have no overlap with B.
+- Overlaps restricted by -f, -F, -r, and -s.}
 
 \item{v}{Only report those entries in A that have _no overlaps_ with B.
 - Similar to "grep -v" (an homage).}
