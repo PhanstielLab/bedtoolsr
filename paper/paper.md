@@ -12,6 +12,7 @@ authors:
     affiliation: 1
   - name: Craig D. Wenger
     affiliation: 2
+    orcid: 0000-0002-7361-8456
   - name: Eric S. Davis
     affiliation: 3
     orcid: 0000-0003-4051-3217
