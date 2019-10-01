@@ -40,6 +40,46 @@ B.bed <- data.frame(chrom=c("chr1"), start=15, end=20)
 1 chr1 15 20
 ```
 
+## Building for a different version of bedtools
+
+In order to more easily support past and future versions of bedtools we adopted a metaprogramming approach.  A single python script reads `bedtools --help` output and automatically generates the entire R package. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools.
+
+To generate a new version of bedtoolsr, run [makePackage.py](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/makePackage.py). There are command-line arguments for the location of bedtools, where the output package should go, and the package version suffix. Special cases are specified in [anomalies.json](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/anomalies.json).
+
+## Testing
+
+Bedtoolsr uses continuous integration made possible by unit tests using the [testthat](https://github.com/r-lib/testthat) R package.  Once installed you can perform unit tests for most of the bedtoolsr functions using the following code:
+
+First, install [testthat](https://github.com/r-lib/testthat) if not already installed:
+```
+install.packages('testthat')
+````
+
+Load `bedtoolsr` and `testthat`:
+```
+library('testthat')
+library('bedtoolsr')
+```
+
+Perform tests:
+```
+testthat::test_package("bedtoolsr")
+```
+
+Expected results:
+```
+══ testthat results  ══════════════════════════════════════════════════════
+OK: 24 SKIPPED: 0 FAILED: 0
+```
+
+## Contributions
+
+We welcome user feedback and contributions on this package. If you have a question or a problem, the best approach is to report it is through [GitHub's issue tracker](https://github.com/PhanstielLab/bedtoolsr/issues). If you want to propose a change to the source code, either to fix a bug or make an improvement, use a [pull request](https://github.com/PhanstielLab/bedtoolsr/pulls).
+
+## Website
+
+For more information, please see the [bedtoolsr website](http://phanstiel-lab.med.unc.edu/bedtoolsr.html).
+
 ## Authors
 
 * [Mayura Patwardhan](https://github.com/mayurapatwardhan)
@@ -49,43 +89,3 @@ B.bed <- data.frame(chrom=c("chr1"), start=15, end=20)
 ## Contact
 
 douglas_phanstiel@med.unc.edu
-
-## Building for a different version of bedtools
-
-In order to more easily support past and future versions of bedtools we adopted a metaprogramming approach.  A single python script reads bedtools --help output and automatically generates the entire R package. It was designed to be generic so that it can be rebuilt quickly for any version of bedtools.
-
-To generate a new version of bedtoolsr, run [makePackage.py](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/makePackage.py). There are command-line arguments for the location of bedtools, where the output package should go, and the package version suffix. Special cases are specified in [anomalies.json](https://github.com/PhanstielLab/bedtoolsr/blob/master/dev/anomalies.json).
-
-## Testing
-
-Bedtoolsr uses continuous integration made possible by unit tests using the [testthat](https://github.com/r-lib/testthat) R package.  Once installed you can perform unit tests for most of the bedtoolsr functions using the following code:
-
-First, install [testthat](https://github.com/r-lib/testthat) if not already installed
-
-```
-install.packages('testthat')
-````
-
-Load bedtoolsr and testthat
-
-```
-library('testthat')
-library('bedtoolsr')
-```
-
-Perform tests
-```
-testthat::test_package("bedtoolsr")
-```
-
-Expected results
-
-
-```
-══ testthat results  ══════════════════════════════════════════════════════
-OK: 24 SKIPPED: 0 FAILED: 0
-```
-
-## Website
-
-For more information please see the [bedtoolsr website](http://phanstiel-lab.med.unc.edu/bedtoolsr.html) 
