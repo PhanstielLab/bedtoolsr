@@ -11,5 +11,5 @@ Imports:
     utils
 Suggests:
     testthat
-License: MIT
+License: MIT + file LICENSE
 RoxygenNote: 6.1.1
