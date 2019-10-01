@@ -25,6 +25,10 @@ You can also install a specific [release](https://github.com/PhanstielLab/bedtoo
 install.packages("/path/to/bedtools_v2.28.0-7", type="source", repos=NULL)
 ```
 
+### Operating System Support
+
+bedtoolsr should work on any system with R and bedtools installed. It has been tested on macOS (version 10.14 "Mojave") and Linux (Ubuntu version 18.04). bedtools is not available for Windows; however, you can either use a virtual machine or [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). In either case, R from the Windows side would not be able to access bedtools running on the Linux side, so R and bedtoolsr would also have to be installed on the Linux side.
+
 ### Example Usage
 
 ```
