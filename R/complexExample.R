@@ -45,13 +45,13 @@ library(ggplot2)
 ggplot(data = df, aes(x = 1, y = percent, fill = group))+
   geom_col(col = "white")+
   coord_polar("y") + 
-  scale_fill_brewer("Blues")+
+  scale_fill_manual(values = c("#2171b5", "#bdd7e7", "#6baed6"))+
   labs(title = "Loop anchors with bound CTCF")+
   annotate(geom = "text",
            x = c(1.0, 1.25, 1.75),
            y = c(60, 8, 17.25),
            label = paste0(df$group, " (", df$percent, "%)"),
-           col = c("black", "white", "black"),
+           col = c("white", "white", "black"),
            size = 4.5)+
   theme_void()+
   theme(
