@@ -14,12 +14,12 @@ loopsBedpe  <- read.table(file = "molcel_6338_Table_S2_Loops_PMA.txt", header = 
 ctcfPeaks   <- read.table(file = gzfile("CTCF_peaks.txt.gz"), header = T)
 
 ## Add 5kb up/downstream from each ctcf peak with the bedtoolsr slop function
-ctcfPeaks   <- bedtoolsr::slop(i = ctcfPeaks, g = "data/hg19", b = 5000, header = T)
+ctcfPeaks   <- bedtoolsr::bt.slop(i = ctcfPeaks, g = "data/hg19", b = 5000, header = T)
 
 ## Compute overlaps with bedtoolsr (find loops that have CTCF bound at both, one, or no ends?)
-bothEnds    <- bedtoolsr::pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "both")
-oneEnd      <- bedtoolsr::pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "xor")
-neitherEnd  <- bedtoolsr::pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "neither")
+bothEnds    <- bedtoolsr::bt.pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "both")
+oneEnd      <- bedtoolsr::bt.pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "xor")
+neitherEnd  <- bedtoolsr::bt.pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "neither")
 
 ## Count the number of loops found in each case
 totalN      <- nrow(unique(loopsBedpe))
