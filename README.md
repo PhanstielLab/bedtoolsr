@@ -42,7 +42,7 @@ B.bed <- data.frame(chrom=c("chr1"), start=15, end=20)
 
 ### Complex Example
 
-In this more complex example, loop calls in bedpe format are downloaded from [Phanstiel et al., 2017](https://www.cell.com/molecular-cell/fulltext/S1097-2765(17)30603-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS1097276517306032%3Fshowall%3Dtrue) and CTCF ChIP-seq peak calls are downloaded from [Van Bortle et al., 2017.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1310-3) `bedtoolsr` is used to add 5kb on either side of the CTCF peaks with the `bedtoolsr::slop` function before the `bedtoolsr::pairtobed` function computes overlap of CTCF peaks with either both, one, or neither loop anchor from the loop call bedpe file. The total and percentage of loops found in each case is calculated then plotted with `ggplot2`.
+In this more complex example, loop calls in bedpe format are downloaded from [Phanstiel et al., 2017](https://www.cell.com/molecular-cell/fulltext/S1097-2765(17)30603-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS1097276517306032%3Fshowall%3Dtrue) and CTCF ChIP-seq peak calls are downloaded from [Van Bortle et al., 2017](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1310-3). `bedtoolsr` is used to add 5kb on either side of the CTCF peaks with the `bedtoolsr::slop` function before the `bedtoolsr::pairtobed` function computes overlap of CTCF peaks with either both, one, or neither loop anchor from the loop call bedpe file. The total and percentage of loops found in each case is calculated then plotted with `ggplot2`.
 
 ```
 ## Download and unzip loop calls bedpe file from Phanstiel et. al, 2017
