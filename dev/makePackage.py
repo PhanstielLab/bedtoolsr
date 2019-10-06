@@ -302,7 +302,7 @@ with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
     descriptionfile.write("    utils\n")
     descriptionfile.write("Suggests:\n")
     descriptionfile.write("    testthat\n")
-    descriptionfile.write("License: MIT\n")
+    descriptionfile.write("License: MIT + file LICENSE\n")
 
 print("Writing NAMESPACE file...")
 with open(os.path.join(bedtoolsRpath, "NAMESPACE"), "w") as namespacefile:
