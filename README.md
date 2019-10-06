@@ -42,7 +42,7 @@ B.bed <- data.frame(chrom=c("chr1"), start=15, end=20)
 
 ### Complex Example
 
-In this more complex example, loop calls in bedpe format are downloaded from [Phanstiel et. al, 2017](https://www.cell.com/molecular-cell/fulltext/S1097-2765(17)30603-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS1097276517306032%3Fshowall%3Dtrue) and CTCF ChIP-seq peak calls are downloaded from [Van Bortle et. al, 2017.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1310-3) `bedtoolsr` is used to add 5kb on either side of the CTCF peaks with the `bedtoolsr::slop` function before the `bedtoolsr::pairtobed` function computes overlap of CTCF peaks with either both, one, or neither loop anchor from the loop call bedpe file. The total and percentage of loops found in each case is calculated then plotted with `ggplot2`.
+In this more complex example, loop calls in bedpe format are downloaded from [Phanstiel et al., 2017](https://www.cell.com/molecular-cell/fulltext/S1097-2765(17)30603-2?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS1097276517306032%3Fshowall%3Dtrue) and CTCF ChIP-seq peak calls are downloaded from [Van Bortle et al., 2017.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1310-3) `bedtoolsr` is used to add 5kb on either side of the CTCF peaks with the `bedtoolsr::slop` function before the `bedtoolsr::pairtobed` function computes overlap of CTCF peaks with either both, one, or neither loop anchor from the loop call bedpe file. The total and percentage of loops found in each case is calculated then plotted with `ggplot2`.
 
 ```
 ## Download and unzip loop calls bedpe file from Phanstiel et. al, 2017
@@ -61,7 +61,7 @@ loopsBedpe  <- read.table(file = "molcel_6338_Table_S2_Loops_PMA.txt", header = 
 ctcfPeaks   <- read.table(file = gzfile("CTCF_peaks.txt.gz"), header = T)
 
 ## Add 5kb up/downstream from each ctcf peak with the bedtoolsr slop function
-ctcfPeaks   <- bedtoolsr::bt.slop(i = ctcfPeaks, g = "data/hg19", b = 5000, header = T)
+ctcfPeaks   <- bedtoolsr::bt.slop(i = ctcfPeaks, g = "hg19", b = 5000, header = T)
 
 ## Compute overlaps with bedtoolsr (find loops that have CTCF bound at both, one, or no ends?)
 bothEnds    <- bedtoolsr::bt.pairtobed(a = loopsBedpe, b = ctcfPeaks, type = "both")
