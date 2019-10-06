@@ -4,7 +4,7 @@ Type: Package
 Title: Bedtools Wrapper
 Version: 2.29.0-1
 Date: 2019-09-04
-Author: Mayura Patwardhan, Craig Wenger, Doug Phanstiel
+Author: Mayura Patwardhan, Craig Wenger, Eric Davis, Doug Phanstiel
 Maintainer: Doug Phanstiel <douglas_phanstiel@med.unc.edu>
 Description: Wrapper library for the bedtools utilities for genome arithmetic.
 Imports:

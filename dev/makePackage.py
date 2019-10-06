@@ -295,7 +295,7 @@ with open(os.path.join(bedtoolsRpath, "DESCRIPTION"), "w") as descriptionfile:
     descriptionfile.write("Title: Bedtools Wrapper\n")
     descriptionfile.write("Version: %s-%d\n" % (version[1:], versionsuffix))
     descriptionfile.write("Date: "+ str(datetime.date.today()) + "\n")
-    descriptionfile.write("Author: Mayura Patwardhan, Craig Wenger, Doug Phanstiel\n")
+    descriptionfile.write("Author: Mayura Patwardhan, Craig Wenger, Eric Davis, Doug Phanstiel\n")
     descriptionfile.write("Maintainer: Doug Phanstiel <douglas_phanstiel@med.unc.edu>\n")
     descriptionfile.write("Description: Wrapper library for the bedtools utilities for genome arithmetic.\n")
     descriptionfile.write("Imports:\n")
