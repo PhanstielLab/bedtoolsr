@@ -272,8 +272,6 @@ if not os.path.exists(os.path.join(bedtoolsRpath, "man")):
     os.makedirs(os.path.join(bedtoolsRpath, "man"))
 if not os.path.exists(os.path.join(bedtoolsRpath, "R")):
     os.makedirs(os.path.join(bedtoolsRpath, "R"))
-if not os.path.exists(os.path.join(bedtoolsRpath, "dev")):
-    os.makedirs(os.path.join(bedtoolsRpath, "dev"))
 
 print("Reading in all bedtools functions...")
 bedtoolsFxns, version = readbedtoolsfxns(bedtoolspath, bedtoolsRpath)
