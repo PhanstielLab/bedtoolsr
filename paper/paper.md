@@ -72,6 +72,6 @@ We thank Erika Deoudes for her contributions to the website and logo design and 
 
 # Funding
 
-D.H.P. is supported by the National Institutes of Health (NIH), National Human Genome Research Institute (NHGRI) grant R00HG008662 and National Insti-tutes of Health (NIH), National Institute of General Medical Sciences (NIGMS) grant R35GM128645. E.S.D. was supported in part by a grant from the National Institute of General Medical Sciences under award 5T32 GM067553
+D.H.P. is supported by the National Institutes of Health (NIH), National Human Genome Research Institute (NHGRI) grant R00HG008662 and National Institutes of Health (NIH), National Institute of General Medical Sciences (NIGMS) grant R35GM128645. E.S.D. was supported in part by a grant from the National Institute of General Medical Sciences under award 5T32 GM067553
 
 # References
