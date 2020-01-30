@@ -1,5 +1,3 @@
-options(scipen=999)
-
 #' Determines if arguments are paths or R objects. Makes temp files when
 #' neccesary. Makes a list of files to use in bedtools call. Makes a list
 #' of temp files to delete at end of function.
@@ -11,6 +9,9 @@ options(scipen=999)
 #' ### Define a function that determines establishes files and paths for bedtools functions
 establishPaths <- function(input, name="", allowRobjects=TRUE)
 {
+  oo <- options(scipen = 999)
+  on.exit(options(oo))
+  
   if(is.null(input))
     return(NULL)
   

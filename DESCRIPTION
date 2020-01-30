@@ -2,7 +2,7 @@ Package: bedtoolsr
 Encoding: UTF-8
 Type: Package
 Title: Bedtools Wrapper
-Version: 2.29.0-4
+Version: 2.29.0-5
 Date: 2020-01-29
 Author: Mayura Patwardhan, Craig Wenger, Eric Davis, Doug Phanstiel
 Maintainer: Doug Phanstiel <douglas_phanstiel@med.unc.edu>
