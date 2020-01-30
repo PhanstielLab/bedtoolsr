@@ -5,8 +5,17 @@
 \title{Creates a batch script to create IGV images 
 at each interval defined in a BED/GFF/VCF file.}
 \usage{
-bt.igv(i, path = NULL, sess = NULL, sort = NULL, clps = NULL,
-  name = NULL, slop = NULL, img = NULL, output = NULL)
+bt.igv(
+  i,
+  path = NULL,
+  sess = NULL,
+  sort = NULL,
+  clps = NULL,
+  name = NULL,
+  slop = NULL,
+  img = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

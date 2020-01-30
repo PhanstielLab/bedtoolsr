@@ -4,8 +4,7 @@
 \alias{bt.bedtobam}
 \title{Converts feature records to BAM format.}
 \usage{
-bt.bedtobam(i, g, mapq = NULL, bed12 = NULL, ubam = NULL,
-  output = NULL)
+bt.bedtobam(i, g, mapq = NULL, bed12 = NULL, ubam = NULL, output = NULL)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

@@ -4,8 +4,17 @@
 \alias{bt.pairtopair}
 \title{Report overlaps between two paired-end BED files (BEDPE).}
 \usage{
-bt.pairtopair(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL,
-  is = NULL, rdn = NULL, output = NULL)
+bt.pairtopair(
+  a,
+  b,
+  f = NULL,
+  type = NULL,
+  slop = NULL,
+  ss = NULL,
+  is = NULL,
+  rdn = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{a}{<BEDPE>}

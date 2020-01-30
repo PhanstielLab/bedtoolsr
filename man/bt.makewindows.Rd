@@ -4,8 +4,16 @@
 \alias{bt.makewindows}
 \title{Makes adjacent or sliding windows across a genome or BED file.}
 \usage{
-bt.makewindows(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL,
-  reverse = NULL, i = NULL, output = NULL)
+bt.makewindows(
+  g = NULL,
+  b = NULL,
+  w = NULL,
+  s = NULL,
+  n = NULL,
+  reverse = NULL,
+  i = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{g}{<genome> OR}

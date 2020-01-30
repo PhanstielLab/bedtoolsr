@@ -4,10 +4,27 @@
 \alias{bt.genomecov}
 \title{Compute the coverage of a feature file among a genome.}
 \usage{
-bt.genomecov(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL,
-  bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL,
-  du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL,
-  trackline = NULL, trackopts = NULL, output = NULL)
+bt.genomecov(
+  i,
+  g,
+  ibam = NULL,
+  d = NULL,
+  dz = NULL,
+  bg = NULL,
+  bga = NULL,
+  split = NULL,
+  strand = NULL,
+  pc = NULL,
+  fs = NULL,
+  du = NULL,
+  five = NULL,
+  three = NULL,
+  max = NULL,
+  scale = NULL,
+  trackline = NULL,
+  trackopts = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

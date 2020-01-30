@@ -4,9 +4,18 @@
 \alias{bt.getfasta}
 \title{Extract DNA sequences from a fasta file based on feature coordinates.}
 \usage{
-bt.getfasta(fi, bed, fo = NULL, name = NULL, nameplus = NULL,
-  split = NULL, tab = NULL, s = NULL, fullHeader = NULL,
-  output = NULL)
+bt.getfasta(
+  fi,
+  bed,
+  fo = NULL,
+  name = NULL,
+  nameplus = NULL,
+  split = NULL,
+  tab = NULL,
+  s = NULL,
+  fullHeader = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{fi}{<fasta>}

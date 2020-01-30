@@ -4,8 +4,15 @@
 \alias{bt.maskfasta}
 \title{Mask a fasta file based on feature coordinates.}
 \usage{
-bt.maskfasta(fi, fo, bed, soft = NULL, mc = NULL, fullHeader = NULL,
-  output = NULL)
+bt.maskfasta(
+  fi,
+  fo,
+  bed,
+  soft = NULL,
+  mc = NULL,
+  fullHeader = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{fi}{<fasta>}

@@ -5,12 +5,38 @@
 \title{For each feature in A, finds the closest 
 feature (upstream or downstream) in B.}
 \usage{
-bt.closest(a, b, d = NULL, D = NULL, io = NULL, iu = NULL,
-  id = NULL, fu = NULL, fd = NULL, t = NULL, mdb = NULL,
-  k = NULL, N = NULL, s = NULL, S = NULL, f = NULL, F = NULL,
-  r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL,
-  names = NULL, filenames = NULL, sortout = NULL, bed = NULL,
-  header = NULL, nobuf = NULL, iobuf = NULL, output = NULL)
+bt.closest(
+  a,
+  b,
+  d = NULL,
+  D = NULL,
+  io = NULL,
+  iu = NULL,
+  id = NULL,
+  fu = NULL,
+  fd = NULL,
+  t = NULL,
+  mdb = NULL,
+  k = NULL,
+  N = NULL,
+  s = NULL,
+  S = NULL,
+  f = NULL,
+  F = NULL,
+  r = NULL,
+  e = NULL,
+  split = NULL,
+  g = NULL,
+  nonamecheck = NULL,
+  names = NULL,
+  filenames = NULL,
+  sortout = NULL,
+  bed = NULL,
+  header = NULL,
+  nobuf = NULL,
+  iobuf = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}

@@ -4,9 +4,19 @@
 \alias{bt.pairtobed}
 \title{Report overlaps between a BEDPE file and a BED/GFF/VCF file.}
 \usage{
-bt.pairtobed(a, b, abam = NULL, ubam = NULL, bedpe = NULL,
-  ed = NULL, f = NULL, s = NULL, S = NULL, type = NULL,
-  output = NULL)
+bt.pairtobed(
+  a,
+  b,
+  abam = NULL,
+  ubam = NULL,
+  bedpe = NULL,
+  ed = NULL,
+  f = NULL,
+  s = NULL,
+  S = NULL,
+  type = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{a}{<bedpe>}

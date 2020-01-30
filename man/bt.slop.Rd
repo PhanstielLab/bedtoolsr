@@ -4,8 +4,17 @@
 \alias{bt.slop}
 \title{Add requested base pairs of "slop" to each feature.}
 \usage{
-bt.slop(i, g, b = NULL, l = NULL, r = NULL, s = NULL, pct = NULL,
-  header = NULL, output = NULL)
+bt.slop(
+  i,
+  g,
+  b = NULL,
+  l = NULL,
+  r = NULL,
+  s = NULL,
+  pct = NULL,
+  header = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

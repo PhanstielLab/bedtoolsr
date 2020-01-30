@@ -5,8 +5,16 @@
 \title{Combines multiple BedGraph files into a single file,
 allowing coverage comparisons between them.}
 \usage{
-bt.unionbedg(i, header = NULL, names = NULL, g = NULL,
-  empty = NULL, filler = NULL, examples = NULL, output = NULL)
+bt.unionbedg(
+  i,
+  header = NULL,
+  names = NULL,
+  g = NULL,
+  empty = NULL,
+  filler = NULL,
+  examples = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{FILE1 FILE2 .. FILEn

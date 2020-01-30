@@ -5,9 +5,17 @@
 \title{Identifies common intervals among multiple
 BED/GFF/VCF files.}
 \usage{
-bt.multiinter(i, cluster = NULL, header = NULL, names = NULL,
-  g = NULL, empty = NULL, filler = NULL, examples = NULL,
-  output = NULL)
+bt.multiinter(
+  i,
+  cluster = NULL,
+  header = NULL,
+  names = NULL,
+  g = NULL,
+  empty = NULL,
+  filler = NULL,
+  examples = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{FILE1 FILE2 .. FILEn

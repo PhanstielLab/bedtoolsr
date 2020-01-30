@@ -4,10 +4,25 @@
 \alias{bt.fisher}
 \title{Calculate Fisher statistic b/w two feature files.}
 \usage{
-bt.fisher(a, b, g, m = NULL, s = NULL, S = NULL, f = NULL,
-  F = NULL, r = NULL, e = NULL, split = NULL, nonamecheck = NULL,
-  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL,
-  output = NULL)
+bt.fisher(
+  a,
+  b,
+  g,
+  m = NULL,
+  s = NULL,
+  S = NULL,
+  f = NULL,
+  F = NULL,
+  r = NULL,
+  e = NULL,
+  split = NULL,
+  nonamecheck = NULL,
+  bed = NULL,
+  header = NULL,
+  nobuf = NULL,
+  iobuf = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}

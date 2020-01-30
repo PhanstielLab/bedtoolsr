@@ -4,8 +4,17 @@
 \alias{bt.flank}
 \title{Creates flanking interval(s) for each BED/GFF/VCF feature.}
 \usage{
-bt.flank(i, g, b = NULL, l = NULL, r = NULL, s = NULL,
-  pct = NULL, header = NULL, output = NULL)
+bt.flank(
+  i,
+  g,
+  b = NULL,
+  l = NULL,
+  r = NULL,
+  s = NULL,
+  pct = NULL,
+  header = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

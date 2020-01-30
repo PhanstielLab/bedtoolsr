@@ -4,9 +4,18 @@
 \alias{bt.sample}
 \title{Take sample of input file(s) using reservoir sampling algorithm.}
 \usage{
-bt.sample(i, n = NULL, seed = NULL, ubam = NULL, s = NULL,
-  header = NULL, bed = NULL, nobuf = NULL, iobuf = NULL,
-  output = NULL)
+bt.sample(
+  i,
+  n = NULL,
+  seed = NULL,
+  ubam = NULL,
+  s = NULL,
+  header = NULL,
+  bed = NULL,
+  nobuf = NULL,
+  iobuf = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}

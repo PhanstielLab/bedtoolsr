@@ -4,9 +4,20 @@
 \alias{bt.multicov}
 \title{Counts sequence coverage for multiple bams at specific loci.}
 \usage{
-bt.multicov(bams, bed, split = NULL, s = NULL, S = NULL, f = NULL,
-  r = NULL, q = NULL, D = NULL, F = NULL, p = NULL,
-  output = NULL)
+bt.multicov(
+  bams,
+  bed,
+  split = NULL,
+  s = NULL,
+  S = NULL,
+  f = NULL,
+  r = NULL,
+  q = NULL,
+  D = NULL,
+  F = NULL,
+  p = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{bams}{aln.1.bam aln.2.bam ... aln.n.bam}

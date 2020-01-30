@@ -4,10 +4,21 @@
 \alias{bt.shuffle}
 \title{Randomly permute the locations of a feature file among a genome.}
 \usage{
-bt.shuffle(i, g, excl = NULL, incl = NULL, chrom = NULL,
-  seed = NULL, f = NULL, chromFirst = NULL, bedpe = NULL,
-  maxTries = NULL, noOverlapping = NULL, allowBeyondChromEnd = NULL,
-  output = NULL)
+bt.shuffle(
+  i,
+  g,
+  excl = NULL,
+  incl = NULL,
+  chrom = NULL,
+  seed = NULL,
+  f = NULL,
+  chromFirst = NULL,
+  bedpe = NULL,
+  maxTries = NULL,
+  noOverlapping = NULL,
+  allowBeyondChromEnd = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

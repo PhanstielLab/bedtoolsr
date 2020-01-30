@@ -5,9 +5,20 @@
 \title{Summarizes a dataset column based upon
 common column groupings. Akin to the SQL "group by" command.}
 \usage{
-bt.groupby(i, g = NULL, c = NULL, o = NULL, full = NULL,
-  inheader = NULL, outheader = NULL, header = NULL,
-  ignorecase = NULL, prec = NULL, delim = NULL, output = NULL)
+bt.groupby(
+  i,
+  g = NULL,
+  c = NULL,
+  o = NULL,
+  full = NULL,
+  inheader = NULL,
+  outheader = NULL,
+  header = NULL,
+  ignorecase = NULL,
+  prec = NULL,
+  delim = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}

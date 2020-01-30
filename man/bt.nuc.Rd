@@ -4,8 +4,16 @@
 \alias{bt.nuc}
 \title{Profiles the nucleotide content of intervals in a fasta file.}
 \usage{
-bt.nuc(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL,
-  fullHeader = NULL, output = NULL)
+bt.nuc(
+  fi,
+  bed,
+  s = NULL,
+  seq = NULL,
+  pattern = NULL,
+  C = NULL,
+  fullHeader = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{fi}{<fasta>}

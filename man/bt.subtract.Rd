@@ -5,11 +5,29 @@
 \title{Removes the portion(s) of an interval that is overlapped
 by another feature(s).}
 \usage{
-bt.subtract(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL,
-  s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e = NULL,
-  split = NULL, g = NULL, nonamecheck = NULL, sorted = NULL,
-  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL,
-  output = NULL)
+bt.subtract(
+  a,
+  b,
+  A = NULL,
+  N = NULL,
+  wb = NULL,
+  wo = NULL,
+  s = NULL,
+  S = NULL,
+  f = NULL,
+  F = NULL,
+  r = NULL,
+  e = NULL,
+  split = NULL,
+  g = NULL,
+  nonamecheck = NULL,
+  sorted = NULL,
+  bed = NULL,
+  header = NULL,
+  nobuf = NULL,
+  iobuf = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}

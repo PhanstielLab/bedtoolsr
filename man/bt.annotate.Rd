@@ -5,8 +5,16 @@
 \title{Annotates the depth & breadth of coverage of features from mult. files
 on the intervals in -i.}
 \usage{
-bt.annotate(i, files, names = NULL, counts = NULL, both = NULL,
-  s = NULL, S = NULL, output = NULL)
+bt.annotate(
+  i,
+  files,
+  names = NULL,
+  counts = NULL,
+  both = NULL,
+  s = NULL,
+  S = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

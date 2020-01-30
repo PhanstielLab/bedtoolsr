@@ -6,10 +6,24 @@
 Jaccard is the length of the intersection over the union.
 Values range from 0 (no intersection) to 1 (self intersection).}
 \usage{
-bt.jaccard(a, b, s = NULL, S = NULL, f = NULL, F = NULL,
-  r = NULL, e = NULL, split = NULL, g = NULL, nonamecheck = NULL,
-  bed = NULL, header = NULL, nobuf = NULL, iobuf = NULL,
-  output = NULL)
+bt.jaccard(
+  a,
+  b,
+  s = NULL,
+  S = NULL,
+  f = NULL,
+  F = NULL,
+  r = NULL,
+  e = NULL,
+  split = NULL,
+  g = NULL,
+  nonamecheck = NULL,
+  bed = NULL,
+  header = NULL,
+  nobuf = NULL,
+  iobuf = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{a}{<bed/gff/vcf>}

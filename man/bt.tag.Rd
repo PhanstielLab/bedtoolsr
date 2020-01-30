@@ -5,9 +5,19 @@
 \title{Annotates a BAM file based on overlaps with multiple BED/GFF/VCF files
 on the intervals in -i.}
 \usage{
-bt.tag(i, files, s = NULL, S = NULL, f = NULL, tag = NULL,
-  names = NULL, scores = NULL, intervals = NULL, labels = NULL,
-  output = NULL)
+bt.tag(
+  i,
+  files,
+  s = NULL,
+  S = NULL,
+  f = NULL,
+  tag = NULL,
+  names = NULL,
+  scores = NULL,
+  intervals = NULL,
+  labels = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<BAM>}

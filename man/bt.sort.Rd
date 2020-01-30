@@ -4,9 +4,19 @@
 \alias{bt.sort}
 \title{Sorts a feature file in various and useful ways.}
 \usage{
-bt.sort(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL,
-  chrThenSizeD = NULL, chrThenScoreA = NULL, chrThenScoreD = NULL,
-  g = NULL, faidx = NULL, header = NULL, output = NULL)
+bt.sort(
+  i,
+  sizeA = NULL,
+  sizeD = NULL,
+  chrThenSizeA = NULL,
+  chrThenSizeD = NULL,
+  chrThenScoreA = NULL,
+  chrThenScoreD = NULL,
+  g = NULL,
+  faidx = NULL,
+  header = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bed/gff/vcf>}

@@ -4,9 +4,19 @@
 \alias{bt.bamtobed}
 \title{Converts BAM alignments to BED6 or BEDPE format.}
 \usage{
-bt.bamtobed(i, bedpe = NULL, mate1 = NULL, bed12 = NULL,
-  split = NULL, splitD = NULL, ed = NULL, tag = NULL,
-  color = NULL, cigar = NULL, output = NULL)
+bt.bamtobed(
+  i,
+  bedpe = NULL,
+  mate1 = NULL,
+  bed12 = NULL,
+  split = NULL,
+  splitD = NULL,
+  ed = NULL,
+  tag = NULL,
+  color = NULL,
+  cigar = NULL,
+  output = NULL
+)
 }
 \arguments{
 \item{i}{<bam>}
