@@ -99,7 +99,7 @@ def captureFxnInfo(bedtoolsFxn, bedtoolspath, bedtoolsRpath):
 
     return(infoDict, usageDict, optionDict)
 
-### Define a function that write R functions 
+### Define a function that write R functions
 def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
 
     command = infoDict["ToolName"]
@@ -187,7 +187,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     optionsbedtoolscombined = ", ".join(optionsbedtools)
     optionsrcombined = ", ".join(optionsr)
     file.write("\t")
-    file.write("""options <- createOptions(names=c(%s), values=list(%s))""" % (optionsbedtoolscombined, optionsrcombined))      
+    file.write("""options <- createOptions(names=c(%s), values=list(%s))""" % (optionsbedtoolscombined, optionsrcombined))
     file.write("\n")
 
     # Launch the bedtools command
@@ -235,14 +235,14 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
 
 ### Define a function that reads in bedtools functions
 def readbedtoolsfxns(bedtoolspath, bedtoolsRpath):
-    
+
     os.system(os.path.join(bedtoolspath, "bedtools") + " &> " + os.path.join(bedtoolsRpath, "bedtools.txt"))
     bedtoolsoutput = open(os.path.join(bedtoolsRpath, "bedtools.txt"), "r")
     fxnset = []
     version = ""
     for line in bedtoolsoutput:
         words = line.split(" ")
-        if(line[:4] == '    ' and line[4] != '-' and words[4] not in anomalies["skipFunctions"]):
+        if(line[:4] == '    ' and line[4] != '-' and len(words[4]) > 0 and words[4] not in anomalies["skipFunctions"]):
             fxnset.append(words[4])
         if(words[0] == "Version:"):
             version = words[-1].rstrip()
@@ -330,9 +330,9 @@ shutil.copytree(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__
 origtestpath = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "tests")
 newtestpath  = os.path.join(bedtoolsRpath, "tests")
 if (origtestpath != newtestpath):
-	if(os.path.exists(newtestpath)):
-		shutil.rmtree(newtestpath)
-	shutil.copytree(origtestpath, newtestpath)
+    if(os.path.exists(newtestpath)):
+        shutil.rmtree(newtestpath)
+        shutil.copytree(origtestpath, newtestpath)
 
 # Create documentation
 print("Writing documentation...")

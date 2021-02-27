@@ -12,13 +12,13 @@
 #'   that overlap A on the _opposite_ strand.
 #'   - By default, overlaps are reported without respect to strand.
 #' 
-#' @param f Minimum overlap required as a fraction of each A.
+#' @param f Minimum overlap required as a fraction of each -bed record.
 #'   - Default is 1E-9 (i.e., 1bp).
 #'   - FLOAT (e.g. 0.50)
 #' 
-#' @param r Require that the fraction overlap be reciprocal for each A and B.
+#' @param r Require that the fraction overlap be reciprocal for each -bed and B.
 #'   - In other words, if -f is 0.90 and -r is used, this requires
-#'     that B overlap 90 percent of A and A _also_ overlaps 90 percent of B.
+#'     that B overlap 90 percent of each -bed and the -bed record _also_ overlaps 90 percent of B.
 #' 
 #' @param q Minimum mapping quality allowed. Default is 0.
 #' 

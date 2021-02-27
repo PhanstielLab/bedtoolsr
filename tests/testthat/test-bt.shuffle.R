@@ -10,7 +10,7 @@ chr2  8000
 chr3  5000
 chr4  2000")
   results <- read.table(text=
-"chr1	9632	9732	a1	1	+
-chr4	994	1994	a2	2	-")
+"chr1	5518	5618	a1	1	+
+chr2	1091	2091	a2	2	-")
   expect_equal(bedtoolsr::bt.shuffle(A.bed, my.genome, seed=100), results)
 })

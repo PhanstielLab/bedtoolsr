@@ -28,6 +28,9 @@
 #'     For BED12 files, this uses the BlockCount, BlockStarts, and BlockEnds
 #'     fields (i.e., columns 10,11,12).
 #' 
+#' @param ignoreD Ignore local deletions (CIGAR "D" operations) in BAM entries
+#'     when computing coverage.
+#' 
 #' @param strand Calculate coverage of intervals from a specific strand.
 #'     With BED files, requires at least 6 columns (strand is column 6). 
 #'     - (STRING): can be + or -
@@ -71,7 +74,7 @@
 #' 
 #' @param output Output filepath instead of returning output in R.
 #' 
-bt.genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = NULL, split = NULL, strand = NULL, pc = NULL, fs = NULL, du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL, trackline = NULL, trackopts = NULL, output = NULL)
+bt.genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga = NULL, split = NULL, ignoreD = NULL, strand = NULL, pc = NULL, fs = NULL, du = NULL, five = NULL, three = NULL, max = NULL, scale = NULL, trackline = NULL, trackopts = NULL, output = NULL)
 {
 	# Required Inputs
 	i <- establishPaths(input=i, name="i", allowRobjects=TRUE)
@@ -80,7 +83,7 @@ bt.genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga 
 	options <- ""
 
 	# Options
-	options <- createOptions(names=c("ibam", "d", "dz", "bg", "bga", "split", "strand", "pc", "fs", "du", "5", "3", "max", "scale", "trackline", "trackopts"), values=list(ibam, d, dz, bg, bga, split, strand, pc, fs, du, five, three, max, scale, trackline, trackopts))
+	options <- createOptions(names=c("ibam", "d", "dz", "bg", "bga", "split", "ignoreD", "strand", "pc", "fs", "du", "5", "3", "max", "scale", "trackline", "trackopts"), values=list(ibam, d, dz, bg, bga, split, ignoreD, strand, pc, fs, du, five, three, max, scale, trackline, trackopts))
 
 	# establish output file 
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")

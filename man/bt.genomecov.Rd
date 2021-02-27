@@ -13,6 +13,7 @@ bt.genomecov(
   bg = NULL,
   bga = NULL,
   split = NULL,
+  ignoreD = NULL,
   strand = NULL,
   pc = NULL,
   fs = NULL,
@@ -56,6 +57,9 @@ For BAM files, this uses the CIGAR "N" and "D" operations
 to infer the blocks for computing coverage.
 For BED12 files, this uses the BlockCount, BlockStarts, and BlockEnds
 fields (i.e., columns 10,11,12).}
+
+\item{ignoreD}{Ignore local deletions (CIGAR "D" operations) in BAM entries
+when computing coverage.}
 
 \item{strand}{Calculate coverage of intervals from a specific strand.
 With BED files, requires at least 6 columns (strand is column 6). 

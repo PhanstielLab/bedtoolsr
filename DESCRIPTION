@@ -2,8 +2,8 @@ Package: bedtoolsr
 Encoding: UTF-8
 Type: Package
 Title: Bedtools Wrapper
-Version: 2.29.0-5
-Date: 2020-01-29
+Version: 2.30.0-1
+Date: 2021-02-27
 Author: Mayura Patwardhan, Craig Wenger, Eric Davis, Doug Phanstiel
 Maintainer: Doug Phanstiel <douglas_phanstiel@med.unc.edu>
 Description: Wrapper library for the bedtools utilities for genome arithmetic.
@@ -12,4 +12,4 @@ Imports:
 Suggests:
     testthat
 License: MIT + file LICENSE
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1

@@ -10,10 +10,13 @@ bt.getfasta(
   fo = NULL,
   name = NULL,
   nameplus = NULL,
+  nameOnly = NULL,
   split = NULL,
   tab = NULL,
+  bedOut = NULL,
   s = NULL,
   fullHeader = NULL,
+  rna = NULL,
   output = NULL
 )
 }
@@ -24,14 +27,18 @@ bt.getfasta(
 
 \item{fo}{Output file (opt., default is STDOUT}
 
-\item{name}{Use the name field for the FASTA header}
+\item{name}{Use the name field and coordinates for the FASTA header}
 
-\item{nameplus}{Use the name field and coordinates for the FASTA header}
+\item{nameplus}{(deprecated) Use the name field and coordinates for the FASTA header}
 
-\item{split}{given BED12 fmt., extract and concatenate the sequences
+\item{nameOnly}{Use the name field for the FASTA header}
+
+\item{split}{Given BED12 fmt., extract and concatenate the sequences
 from the BED "blocks" (e.g., exons)}
 
-\item{tab}{Write output in TAB delimited format.
+\item{tab}{Write output in TAB delimited format.}
+
+\item{bedOut}{Report extract sequences in a tab-delimited BED format instead of in FASTA format.
 - Default is FASTA format.}
 
 \item{s}{Force strandedness. If the feature occupies the antisense,
@@ -41,6 +48,8 @@ strand, the sequence will be reverse complemented.
 \item{fullHeader}{Use full fasta header.
 - By default, only the word before the first space or tab 
 is used.}
+
+\item{rna}{The FASTA is RNA not DNA. Reverse complementation handled accordingly.}
 
 \item{output}{Output filepath instead of returning output in R.}
 }
