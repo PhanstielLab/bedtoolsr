@@ -8,7 +8,7 @@
   },
   error = function(e)
   {
-    warning("bedtools does not appear to be installed or not in your PATH. If it is installed, please add it to your PATH or run:\noptions(bedtools.path = \\\"[bedtools path]\\\")")
+    warning("bedtools does not appear to be installed or not in your PATH. If it is installed, please add it to your PATH or run:\noptions(bedtools.path = \"/path/to/\")")
     return(NULL)
   })
   if(!is.null(response)) {
