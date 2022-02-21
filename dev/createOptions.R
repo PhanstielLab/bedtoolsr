@@ -9,7 +9,7 @@ createOptions <- function(names, values)
   options <- "" 
   if(length(names) > 0)
     for(i in 1:length(names))
-      if(!is.null(values[[i]]))
+      if(!is.null(values[[i]])&&(!is.logical(values[[i]])||values[[i]]))
       {
         options <- paste(options, paste(" -", names[i], sep=""))
         if(is.character(values[[i]]) || is.numeric(values[[i]]))

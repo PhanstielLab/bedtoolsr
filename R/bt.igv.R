@@ -49,7 +49,7 @@ bt.igv <- function(i, path = NULL, sess = NULL, sort = NULL, clps = NULL, name =
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

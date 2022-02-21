@@ -93,7 +93,7 @@ bt.coverage <- function(a, b, hist = NULL, d = NULL, counts = NULL, mean = NULL,
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

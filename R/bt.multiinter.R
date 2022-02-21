@@ -46,7 +46,7 @@ bt.multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NU
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

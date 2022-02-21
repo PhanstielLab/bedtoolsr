@@ -52,7 +52,7 @@ bt.pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, i
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

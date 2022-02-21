@@ -52,7 +52,7 @@ bt.getfasta <- function(fi, bed, fo = NULL, name = NULL, nameplus = NULL, nameOn
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

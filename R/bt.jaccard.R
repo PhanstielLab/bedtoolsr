@@ -76,7 +76,7 @@ bt.jaccard <- function(a, b, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=TRUE, sep="\t")
+			results <- utils::read.table(tempfile, header=TRUE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

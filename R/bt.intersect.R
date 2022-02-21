@@ -123,7 +123,7 @@ bt.intersect <- function(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL, wao 
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote="")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

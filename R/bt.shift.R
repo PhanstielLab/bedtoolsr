@@ -41,7 +41,7 @@ bt.shift <- function(i, g, s = NULL, p = NULL, m = NULL, pct = NULL, header = NU
 			file.copy(tempfile, output)
 	} else {
 		if(file.info(tempfile)$size > 0)
-			results <- utils::read.table(tempfile, header=FALSE, sep="\t")
+			results <- utils::read.table(tempfile, header=FALSE, sep="\t", quote='')
 		else
 			results <- data.frame()
 	}

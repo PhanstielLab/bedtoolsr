@@ -213,7 +213,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         file.write('\t\t\tfile.copy(tempfile, output)\n')
         file.write('\t} else {\n')
         file.write('\t\tif(file.info(tempfile)$size > 0)\n')
-        file.write('\t\t\tresults <- utils::read.table(tempfile, header=%s, sep="\\t")\n' % readheader)
+        file.write('\t\t\tresults <- utils::read.table(tempfile, header=%s, sep="\\t", quote=\'\')\n' % readheader)
         file.write('\t\telse\n')
         file.write('\t\t\tresults <- data.frame()\n')
         file.write('\t}\n')
