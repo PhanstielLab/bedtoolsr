@@ -192,7 +192,8 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
 
     # Launch the bedtools command
     file.write('\n\t# establish output file \n')
-    file.write('\ttempfile <- tempfile("bedtoolsr", fileext=".txt")\n' )
+    file.write('\ttempfile <- tempfile("bedtoolsr", fileext=".txt")\n')
+    file.write('\ttempfile <- gsub("\\\\", "/", tempfile, fixed=TRUE)\n')
     cmdstring = ""
     for key in usageDict:
         if(command in anomalies["allowNullEvenIfFile"] and key in anomalies["allowNullEvenIfFile"][command]):
@@ -207,7 +208,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
         file.write(")\n\tconsole.output <- system(cmd, intern=TRUE)\n\tprint(console.output)\n")
     else:
         file.write(', " > ", tempfile)\n')
-        file.write('\tsystem(cmd)\n')
+        file.write('\tif(.Platform$OS.type == "windows") shell(cmd) else system(cmd)\n')
         file.write('\tif(!is.null(output)) {\n')
         file.write('\t\tif(file.info(tempfile)$size > 0)\n')
         file.write('\t\t\tfile.copy(tempfile, output)\n')

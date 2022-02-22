@@ -67,10 +67,11 @@ bt.jaccard <- function(a, b, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e
 
 	# establish output file 
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools jaccard ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
-	system(cmd)
+	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {
 		if(file.info(tempfile)$size > 0)
 			file.copy(tempfile, output)

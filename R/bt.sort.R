@@ -33,10 +33,11 @@ bt.sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenS
 
 	# establish output file 
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
+	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
 	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools sort ", options, " -i ", i[[1]], " > ", tempfile)
-	system(cmd)
+	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {
 		if(file.info(tempfile)$size > 0)
 			file.copy(tempfile, output)

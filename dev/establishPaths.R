@@ -15,6 +15,8 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
   if(is.null(input))
     return(NULL)
   
+  bedtools.path <- getOption("bedtools.path")
+  
   # convert to list if neccesary
   if(!inherits(input, "list"))
     input <- list(input)
@@ -35,6 +37,8 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
       
       # write a temp file
       filepath <- paste0(tempdir(), "/" , name, "_", i, ".txt")
+      if(!is.null(bedtools.path) && grepl("wsl", bedtools.path, ignore.case=TRUE))
+        filepath <- system(paste0("wsl wslpath -a -u \"", filepath, "\""), intern=TRUE)
       utils::write.table(item, filepath, append = FALSE, sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE) 
       
       # record temp file for deletion
@@ -46,6 +50,8 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
     }
     
     # record file path for use
+    if(!is.null(bedtools.path) && grepl("wsl", bedtools.path, ignore.case=TRUE))
+      filepath <- system(paste0("wsl wslpath -a -u \"", filepath, "\""), intern=TRUE)
     inputpaths <- c(inputpaths, filepath)
   }
   
