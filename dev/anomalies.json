@@ -5,7 +5,7 @@
 	},
 	"alternativeUsage":
 	{
-		"expand": "bedtools expand -i <bed/gff/vcf/bam> -c [COLS]",
+		"expand": "bedtools expand -i <bed/gff/vcf/bam>",
 		"groupby": "bedtools groupby [OPTIONS] -i <bed/gff/vcf/bam> -g <group columns> -c <op. column> -o <operation>",
 		"makewindows": "bedtools makewindows [OPTIONS] -g <genome> OR -b <bed>  -w <window_size> OR -n <number of windows>",
 		"overlap": "bedtools overlap -i <bed/gff/vcf/bam> -cols <columns>"

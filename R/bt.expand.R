@@ -1,7 +1,9 @@
 #' Replicate lines in a file based on columns of comma-separated values.
 #' 
 #' @param i <bed/gff/vcf/bam>
-#' @param c 
+#' @param c Specify the column (1-based) that should be summarized.
+#'   - Required.
+#' 
 #' @param output Output filepath instead of returning output in R.
 #' 
 bt.expand <- function(i, c = NULL, output = NULL)

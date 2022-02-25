@@ -9,7 +9,8 @@ bt.expand(i, c = NULL, output = NULL)
 \arguments{
 \item{i}{<bed/gff/vcf/bam>}
 
-\item{c}{}
+\item{c}{Specify the column (1-based) that should be summarized.
+- Required.}
 
 \item{output}{Output filepath instead of returning output in R.}
 }
