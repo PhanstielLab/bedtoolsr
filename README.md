@@ -1,4 +1,6 @@
-[![Travis build status](https://travis-ci.org/PhanstielLab/bedtoolsr.svg?branch=master)](https://travis-ci.org/PhanstielLab/bedtoolsr)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/PhanstielLab/bedtoolsr/workflows/R-CMD-check/badge.svg)](https://github.com/PhanstielLab/bedtoolsr/actions)
+<!-- badges: end -->
 
 [![DOI](https://zenodo.org/badge/151143796.svg)](https://zenodo.org/badge/latestdoi/151143796)
 
@@ -93,7 +95,7 @@ df  <- data.frame(
 library(ggplot2)
 ggplot(data = df, aes(x = 1, y = percent, fill = group))+
   geom_col(col = "white")+
-  coord_polar("y") + 
+  coord_polar("y") +
   scale_fill_manual(values = c("#2171b5", "#bdd7e7", "#6baed6"))+
   labs(title = "Loop anchors with bound CTCF")+
   annotate(geom = "text",
