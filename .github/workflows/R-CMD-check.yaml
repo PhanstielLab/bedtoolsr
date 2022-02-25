@@ -28,7 +28,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - name: Install bedtools
+      - name: Install bedtools on Linux
         if: runner.os == 'Linux'
         run: sudo apt-get install -y bedtools
 
