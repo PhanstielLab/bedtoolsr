@@ -29,6 +29,7 @@ jobs:
 
     steps:
       - name: Install bedtools
+        if: runner.os == 'Linux'
         run: sudo apt-get install -y bedtools
 
       - name: Install bedtools on macOS
