@@ -18,6 +18,7 @@
 	},
 	"noRinput": ["bamtobed", "bamtofastq"],
 	"noRoutput": ["split"],
+	"optionalFileArgs": ["excl", "incl"],
 	"optionConverter":
 	{
 		"3": "three",

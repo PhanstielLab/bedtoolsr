@@ -51,7 +51,8 @@ bt.annotate <- function(i, files, names = NULL, counts = NULL, both = NULL, s = 
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]], files[[2]]))
+	temp.files <- c(tempfile, i[[2]], files[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

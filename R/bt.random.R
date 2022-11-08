@@ -43,7 +43,8 @@ bt.random <- function(g, l = NULL, n = NULL, seed = NULL, output = NULL)
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, g[[2]]))
+	temp.files <- c(tempfile, g[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

@@ -45,7 +45,8 @@ bt.maskfasta <- function(fi, fo, bed, soft = NULL, mc = NULL, fullHeader = NULL,
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, fi[[2]], fo[[2]], bed[[2]]))
+	temp.files <- c(tempfile, fi[[2]], fo[[2]], bed[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

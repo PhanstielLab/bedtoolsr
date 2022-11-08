@@ -56,7 +56,8 @@ bt.groupby <- function(i, g = NULL, c = NULL, o = NULL, full = NULL, inheader = 
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]]))
+	temp.files <- c(tempfile, i[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

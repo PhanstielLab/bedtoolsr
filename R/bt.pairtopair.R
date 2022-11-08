@@ -59,7 +59,8 @@ bt.pairtopair <- function(a, b, f = NULL, type = NULL, slop = NULL, ss = NULL, i
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+	temp.files <- c(tempfile, a[[2]], b[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

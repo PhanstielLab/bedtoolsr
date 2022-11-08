@@ -184,6 +184,11 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
             roption = anomalies["optionConverter"][option]
         optionsbedtools.append("\"" + option + "\"")
         optionsr.append(roption)
+        if(option in anomalies["optionalFileArgs"]):
+            file.write("\tif(!is.null(%s))\n" % option)
+            file.write("\t\t")
+            file.write("""%s <- establishPaths(input=%s, name="%s", allowRobjects=%s)""" % (option, option, option, allowRobjectsInput))
+            file.write("\n")
     optionsbedtoolscombined = ", ".join(optionsbedtools)
     optionsrcombined = ", ".join(optionsr)
     file.write("\t")
@@ -226,7 +231,14 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
     for key in usageDict:
         tempfiles.append(key + "[[2]]")
     filestodelete = ", ".join(tempfiles)
-    file.write("""\tdeleteTempFiles(c(%s))""" % filestodelete)
+    file.write('\ttemp.files <- c(%s)\n' % filestodelete)
+    for option in optionDict:
+        if(option in anomalies["optionalFileArgs"]):
+            file.write("\tif(!is.null(%s))\n" % option)
+            file.write("\t\t")
+            file.write("""temp.files <- c(temp.files, %s[[2]])""" % option)
+            file.write("\n")
+    file.write("\tdeleteTempFiles(temp.files)")
 
     # Return the results
     if(not command in anomalies["noRoutput"]):

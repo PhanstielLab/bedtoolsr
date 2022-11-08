@@ -30,5 +30,6 @@ bt.split <- function(i, n = NULL, p = NULL, a = NULL)
 	print(console.output)
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]]))
+	temp.files <- c(tempfile, i[[2]])
+	deleteTempFiles(temp.files)
 }

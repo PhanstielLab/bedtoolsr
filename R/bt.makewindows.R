@@ -52,7 +52,8 @@ bt.makewindows <- function(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL, rev
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, g[[2]], b[[2]]))
+	temp.files <- c(tempfile, g[[2]], b[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

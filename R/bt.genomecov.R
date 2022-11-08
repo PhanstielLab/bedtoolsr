@@ -103,7 +103,8 @@ bt.genomecov <- function(i, g, ibam = NULL, d = NULL, dz = NULL, bg = NULL, bga 
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
+	temp.files <- c(tempfile, i[[2]], g[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

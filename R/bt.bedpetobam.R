@@ -38,7 +38,8 @@ bt.bedpetobam <- function(i, g, mapq = NULL, ubam = NULL, output = NULL)
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
+	temp.files <- c(tempfile, i[[2]], g[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

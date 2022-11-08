@@ -116,7 +116,8 @@ bt.map <- function(a, b, c = NULL, o = NULL, delim = NULL, prec = NULL, s = NULL
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+	temp.files <- c(tempfile, a[[2]], b[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

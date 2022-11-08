@@ -82,7 +82,8 @@ bt.window <- function(a, b, abam = NULL, ubam = NULL, bed = NULL, w = NULL, l = 
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+	temp.files <- c(tempfile, a[[2]], b[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

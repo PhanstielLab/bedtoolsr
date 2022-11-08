@@ -130,7 +130,8 @@ bt.intersect <- function(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL, wao 
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+	temp.files <- c(tempfile, a[[2]], b[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

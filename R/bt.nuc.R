@@ -45,7 +45,8 @@ bt.nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, full
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, fi[[2]], bed[[2]]))
+	temp.files <- c(tempfile, fi[[2]], bed[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

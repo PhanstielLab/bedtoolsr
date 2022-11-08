@@ -56,7 +56,8 @@ bt.igv <- function(i, path = NULL, sess = NULL, sort = NULL, clps = NULL, name =
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]]))
+	temp.files <- c(tempfile, i[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

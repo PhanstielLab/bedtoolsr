@@ -49,7 +49,8 @@ bt.sort <- function(i, sizeA = NULL, sizeD = NULL, chrThenSizeA = NULL, chrThenS
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]]))
+	temp.files <- c(tempfile, i[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

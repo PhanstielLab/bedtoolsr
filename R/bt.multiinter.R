@@ -53,7 +53,8 @@ bt.multiinter <- function(i, cluster = NULL, header = NULL, names = NULL, g = NU
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]]))
+	temp.files <- c(tempfile, i[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

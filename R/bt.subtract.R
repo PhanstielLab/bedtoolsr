@@ -99,7 +99,8 @@ bt.subtract <- function(a, b, A = NULL, N = NULL, wb = NULL, wo = NULL, s = NULL
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, a[[2]], b[[2]]))
+	temp.files <- c(tempfile, a[[2]], b[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)

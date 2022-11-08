@@ -63,6 +63,10 @@ bt.shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL
 	options <- ""
 
 	# Options
+	if(!is.null(excl))
+		excl <- establishPaths(input=excl, name="excl", allowRobjects=TRUE)
+	if(!is.null(incl))
+		incl <- establishPaths(input=incl, name="incl", allowRobjects=TRUE)
 	options <- createOptions(names=c("excl", "incl", "chrom", "seed", "f", "chromFirst", "bedpe", "maxTries", "noOverlapping", "allowBeyondChromEnd"), values=list(excl, incl, chrom, seed, f, chromFirst, bedpe, maxTries, noOverlapping, allowBeyondChromEnd))
 
 	# establish output file 
@@ -83,7 +87,12 @@ bt.shuffle <- function(i, g, excl = NULL, incl = NULL, chrom = NULL, seed = NULL
 	}
 
 	# Delete temp files
-	deleteTempFiles(c(tempfile, i[[2]], g[[2]]))
+	temp.files <- c(tempfile, i[[2]], g[[2]])
+	if(!is.null(excl))
+		temp.files <- c(temp.files, excl[[2]])
+	if(!is.null(incl))
+		temp.files <- c(temp.files, incl[[2]])
+	deleteTempFiles(temp.files)
 
 	if(is.null(output))
 		return(results)
