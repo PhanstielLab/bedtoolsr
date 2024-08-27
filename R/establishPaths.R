@@ -22,12 +22,10 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
     input <- list(input)
 
   # iterate through list making files where necessary and recording tmp files for deletion
-  i <- 0
   inputpaths <- c()
   inputtmps <- c()
   for(item in input)
   {
-    i <- i + 1
     filepath <- item
     # if it is an R object
     if(!is.character(item) && !is.numeric(item))
@@ -36,7 +34,7 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
         stop("R objects are not permitted as arguments for",name)
 
       # write a temp file
-      filepath <- paste0(tempdir(), "/" , name, "_", i, ".txt")
+      filepath <- tempfile(name, fileext=".txt")
       if(!is.null(bedtools.path) && grepl("wsl", bedtools.path, ignore.case=TRUE))
         filepath <- system(paste0("wsl wslpath -a -u \"", filepath, "\""), intern=TRUE)
       utils::write.table(item, filepath, append = FALSE, sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE)
