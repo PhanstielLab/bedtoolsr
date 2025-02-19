@@ -207,7 +207,7 @@ def writeRfxn(infoDict, usageDict, optionDict, bedtoolsRpath):
             cmdstring += ', " -%s ", %s[[1]]' % (key, key)
 
     file.write('\tbedtools.path <- getOption(\"bedtools.path\")\n')
-    file.write('\tif(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
+    file.write('\tif(!is.null(bedtools.path) && !grepl("wsl", bedtools.path, ignore.case=TRUE)) bedtools.path <- paste0(bedtools.path, \"/\")\n')
     file.write('\tcmd <- paste0(bedtools.path, "bedtools ' + infoDict["ToolName"].rstrip() + ' ", options' + cmdstring)
     if(command in anomalies["noRoutput"]):
         file.write(")\n\tconsole.output <- system(cmd, intern=TRUE)\n\tprint(console.output)\n")

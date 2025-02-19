@@ -38,7 +38,7 @@ bt.makewindows <- function(g = NULL, b = NULL, w = NULL, s = NULL, n = NULL, rev
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
-	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	if(!is.null(bedtools.path) && !grepl("wsl", bedtools.path, ignore.case=TRUE)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools makewindows ", options, ifelse(!is.null(g), paste0(" -g ", g[[1]]), ""), ifelse(!is.null(b), paste0(" -b ", b[[1]]), ""), " > ", tempfile)
 	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {

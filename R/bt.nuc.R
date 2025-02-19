@@ -31,7 +31,7 @@ bt.nuc <- function(fi, bed, s = NULL, seq = NULL, pattern = NULL, C = NULL, full
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
-	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	if(!is.null(bedtools.path) && !grepl("wsl", bedtools.path, ignore.case=TRUE)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools nuc ", options, " -fi ", fi[[1]], " -bed ", bed[[1]], " > ", tempfile)
 	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {

@@ -29,7 +29,7 @@ bt.random <- function(g, l = NULL, n = NULL, seed = NULL, output = NULL)
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
-	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	if(!is.null(bedtools.path) && !grepl("wsl", bedtools.path, ignore.case=TRUE)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools random ", options, " -g ", g[[1]], " > ", tempfile)
 	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {

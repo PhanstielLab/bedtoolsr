@@ -116,7 +116,7 @@ bt.intersect <- function(a, b, wa = NULL, wb = NULL, loj = NULL, wo = NULL, wao 
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
-	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	if(!is.null(bedtools.path) && !grepl("wsl", bedtools.path, ignore.case=TRUE)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools intersect ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
 	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {

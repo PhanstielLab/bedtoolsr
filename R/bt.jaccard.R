@@ -69,7 +69,7 @@ bt.jaccard <- function(a, b, s = NULL, S = NULL, f = NULL, F = NULL, r = NULL, e
 	tempfile <- tempfile("bedtoolsr", fileext=".txt")
 	tempfile <- gsub("\\", "/", tempfile, fixed=TRUE)
 	bedtools.path <- getOption("bedtools.path")
-	if(!is.null(bedtools.path)) bedtools.path <- paste0(bedtools.path, "/")
+	if(!is.null(bedtools.path) && !grepl("wsl", bedtools.path, ignore.case=TRUE)) bedtools.path <- paste0(bedtools.path, "/")
 	cmd <- paste0(bedtools.path, "bedtools jaccard ", options, " -a ", a[[1]], " -b ", b[[1]], " > ", tempfile)
 	if(.Platform$OS.type == "windows") shell(cmd) else system(cmd)
 	if(!is.null(output)) {

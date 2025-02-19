@@ -35,8 +35,6 @@ establishPaths <- function(input, name="", allowRobjects=TRUE)
 
       # write a temp file
       filepath <- tempfile(name, fileext=".txt")
-      if(!is.null(bedtools.path) && grepl("wsl", bedtools.path, ignore.case=TRUE))
-        filepath <- system(paste0("wsl wslpath -a -u \"", filepath, "\""), intern=TRUE)
       utils::write.table(item, filepath, append = FALSE, sep = "	", quote = FALSE, col.names = FALSE, row.names = FALSE)
 
       # record temp file for deletion
